@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tian Pretorius | Computer Engineer & Software Developer</title>
+    <meta name="description" content="Computer Engineer with 6+ years of experience in software development, automation systems, and technical leadership.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icon-192.png">
+    <meta name="theme-color" content="#3182ce">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="terminal-prompt">$</span> tian-pretorius
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">home</a></li>
+                <li><a href="#about" class="nav-link">about</a></li>
+                <li><a href="#experience" class="nav-link">experience</a></li>
+                <li><a href="#skills" class="nav-link">skills</a></li>
+                <li><a href="#education" class="nav-link">education</a></li>
+                <li><a href="#interests" class="nav-link">interests</a></li>
+                <li><a href="#contact" class="nav-link">contact</a></li>
+                <li><button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">🌙</button></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section home-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="profile-image-container">
+                    <img src="assets/profile.png" alt="Tian Pretorius" class="profile-image">
+                </div>
+                <div class="hero-text">
+                    <h1 class="hero-name">Tian Pretorius</h1>
+                    <div class="hero-tagline">
+                        <span class="typewriter" id="typewriter"></span>
+                        <span class="cursor">|</span>
+                    </div>
+                    <p class="hero-summary">Computer Engineer with 6+ years of experience in software development, automation systems, and technical leadership. Expertise in Python, system optimisation, and cross-functional collaboration. Passionate about clean, maintainable code and scalable solutions.</p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                        <a href="assets/Tian-Pretorius-CV.pdf" target="_blank" class="btn btn-secondary">Download CV</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="section-number">01.</span> About Me
+            </h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm a Computer Engineer who bridges the gap between traditional engineering and modern software development. My journey has taken me through automation systems, compliance frameworks, and cutting-edge computer vision applications.</p>
+                    
+                    <p>With a strong foundation in both hardware and software, I specialize in creating robust, scalable solutions that solve real-world problems. From optimizing production lines to building OpenCV-based recognition systems, I thrive on challenges that require both technical depth and innovative thinking.</p>
+                    
+                    <p>My approach combines engineering rigor with agile development practices, ensuring that every solution is not just functional, but maintainable and scalable. I'm passionate about clean code, system architecture, and mentoring teams to deliver exceptional results.</p>
+                    
+                    <div class="about-cta">
+                        <a href="assets/Tian-Pretorius-CV.pdf" target="_blank" class="btn btn-outline">
+                            <span>Download CV</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7,10 12,15 17,10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="code-title">about_me.py</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><code><span class="keyword">class</span> <span class="class-name">TianPretorius</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="self">self</span>):
+        <span class="self">self</span>.role = <span class="string">"CTO"</span>
+        <span class="self">self</span>.experience = <span class="number">6</span>
+        <span class="self">self</span>.languages = [
+            <span class="string">"Python"</span>, <span class="string">"Java"</span>, <span class="string">"C#"</span>
+        ]
+        <span class="self">self</span>.passions = [
+            <span class="string">"clean_code"</span>,
+            <span class="string">"system_design"</span>,
+            <span class="string">"automation"</span>
+        ]
+    
+    <span class="keyword">def</span> <span class="function">get_motto</span>(<span class="self">self</span>):
+        <span class="keyword">return</span> <span class="string">"Build it right, build it scalable"</span></code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="section-number">02.</span> Experience
+            </h2>
+            <div class="timeline">
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3 class="timeline-title">Chief Technology Officer</h3>
+                            <div class="timeline-company">Vandenburg</div>
+                            <div class="timeline-date">2025 - Present</div>
+                        </div>
+                        <p class="timeline-description">
+                            Leading technological transformation initiatives, optimizing production lines through automation, 
+                            and spearheading fortification projects. Managing trading operations systems and driving 
+                            cross-functional collaboration to deliver scalable solutions.
+                        </p>
+                        <div class="timeline-tags">
+                            <span class="tag">Leadership</span>
+                            <span class="tag">Automation</span>
+                            <span class="tag">System Optimization</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3 class="timeline-title">Computer Engineer</h3>
+                            <div class="timeline-company">Millhouse International</div>
+                            <div class="timeline-date">2020 - 2025</div>
+                        </div>
+                        <p class="timeline-description">
+                            Built comprehensive automation and compliance systems, implemented security protocols, 
+                            and established quality assurance frameworks. Developed robust software solutions 
+                            that improved operational efficiency and regulatory compliance.
+                        </p>
+                        <div class="timeline-tags">
+                            <span class="tag">Automation</span>
+                            <span class="tag">Compliance Systems</span>
+                            <span class="tag">Security</span>
+                            <span class="tag">QA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3 class="timeline-title">Lead Engineer</h3>
+                            <div class="timeline-company">InnovateX</div>
+                            <div class="timeline-date">2019 - 2025</div>
+                        </div>
+                        <p class="timeline-description">
+                            Developed an innovative OpenCV-based vitamin recognition algorithm and contributed to 
+                            Android application development. Led engineering teams in delivering cutting-edge 
+                            computer vision solutions for healthcare applications.
+                        </p>
+                        <div class="timeline-tags">
+                            <span class="tag">OpenCV</span>
+                            <span class="tag">Computer Vision</span>
+                            <span class="tag">Android Development</span>
+                            <span class="tag">Team Leadership</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3 class="timeline-title">Postgraduate Researcher</h3>
+                            <div class="timeline-company">North-West University</div>
+                            <div class="timeline-date">2017 - 2019</div>
+                        </div>
+                        <p class="timeline-description">
+                            Conducted advanced research in RFID technology, developed prototypes for innovative 
+                            tracking systems, and designed comprehensive system architectures. Published research 
+                            findings and contributed to academic knowledge in the field.
+                        </p>
+                        <div class="timeline-tags">
+                            <span class="tag">RFID Technology</span>
+                            <span class="tag">Research</span>
+                            <span class="tag">Prototyping</span>
+                            <span class="tag">System Design</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="section-number">03.</span> Skills & Technologies
+            </h2>
+            <div class="skills-grid">
+                <div class="skill-category" data-aos="fade-up">
+                    <h3 class="skill-category-title">
+                        <span class="skill-icon">💻</span> Programming Languages
+                    </h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">Python</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="95"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Java</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">C#</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">HTML/CSS</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">JavaScript</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="skill-category-title">
+                        <span class="skill-icon">🛠️</span> Tools & Technologies
+                    </h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Linux</span>
+                        <span class="skill-tag">OpenCV</span>
+                        <span class="skill-tag">SolidWorks</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">Redis</span>
+                    </div>
+                </div>
+
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="skill-category-title">
+                        <span class="skill-icon">🏆</span> Certifications
+                    </h3>
+                    <div class="certifications">
+                        <div class="certification-item">
+                            <div class="certification-icon">📡</div>
+                            <div class="certification-info">
+                                <h4>CCNA Certified</h4>
+                                <p>Cisco Certified Network Associate</p>
+                            </div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="certification-icon">⚙️</div>
+                            <div class="certification-info">
+                                <h4>SolidWorks Certified Associate</h4>
+                                <p>3D CAD Design & Engineering</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="section-number">04.</span> Education
+            </h2>
+            <div class="education-grid">
+                <div class="education-item" data-aos="fade-up">
+                    <div class="education-icon">🎓</div>
+                    <div class="education-content">
+                        <h3 class="education-degree">Bachelor of Engineering</h3>
+                        <div class="education-major">Computer & Electronic Engineering</div>
+                        <div class="education-school">North-West University</div>
+                        <div class="education-date">2013 - 2016</div>
+                        <p class="education-description">
+                            Comprehensive engineering program covering computer systems, electronics, 
+                            and software development fundamentals.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="education-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="education-icon">🔬</div>
+                    <div class="education-content">
+                        <h3 class="education-degree">Postgraduate Research</h3>
+                        <div class="education-major">Advanced Engineering Systems</div>
+                        <div class="education-school">North-West University</div>
+                        <div class="education-date">2017 - 2019</div>
+                        <p class="education-description">
+                            Advanced research in RFID technology and system design, focusing on 
+                            innovative tracking solutions and prototype development.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interests Section -->
+    <section id="interests" class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="section-number">05.</span> Interests & Hobbies
+            </h2>
+            <div class="interests-grid">
+                <div class="interest-item" data-aos="fade-up">
+                    <div class="interest-icon">🔒</div>
+                    <h3>Information Security</h3>
+                    <p>Exploring cybersecurity trends, ethical hacking, and secure system design.</p>
+                </div>
+                <div class="interest-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="interest-icon">💡</div>
+                    <h3>Hackathons</h3>
+                    <p>Participating in coding competitions and rapid prototype development events.</p>
+                </div>
+                <div class="interest-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="interest-icon">🤖</div>
+                    <h3>Robotics</h3>
+                    <p>Building autonomous systems and exploring AI-driven robotic applications.</p>
+                </div>
+                <div class="interest-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="interest-icon">⚡</div>
+                    <h3>Electronics</h3>
+                    <p>Circuit design, embedded systems, and IoT device development.</p>
+                </div>
+                <div class="interest-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="interest-icon">💪</div>
+                    <h3>Fitness</h3>
+                    <p>Maintaining physical and mental well-being through regular exercise.</p>
+                </div>
+                <div class="interest-item" data-aos="fade-up" data-aos-delay="500">
+                    <div class="interest-icon">🧪</div>
+                    <h3>Science</h3>
+                    <p>Staying curious about scientific breakthroughs and emerging technologies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="section-number">06.</span> Get In Touch
+            </h2>
+            <div class="contact-content">
+                <div class="contact-text">
+                    <h3>Let's Build Something Amazing Together</h3>
+                    <p>
+                        I'm always interested in new opportunities, challenging projects, and 
+                        meaningful collaborations. Whether you have a question, want to discuss 
+                        a potential project, or just want to connect, I'd love to hear from you.
+                    </p>
+                </div>
+                <div class="contact-links">
+                    <a href="mailto:tianpretorius@gmail.com" class="contact-link" data-aos="fade-up">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-info">
+                            <h4>Email</h4>
+                            <p>tianpretorius@gmail.com</p>
+                        </div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/tian-pretorius-817a2189/" target="_blank" rel="noopener noreferrer" class="contact-link" data-aos="fade-up" data-aos-delay="100">
+                        <div class="contact-icon">💼</div>
+                        <div class="contact-info">
+                            <h4>LinkedIn</h4>
+                            <p>Connect with me professionally</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Tian Pretorius. Built with ❤️ and lots of ☕</p>
+                <div class="footer-links">
+                    <a href="#home">Back to top</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
