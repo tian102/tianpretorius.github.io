@@ -100,12 +100,22 @@ const MarkdownUtils = {
     
     /**
      * Format date
-     * @param {Date} date - Date object
+     * @param {Date|string} date - Date object or date string
      * @returns {string} - Formatted date string
      */
     formatDate(date) {
+        if (!date) return 'Unknown date';
+        
+        // Convert to Date object if it's a string
+        const dateObj = typeof date === 'string' ? new Date(date) : date;
+        
+        // Check if valid date
+        if (isNaN(dateObj.getTime())) {
+            return date.toString(); // Return original string if invalid
+        }
+        
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        return date.toLocaleDateString('en-US', options);
+        return dateObj.toLocaleDateString('en-US', options);
     },
     
     /**

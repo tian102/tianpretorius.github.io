@@ -34,9 +34,16 @@ class ThemeManager {
 // Mobile Navigation
 class MobileNav {
     constructor() {
-        this.hamburger = document.getElementById('hamburger');
-        this.navMenu = document.querySelector('.nav-menu');
-        this.navLinks = document.querySelectorAll('.nav-link');
+        // Support both old and new navigation IDs
+        this.hamburger = document.getElementById('hamburger') || document.getElementById('mobile-menu-toggle');
+        this.navMenu = document.querySelector('.nav-menu') || document.getElementById('nav-menu');
+        this.navLinks = document.querySelectorAll('.nav-link') || document.querySelectorAll('.nav-menu a');
+        
+        if (!this.hamburger || !this.navMenu) {
+            console.log('Mobile nav elements not found');
+            return;
+        }
+        
         this.init();
     }
 
@@ -44,9 +51,11 @@ class MobileNav {
         this.hamburger.addEventListener('click', () => this.toggleMenu());
         
         // Close menu when clicking on nav links
-        this.navLinks.forEach(link => {
-            link.addEventListener('click', () => this.closeMenu());
-        });
+        if (this.navLinks) {
+            this.navLinks.forEach(link => {
+                link.addEventListener('click', () => this.closeMenu());
+            });
+        }
 
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
@@ -465,23 +474,50 @@ class PerformanceMonitor {
 
 // Initialize Everything
 document.addEventListener('DOMContentLoaded', () => {
-    // Core functionality
+    // Core functionality - always initialize theme
     new ThemeManager();
-    new MobileNav();
-    new SmoothScrolling();
-    new ActiveNavigation();
-    new LoadingAnimation();
     
-    // Animations and effects
-    new AnimateOnScroll();
-    new SkillBarAnimation();
-    new NavScrollEffect();
-    new ParallaxEffect();
+    // Only initialize if elements exist
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    if (hamburger || mobileMenuToggle) {
+        try {
+            new MobileNav();
+        } catch (e) {
+            console.log('Mobile nav not initialized:', e);
+        }
+    }
     
-    // Enhanced features
-    new ContactFormHandler();
-    new EasterEgg();
-    new PerformanceMonitor();
+    // Check if we're on a page with these features
+    if (document.querySelector('.nav-link')) {
+        try {
+            new SmoothScrolling();
+            new ActiveNavigation();
+        } catch (e) {
+            console.log('Navigation features not initialized:', e);
+        }
+    }
+    
+    if (document.querySelector('.skill-progress')) {
+        try {
+            new SkillBarAnimation();
+        } catch (e) {
+            console.log('Skill bar animation not initialized:', e);
+        }
+    }
+    
+    // Safe initialization of other features
+    try {
+        new LoadingAnimation();
+        new AnimateOnScroll();
+        new NavScrollEffect();
+        new ParallaxEffect();
+        new ContactFormHandler();
+        new EasterEgg();
+        new PerformanceMonitor();
+    } catch (e) {
+        console.log('Some features not initialized:', e);
+    }
     
     // Add loading styles
     const loadingStyles = document.createElement('style');
