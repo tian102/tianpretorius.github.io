@@ -1,36 +1,33 @@
-// Blog functionality
-
-// Global state
-let allPosts = [];
-let currentFilter = 'all';
-let currentSort = 'date-desc';
-
-// List of markdown files in blog/posts directory
-const blogPostFiles = [
-    'unemployed-to-saas-founder.md',
-    'building-scalable-systems.md',
-    'my-saas-tech-stack.md'
-];
-
-// Parse frontmatter from markdown
-function parseFrontmatter(content) {
-        // Handle both \n and \r\n line endings
-        const frontmatterRegex = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/;
+document.addEventListener('DOMContentLoaded', async function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const postSlug = urlParams.get('post');
+    
+    // List of markdown files in blog/posts directory
+    const blogPostFiles = [
+        'unemployed-to-saas-founder.md',
+        'building-scalable-systems.md',
+        'my-saas-tech-stack.md',
+        'sample-post.md'
+    ];
+    
+    let allPosts = [];
+    let currentFilter = 'all';
+    let currentSort = 'date-desc';
+    
+    // Parse frontmatter from markdown
+    function parseFrontmatter(content) {
+        const frontmatterRegex = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/;
         const match = content.match(frontmatterRegex);
         
         if (!match) {
-            console.log('No frontmatter match found');
             return { metadata: {}, content: content };
         }
         
         const frontmatterText = match[1];
         const mainContent = match[2];
         
-        console.log('Frontmatter text:', frontmatterText);
-        console.log('Main content length:', mainContent.length);
-        
         const metadata = {};
-        frontmatterText.split(/\r?\n/).forEach(line => {
+        frontmatterText.split('\n').forEach(line => {
             const [key, ...valueParts] = line.split(':');
             if (key && valueParts.length > 0) {
                 const value = valueParts.join(':').trim();
@@ -41,8 +38,6 @@ function parseFrontmatter(content) {
                 }
             }
         });
-        
-        console.log('Parsed metadata:', metadata);
         
         return { metadata, content: mainContent };
     }
@@ -315,3 +310,4 @@ function parseFrontmatter(content) {
             });
         }
     });
+});

@@ -3,202 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Developer blog by Tian Pretorius - Journey from unemployed to solo SaaS founder">
-    <title>Blog | Tian Pretorius</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" href="assets/profile.png">
+    <title>Blog - Tian Pretorius</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/blog.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav class="nav-container">
-        <div class="nav-content">
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
             <div class="nav-brand">
-                <a href="index.html">
-                    <span class="prompt">&gt;</span>
-                    <span class="nav-text">tian@dev:~$</span>
-                </a>
+                <span class="brand-name">Tian Pretorius</span>
             </div>
-            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="blog.html" class="active">Blog</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="resume.html">Resume</a></li>
-                <li>
-                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-                        🌙
-                    </button>
-                </li>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="blog.html" class="nav-link active">Blog</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="assets/Tian-Pretorius-CV.pdf" class="btn-primary" download>Resume</a></li>
             </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
+    <section class="page-header">
+        <div class="container">
+            <h1>Blog</h1>
+            <p class="page-tagline">Thoughts on engineering, entrepreneurship, and building products</p>
+        </div>
+    </section>
 
-    <main class="main-content">
-        <section class="blog-header">
-            <div class="container">
-                <h1 class="section-title">
-                    <span class="prompt">&gt;</span> Developer Blog
-                </h1>
-                <p class="blog-subtitle">
-                    My journey from unemployed to solo SaaS founder. Documenting the wins, losses, and lessons learned along the way.
-                </p>
-            </div>
-        </section>
-
-        <section class="blog-controls">
-            <div class="container">
-                <div class="blog-controls-inner">
-                    <div class="search-box">
-                        <input 
-                            type="search" 
-                            id="blog-search" 
-                            placeholder="Search posts..."
-                            aria-label="Search blog posts"
-                        >
-                    </div>
-                    <div class="tag-filter">
-                        <label for="tag-select" class="sr-only">Filter by tag</label>
-                        <select id="tag-select" aria-label="Filter posts by tag">
-                            <option value="">All Tags</option>
-                        </select>
-                    </div>
+    <!-- Filter Controls -->
+    <section class="blog-filters">
+        <div class="container">
+            <div class="filter-bar">
+                <div class="filter-group">
+                    <label for="tag-filter">Filter by tag:</label>
+                    <select id="tag-filter" class="filter-select">
+                        <option value="all">All Posts</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="sort-filter">Sort by:</label>
+                    <select id="sort-filter" class="filter-select">
+                        <option value="date-desc">Newest First</option>
+                        <option value="date-asc">Oldest First</option>
+                        <option value="title-asc">Title A-Z</option>
+                        <option value="title-desc">Title Z-A</option>
+                    </select>
                 </div>
             </div>
-        </section>
+            <div id="active-filters" class="active-filters"></div>
+        </div>
+    </section>
 
-        <section class="blog-content">
-            <div class="container">
-                <div id="blog-posts" class="blog-grid">
-                    <!-- Posts will be dynamically loaded here -->
-                    <div class="loading-message">
-                        <span class="prompt">&gt;</span> Loading posts...
-                    </div>
-                </div>
-                
-                <div id="no-posts-message" class="no-posts-message" style="display: none;">
-                    <span class="prompt">&gt;</span> No posts found.
-                </div>
-            </div>
-        </section>
-    </main>
-
+    <section class="blog-content">
+        <div class="container" id="blog-list">
+            <!-- Blog posts will be loaded here -->
+        </div>
+        <div class="container hidden" id="blog-post">
+            <!-- Individual blog post will be loaded here -->
+        </div>
+    </section>
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Tian Pretorius. Built with vanilla HTML, CSS, and JavaScript.</p>
-            <div class="footer-links">
-                <a href="https://github.com/tianpretorius" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="https://linkedin.com/in/tianpretorius" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                <a href="mailto:tian@example.com">Email</a>
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>&copy; 2025 Tian Pretorius. Built with vanilla HTML, CSS, and JavaScript.</p>
+                </div>
+                <div class="footer-right">
+                    <a href="https://github.com/tianpretorius" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://www.linkedin.com/in/tian-pretorius-817a2189/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="mailto:tianpretorius@gmail.com">Email</a>
+                </div>
             </div>
         </div>
     </footer>
-
-    <script src="js/marked.min.js"></script>
-    <script src="js/markdown-utils.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/blog.js"></script>
-    <script src="script.js"></script>
-    <script>
-        // Mobile menu toggle (ThemeManager is initialized in script.js)
-        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-        const navMenu = document.getElementById('nav-menu');
-        
-        mobileMenuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            mobileMenuToggle.classList.toggle('active');
-        });
-
-        // Blog functionality
-        let allPosts = [];
-        let filteredPosts = [];
-
-        async function initializeBlog() {
-            try {
-                // Load all posts
-                allPosts = await BlogManager.loadAllPosts();
-                filteredPosts = [...allPosts];
-                
-                // Populate tag filter
-                populateTagFilter();
-                
-                // Render posts
-                renderPosts(filteredPosts);
-                
-            } catch (error) {
-                console.error('Error loading blog posts:', error);
-                document.getElementById('blog-posts').innerHTML = `
-                    <div class="error-message">
-                        <span class="prompt">&gt;</span> Error loading posts. Please try again later.
-                    </div>
-                `;
-            }
-        }
-
-        function populateTagFilter() {
-            const tags = BlogManager.getAllTags();
-            const tagSelect = document.getElementById('tag-select');
-            
-            tags.forEach(tag => {
-                const option = document.createElement('option');
-                option.value = tag;
-                option.textContent = tag;
-                tagSelect.appendChild(option);
-            });
-        }
-
-        function renderPosts(posts) {
-            const container = document.getElementById('blog-posts');
-            const noPostsMessage = document.getElementById('no-posts-message');
-            
-            if (posts.length === 0) {
-                container.style.display = 'none';
-                noPostsMessage.style.display = 'block';
-                return;
-            }
-            
-            container.style.display = 'grid';
-            noPostsMessage.style.display = 'none';
-            
-            container.innerHTML = posts.map(post => BlogManager.renderPostCard(post)).join('');
-        }
-
-        // Search functionality
-        document.getElementById('blog-search').addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            const tagFilter = document.getElementById('tag-select').value;
-            
-            filterPosts(searchTerm, tagFilter);
-        });
-
-        // Tag filter functionality
-        document.getElementById('tag-select').addEventListener('change', (e) => {
-            const tagFilter = e.target.value;
-            const searchTerm = document.getElementById('blog-search').value.toLowerCase();
-            
-            filterPosts(searchTerm, tagFilter);
-        });
-
-        function filterPosts(searchTerm, tag) {
-            filteredPosts = allPosts.filter(post => {
-                const matchesSearch = !searchTerm || 
-                    post.title.toLowerCase().includes(searchTerm) ||
-                    post.excerpt.toLowerCase().includes(searchTerm) ||
-                    post.tags.some(t => t.toLowerCase().includes(searchTerm));
-                
-                const matchesTag = !tag || post.tags.includes(tag);
-                
-                return matchesSearch && matchesTag;
-            });
-            
-            renderPosts(filteredPosts);
-        }
-
-        // Initialize on page load
-        initializeBlog();
-    </script>
 </body>
 </html>

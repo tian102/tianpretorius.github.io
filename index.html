@@ -3,243 +3,292 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tian Pretorius | CTO, Software Engineer & Technology Leader</title>
-    <meta name="description" content="Personal website and blog of Tian Pretorius - CTO with 6+ years of experience in software development, automation systems, and technical leadership.">
-    <link rel="stylesheet" href="style.css">
+    <title>Tian Pretorius - CTO & Software Engineer</title>
+    <meta name="description" content="CTO and software engineer with 6+ years of experience building scalable systems. Currently documenting my journey from unemployed to solo SaaS founder.">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="assets/icon-192.png">
-    <meta name="theme-color" content="#3182ce">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+    </button>
+
     <!-- Navigation -->
-    <nav class="nav-container">
-        <div class="nav-content">
+    <nav class="navbar">
+        <div class="nav-container">
             <div class="nav-brand">
-                <a href="index.html">
-                    <span class="prompt">&gt;</span>
-                    <span class="nav-text">tian@dev:~$</span>
-                </a>
+                <span class="brand-name">Tian Pretorius</span>
             </div>
-            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="resume.html">Resume</a></li>
-                <li>
-                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-                        🌙
-                    </button>
-                </li>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="assets/Tian-Pretorius-CV.pdf" class="btn-primary" download>Resume</a></li>
             </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
-    <main class="main-content">
-        <!-- Hero Section -->
-        <section id="home" class="section home-section">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="profile-image-container">
-                        <img src="assets/profile.png" alt="Tian Pretorius" class="profile-image">
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-greeting">
+                        <span class="wave">👋</span>
+                        <span>Hi, I'm</span>
                     </div>
-                    <div class="hero-text">
-                        <h1 class="hero-name">Tian Pretorius</h1>
-                        <div class="hero-tagline">
-                            <span class="typewriter" id="typewriter"></span>
-                            <span class="cursor">|</span>
+                    <h1 class="hero-title">
+                        <span class="gradient-text">Tian Pretorius</span>
+                    </h1>
+                    <h2 class="hero-subtitle">
+                        <span class="typed-text"></span>
+                        <span class="cursor">|</span>
+                    </h2>
+                    <p class="hero-description">
+                        CTO and software engineer with 6+ years of experience building scalable systems 
+                        and leading engineering teams. Currently documenting my journey from unemployed 
+                        to solo SaaS founder.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#projects" class="btn-primary">View My Work</a>
+                        <a href="contact.html" class="btn-secondary">Get In Touch</a>
+                    </div>
+                    <div class="hero-social">
+                        <a href="https://github.com/tianpretorius" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/tian-pretorius-817a2189/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        </a>
+                        <a href="mailto:tianpretorius@gmail.com" aria-label="Email">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="image-wrapper">
+                        <img src="assets/profile.png" alt="Tian Pretorius">
+                        <div class="image-backdrop"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll Down</span>
+            <div class="scroll-arrow">↓</div>
+        </div>
+    </section>
+
+    <!-- Latest Blog Posts Section -->
+    <section id="blog" class="blog-preview">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">01.</span>
+                <h2 class="section-title">Latest from the Blog</h2>
+                <div class="section-line"></div>
+            </div>
+            <p class="section-subtitle">Follow my journey from unemployed to solo SaaS founder</p>
+            <div class="blog-grid" id="blog-preview-grid">
+                <!-- Blog posts will be loaded dynamically -->
+                <div class="blog-loading">
+                    <span>Loading posts...</span>
+                </div>
+            </div>
+            <div class="blog-cta">
+                <a href="blog.html" class="btn-secondary">View All Posts →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">02.</span>
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="projects-grid" id="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="View project">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                        <polyline points="15 3 21 3 21 9"></polyline>
+                                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                                    </svg>
+                                </a>
+                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="View code">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
-                        <p class="hero-summary">
-                            CTO and software engineer with 6+ years of experience building scalable systems and 
-                            leading engineering teams. Currently documenting my journey from unemployed to solo SaaS founder.
+                        <img src="https://via.placeholder.com/400x250/1a1a1a/00ff88?text=Project+1" alt="Project 1">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Featured Project Name</h3>
+                        <p class="project-description">
+                            A brief description of your project highlighting the problem it solves and the technologies used.
                         </p>
-                        <div class="hero-buttons">
-                            <a href="about.html" class="btn btn-primary">Learn More</a>
-                            <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="View project">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                        <polyline points="15 3 21 3 21 9"></polyline>
+                                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                                    </svg>
+                                </a>
+                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="View code">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <img src="https://via.placeholder.com/400x250/1a1a1a/00ff88?text=Project+2" alt="Project 2">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Another Cool Project</h3>
+                        <p class="project-description">
+                            Description of another amazing project showcasing your skills and problem-solving abilities.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="View project">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                        <polyline points="15 3 21 3 21 9"></polyline>
+                                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                                    </svg>
+                                </a>
+                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="View code">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <img src="https://via.placeholder.com/400x250/1a1a1a/00ff88?text=Project+3" alt="Project 3">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Innovative Solution</h3>
+                        <p class="project-description">
+                            A cutting-edge project that demonstrates your technical expertise and creative problem-solving.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">Next.js</span>
+                            <span class="tech-tag">Tailwind</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Featured Projects Section -->
-        <section id="projects" class="section">
-            <div class="container">
-                <h2 class="section-title">
-                    <span class="section-number">01.</span> Featured Projects
-                </h2>
-                <div id="featured-projects" class="projects-grid">
-                    <div class="loading-message">
-                        <span class="prompt">&gt;</span> Loading projects...
-                    </div>
-                </div>
-                <div class="section-cta">
-                    <a href="projects.html" class="btn btn-secondary">
-                        View All Projects <span class="prompt">&gt;</span>
-                    </a>
-                </div>
+            <div class="projects-cta">
+                <a href="projects.html" class="btn-secondary">View All Projects →</a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Featured Blog Posts Section -->
-        <section id="blog" class="section">
-            <div class="container">
-                <h2 class="section-title">
-                    <span class="section-number">02.</span> Latest from the Blog
-                </h2>
-                <p class="section-subtitle">
-                    Follow my journey from unemployed to solo SaaS founder
+    <!-- Contact Section -->
+    <section id="contact" class="contact-preview">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">03.</span>
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="contact-content">
+                <h3>Let's Build Something Amazing Together</h3>
+                <p>
+                    I'm always interested in new opportunities, challenging projects, and meaningful 
+                    collaborations. Whether you have a question, want to discuss a potential project, 
+                    or just want to connect, I'd love to hear from you.
                 </p>
-                <div id="featured-posts" class="blog-grid">
-                    <div class="loading-message">
-                        <span class="prompt">&gt;</span> Loading posts...
-                    </div>
-                </div>
-                <div class="section-cta">
-                    <a href="blog.html" class="btn btn-secondary">
-                        View All Posts <span class="prompt">&gt;</span>
+                <div class="contact-methods">
+                    <a href="mailto:tianpretorius@gmail.com" class="contact-method">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-info">
+                            <h4>Email</h4>
+                            <p>tianpretorius@gmail.com</p>
+                        </div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/tian-pretorius-817a2189/" target="_blank" rel="noopener noreferrer" class="contact-method">
+                        <div class="contact-icon">💼</div>
+                        <div class="contact-info">
+                            <h4>LinkedIn</h4>
+                            <p>Connect with me professionally</p>
+                        </div>
+                    </a>
+                    <a href="https://github.com/tianpretorius" target="_blank" rel="noopener noreferrer" class="contact-method">
+                        <div class="contact-icon">💻</div>
+                        <div class="contact-info">
+                            <h4>GitHub</h4>
+                            <p>Check out my code</p>
+                        </div>
                     </a>
                 </div>
+                <a href="contact.html" class="btn-primary">Send Me a Message</a>
             </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="section">
-            <div class="container">
-                <h2 class="section-title">
-                    <span class="section-number">03.</span> Get In Touch
-                </h2>
-                <div class="contact-content">
-                    <div class="contact-text">
-                        <h3>Let's Build Something Amazing Together</h3>
-                        <p>
-                            I'm always interested in new opportunities, challenging projects, and 
-                            meaningful collaborations. Whether you have a question, want to discuss 
-                            a potential project, or just want to connect, I'd love to hear from you.
-                        </p>
-                    </div>
-                    <div class="contact-links">
-                        <a href="mailto:tianpretorius@gmail.com" class="contact-link" data-aos="fade-up">
-                            <div class="contact-icon">✉️</div>
-                            <div class="contact-info">
-                                <h4>Email</h4>
-                                <p>tianpretorius@gmail.com</p>
-                            </div>
-                        </a>
-                        <a href="https://www.linkedin.com/in/tian-pretorius-817a2189/" target="_blank" rel="noopener noreferrer" class="contact-link" data-aos="fade-up" data-aos-delay="100">
-                            <div class="contact-icon">💼</div>
-                            <div class="contact-info">
-                                <h4>LinkedIn</h4>
-                                <p>Connect with me professionally</p>
-                            </div>
-                        </a>
-                        <a href="https://github.com/tianpretorius" target="_blank" rel="noopener noreferrer" class="contact-link" data-aos="fade-up" data-aos-delay="200">
-                            <div class="contact-icon">💻</div>
-                            <div class="contact-info">
-                                <h4>GitHub</h4>
-                                <p>Check out my code</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Tian Pretorius. Built with vanilla HTML, CSS, and JavaScript.</p>
-            <div class="footer-links">
-                <a href="https://github.com/tianpretorius" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="https://linkedin.com/in/tianpretorius" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                <a href="mailto:tianpretorius@gmail.com">Email</a>
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>&copy; 2025 Tian Pretorius. Built with vanilla HTML, CSS, and JavaScript.</p>
+                </div>
+                <div class="footer-right">
+                    <a href="https://github.com/tianpretorius" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+                    <a href="https://www.linkedin.com/in/tian-pretorius-817a2189/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
+                    <a href="mailto:tianpretorius@gmail.com" aria-label="Email">Email</a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script src="js/marked.min.js"></script>
-    <script src="js/markdown-utils.js"></script>
-    <script src="js/blog.js"></script>
-    <script src="js/projects.js"></script>
-    <script src="script.js"></script>
-    <script>
-        // Mobile menu toggle (ThemeManager is initialized in script.js)
-        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-        const navMenu = document.getElementById('nav-menu');
-        
-        if (mobileMenuToggle && navMenu) {
-            mobileMenuToggle.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-                mobileMenuToggle.classList.toggle('active');
-            });
-        }
-
-        // Load featured projects
-        async function loadFeaturedProjects() {
-            try {
-                const projects = await ProjectsManager.loadAllProjects();
-                const featured = projects.filter(p => p.featured).slice(0, 3);
-                
-                const container = document.getElementById('featured-projects');
-                if (featured.length > 0) {
-                    container.innerHTML = featured.map(project => 
-                        ProjectsManager.renderProjectCard(project)
-                    ).join('');
-                } else {
-                    // If no featured projects, show first 3
-                    container.innerHTML = projects.slice(0, 3).map(project => 
-                        ProjectsManager.renderProjectCard(project)
-                    ).join('');
-                }
-            } catch (error) {
-                console.error('Error loading featured projects:', error);
-                document.getElementById('featured-projects').innerHTML = `
-                    <div class="error-message">
-                        <span class="prompt">&gt;</span> Error loading projects.
-                    </div>
-                `;
-            }
-        }
-
-        // Load featured blog posts
-        async function loadFeaturedPosts() {
-            try {
-                const posts = await BlogManager.loadAllPosts();
-                const featured = posts.filter(p => p.featured).slice(0, 3);
-                
-                const container = document.getElementById('featured-posts');
-                if (featured.length > 0) {
-                    container.innerHTML = featured.map(post => 
-                        BlogManager.renderPostCard(post)
-                    ).join('');
-                } else {
-                    // If no featured posts, show first 3
-                    container.innerHTML = posts.slice(0, 3).map(post => 
-                        BlogManager.renderPostCard(post)
-                    ).join('');
-                }
-            } catch (error) {
-                console.error('Error loading featured posts:', error);
-                document.getElementById('featured-posts').innerHTML = `
-                    <div class="error-message">
-                        <span class="prompt">&gt;</span> Error loading posts.
-                    </div>
-                `;
-            }
-        }
-
-        // Initialize on page load
-        loadFeaturedProjects();
-        loadFeaturedPosts();
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>
