@@ -1,22 +1,5 @@
 // Main JavaScript functionality
 document.addEventListener("DOMContentLoaded", function() {
-    // Theme Toggle
-    const themeToggle = document.getElementById("theme-toggle");
-    const htmlElement = document.documentElement;
-    const themeIcon = document.querySelector(".theme-icon");
-    
-    const currentTheme = localStorage.getItem("theme") || "light";
-    htmlElement.setAttribute("data-theme", currentTheme);
-    themeIcon.textContent = currentTheme === "light" ? "🌙" : "☀️";
-    
-    themeToggle.addEventListener("click", () => {
-        const theme = htmlElement.getAttribute("data-theme");
-        const newTheme = theme === "light" ? "dark" : "light";
-        htmlElement.setAttribute("data-theme", newTheme);
-        localStorage.setItem("theme", newTheme);
-        themeIcon.textContent = newTheme === "light" ? "🌙" : "☀️";
-    });
-    
     // Mobile Navigation
     const navToggle = document.querySelector(".nav-toggle");
     const navMenu = document.querySelector(".nav-menu");
@@ -58,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Typing Animation
     const typedText = document.querySelector(".typed-text");
     if (typedText) {
-        const texts = ["CTO & Software Engineer", "Full-Stack Developer", "Problem Solver", "Tech Enthusiast", "Solo SaaS Founder"];
+        const texts = ["Software Engineer", "Full-Stack Developer", "Problem Solver", "Tech Enthusiast", "Future Solo SaaS Founder😉"];
         let textIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
@@ -176,4 +159,69 @@ document.addEventListener("DOMContentLoaded", function() {
             navbar.style.boxShadow = "none";
         }
     });
+
+    // Section Navigation
+    const sectionNav = document.querySelector('.section-nav');
+    const navUpBtn = document.getElementById('nav-up');
+    const navDownBtn = document.getElementById('nav-down');
+    
+    if (sectionNav && navUpBtn && navDownBtn) {
+        // Define sections in order
+        const sections = ['home', 'about', 'projects', 'blog', 'contact'];
+        let currentSectionIndex = 0;
+        
+        // Show navigation after scrolling past hero
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            if (scrollPosition > window.innerHeight * 0.5) {
+                sectionNav.classList.add('visible');
+            } else {
+                sectionNav.classList.remove('visible');
+            }
+            
+            // Update current section based on scroll position
+            sections.forEach((sectionId, index) => {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const rect = section.getBoundingClientRect();
+                    const navHeight = navbar.offsetHeight;
+                    if (rect.top <= navHeight + 100 && rect.bottom > navHeight) {
+                        currentSectionIndex = index;
+                    }
+                }
+            });
+            
+            // Update button states
+            navUpBtn.disabled = currentSectionIndex === 0;
+            navDownBtn.disabled = currentSectionIndex === sections.length - 1;
+        });
+        
+        // Navigate to previous section
+        navUpBtn.addEventListener('click', () => {
+            if (currentSectionIndex > 0) {
+                const prevSection = document.getElementById(sections[currentSectionIndex - 1]);
+                if (prevSection) {
+                    const navHeight = navbar.offsetHeight;
+                    window.scrollTo({
+                        top: prevSection.offsetTop - navHeight,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+        
+        // Navigate to next section
+        navDownBtn.addEventListener('click', () => {
+            if (currentSectionIndex < sections.length - 1) {
+                const nextSection = document.getElementById(sections[currentSectionIndex + 1]);
+                if (nextSection) {
+                    const navHeight = navbar.offsetHeight;
+                    window.scrollTo({
+                        top: nextSection.offsetTop - navHeight,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    }
 });

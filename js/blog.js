@@ -4,12 +4,15 @@
 let allPosts = [];
 let currentFilter = 'all';
 let currentSort = 'date-desc';
+let currentPage = 1;
+let itemsPerPage = 10;
 
 // List of markdown files in blog/posts directory
 const blogPostFiles = [
     'unemployed-to-saas-founder.md',
     'building-scalable-systems.md',
-    'my-saas-tech-stack.md'
+    'my-saas-tech-stack.md',
+    'template.md'
 ];
 
 // Parse frontmatter from markdown
@@ -51,16 +54,14 @@ function parseFrontmatter(content) {
     async function loadBlogPosts() {
         const blogList = document.getElementById('blog-list');
         
+        console.log('Loading blog posts from files:', blogPostFiles);
+        
         try {
-            const posts = [
-                'unemployed-to-saas-founder.md',
-                'building-scalable-systems.md',
-                'my-saas-tech-stack.md'
-            ];
-            
-            allPosts = await Promise.all(posts.map(async (filename) => {
+            allPosts = await Promise.all(blogPostFiles.map(async (filename) => {
+                console.log('Fetching:', filename);
                 const response = await fetch(`blog/posts/${filename}`);
                 const markdown = await response.text();
+                console.log('Loaded file:', filename, 'Length:', markdown.length);
                 const { metadata, content } = parseFrontmatter(markdown);
                 
                 const title = metadata.title || content.split('\n')[0].replace(/^#\s*/, '');
@@ -133,18 +134,56 @@ function parseFrontmatter(content) {
         return filteredPosts;
     }
     
+    // Show blog list view (and hide individual post view)
+    function showBlogList() {
+        const blogList = document.getElementById('blog-list');
+        const blogPost = document.getElementById('blog-post');
+        const blogHeader = document.getElementById('blog-header');
+        const blogFilters = document.getElementById('blog-filters');
+        
+        // Show the list view, header, and filters
+        blogList.classList.remove('hidden');
+        blogPost.classList.add('hidden');
+        if (blogHeader) blogHeader.classList.remove('hidden');
+        if (blogFilters) blogFilters.classList.remove('hidden');
+    }
+
     // Display posts
     function displayPosts() {
+        showBlogList(); // Ensure we're in list view
         const blogList = document.getElementById('blog-list');
         const filteredPosts = filterAndSortPosts();
         
+        console.log('Displaying posts:', filteredPosts.length, 'posts');
+        console.log('All posts:', allPosts);
+        
         if (filteredPosts.length === 0) {
             blogList.innerHTML = '<p class="no-results">No posts found matching your filters.</p>';
+            hidePagination();
             return;
         }
         
-        blogList.innerHTML = filteredPosts.map(post => `
-            <article class="blog-card">
+        // Calculate pagination
+        const totalPosts = filteredPosts.length;
+        const totalPages = Math.ceil(totalPosts / itemsPerPage);
+        
+        // Ensure current page is valid
+        if (currentPage > totalPages) {
+            currentPage = totalPages;
+        }
+        if (currentPage < 1) {
+            currentPage = 1;
+        }
+        
+        // Get posts for current page
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const postsToDisplay = filteredPosts.slice(startIndex, endIndex);
+        
+        console.log(`Showing posts ${startIndex + 1}-${Math.min(endIndex, totalPosts)} of ${totalPosts}`);
+        
+        blogList.innerHTML = postsToDisplay.map(post => `
+            <article class="blog-card" data-slug="${post.slug}">
                 <div class="blog-card-content">
                     <div class="blog-card-meta">
                         <span class="blog-date">${new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
@@ -157,22 +196,142 @@ function parseFrontmatter(content) {
                             <span class="blog-card-tag" data-tag="${tag}">${tag}</span>
                         `).join('')}
                     </div>
-                    <a href="?post=${post.slug}" class="blog-card-link">Read More →</a>
                 </div>
             </article>
         `).join('');
         
+        // Add click handlers to cards
+        document.querySelectorAll('.blog-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                // Don't navigate if clicking on a tag
+                if (e.target.classList.contains('blog-card-tag')) {
+                    return;
+                }
+                const slug = card.getAttribute('data-slug');
+                window.location.href = `?post=${slug}`;
+            });
+        });
+        
         // Add click handlers to tag chips
         document.querySelectorAll('.blog-card-tag').forEach(tagEl => {
             tagEl.addEventListener('click', (e) => {
-                e.preventDefault();
+                e.stopPropagation(); // Prevent card click
                 const tag = tagEl.getAttribute('data-tag');
                 document.getElementById('tag-filter').value = tag;
                 currentFilter = tag;
+                currentPage = 1; // Reset to first page when filtering
                 displayPosts();
                 updateActiveFilters();
             });
         });
+        
+        // Update pagination
+        updatePagination(totalPosts, startIndex, endIndex);
+    }
+    
+    // Update pagination controls
+    function updatePagination(totalPosts, startIndex, endIndex) {
+        const paginationSection = document.getElementById('pagination-section');
+        const paginationButtons = document.getElementById('pagination-buttons');
+        const paginationInfoText = document.getElementById('pagination-info-text');
+        
+        if (!paginationSection || totalPosts === 0) return;
+        
+        // Show pagination section
+        paginationSection.style.display = 'block';
+        
+        // Update info text
+        const actualEndIndex = Math.min(endIndex, totalPosts);
+        paginationInfoText.textContent = `Showing ${startIndex + 1}-${actualEndIndex} of ${totalPosts} posts`;
+        
+        // Calculate total pages
+        const totalPages = Math.ceil(totalPosts / itemsPerPage);
+        
+        if (totalPages <= 1) {
+            paginationButtons.innerHTML = '';
+            return;
+        }
+        
+        // Generate pagination buttons
+        let buttonsHTML = '';
+        
+        // Previous button
+        buttonsHTML += `
+            <button class="pagination-btn" ${currentPage === 1 ? 'disabled' : ''} data-page="${currentPage - 1}">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                Previous
+            </button>
+        `;
+        
+        // Page numbers
+        const maxVisiblePages = 5;
+        let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+        let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+        
+        // Adjust start page if we're near the end
+        if (endPage - startPage < maxVisiblePages - 1) {
+            startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+        
+        // First page
+        if (startPage > 1) {
+            buttonsHTML += `<button class="pagination-btn page-number" data-page="1">1</button>`;
+            if (startPage > 2) {
+                buttonsHTML += `<span class="pagination-ellipsis">...</span>`;
+            }
+        }
+        
+        // Page numbers
+        for (let i = startPage; i <= endPage; i++) {
+            buttonsHTML += `
+                <button class="pagination-btn page-number ${i === currentPage ? 'active' : ''}" data-page="${i}">
+                    ${i}
+                </button>
+            `;
+        }
+        
+        // Last page
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                buttonsHTML += `<span class="pagination-ellipsis">...</span>`;
+            }
+            buttonsHTML += `<button class="pagination-btn page-number" data-page="${totalPages}">${totalPages}</button>`;
+        }
+        
+        // Next button
+        buttonsHTML += `
+            <button class="pagination-btn" ${currentPage === totalPages ? 'disabled' : ''} data-page="${currentPage + 1}">
+                Next
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        `;
+        
+        paginationButtons.innerHTML = buttonsHTML;
+        
+        // Add click handlers
+        document.querySelectorAll('.pagination-btn[data-page]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const page = parseInt(btn.getAttribute('data-page'));
+                if (page >= 1 && page <= totalPages && page !== currentPage) {
+                    currentPage = page;
+                    displayPosts();
+                    // Scroll to top of blog list
+                    document.getElementById('blog-list').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    }
+    
+    // Hide pagination
+    function hidePagination() {
+        const paginationSection = document.getElementById('pagination-section');
+        if (paginationSection) {
+            paginationSection.style.display = 'none';
+        }
     }
     
     // Update active filters display
@@ -203,9 +362,14 @@ function parseFrontmatter(content) {
     async function loadBlogPost(slug) {
         const blogList = document.getElementById('blog-list');
         const blogPost = document.getElementById('blog-post');
+        const blogHeader = document.getElementById('blog-header');
+        const blogFilters = document.getElementById('blog-filters');
         
+        // Hide the list view, header, and filters
         blogList.classList.add('hidden');
         blogPost.classList.remove('hidden');
+        if (blogHeader) blogHeader.classList.add('hidden');
+        if (blogFilters) blogFilters.classList.add('hidden');
         
         try {
             const post = allPosts.find(p => p.slug === slug);
@@ -251,30 +415,17 @@ function parseFrontmatter(content) {
     }
     
     function parseMarkdown(md) {
-        // Basic markdown parser
-        let html = md;
+        // Use marked.js library for proper markdown parsing
+        if (typeof marked === 'undefined') {
+            console.error('Marked.js library not loaded');
+            return md;
+        }
         
-        // Convert code blocks
-        html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
+        // Remove the first H1 heading (title is already shown in the header)
+        let content = md.replace(/^#\s+.+$/m, '');
         
-        // Convert inline code
-        html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
-        
-        // Convert links
-        html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
-        
-        // Convert headers
-        html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
-        html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
-        html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
-        
-        // Convert paragraphs
-        html = html.split('\n\n').map(block => {
-            if (!block.startsWith('<h') && !block.startsWith('<pre') && block.trim()) {
-                return '<p>' + block.replace(/\n/g, '<br>') + '</p>';
-            }
-            return block;
-        }).join('\n');
+        // Parse markdown to HTML using marked.js
+        const html = marked.parse(content);
         
         return html;
     }
@@ -299,10 +450,12 @@ function parseFrontmatter(content) {
         // Filter event listeners
         const tagFilter = document.getElementById('tag-filter');
         const sortFilter = document.getElementById('sort-filter');
+        const itemsPerPageSelect = document.getElementById('items-per-page');
         
         if (tagFilter) {
             tagFilter.addEventListener('change', (e) => {
                 currentFilter = e.target.value;
+                currentPage = 1; // Reset to first page when filtering
                 displayPosts();
                 updateActiveFilters();
             });
@@ -311,6 +464,15 @@ function parseFrontmatter(content) {
         if (sortFilter) {
             sortFilter.addEventListener('change', (e) => {
                 currentSort = e.target.value;
+                currentPage = 1; // Reset to first page when sorting
+                displayPosts();
+            });
+        }
+        
+        if (itemsPerPageSelect) {
+            itemsPerPageSelect.addEventListener('change', (e) => {
+                itemsPerPage = parseInt(e.target.value);
+                currentPage = 1; // Reset to first page when changing items per page
                 displayPosts();
             });
         }

@@ -6,7 +6,6 @@ author: Tian Pretorius
 ---
 
 # From Unemployed to Solo SaaS Founder: The Beginning
-
 The story of how I decided to build my own SaaS product after being laid off. This is the beginning of a journey filled with challenges, learning, and growth.
 
 ## The Decision
