@@ -28,6 +28,12 @@ const BlogManager = {
         const postsPromises = this.postFiles.map(async (filename) => {
             try {
                 const response = await fetch(`/blog/posts/${filename}`);
+                
+                if (!response.ok) {
+                    console.warn(`Failed to load post: ${filename} (${response.status})`);
+                    return null;
+                }
+                
                 const content = await response.text();
                 const { metadata } = MarkdownUtils.parseFrontmatter(content);
                 
@@ -139,11 +145,24 @@ const BlogManager = {
             `<span class="tag">${tag}</span>`
         ).join('') : '';
         
+        // Handle date for datetime attribute
+        let datetimeAttr = '';
+        if (post.date) {
+            try {
+                const dateObj = typeof post.date === 'string' ? new Date(post.date) : post.date;
+                if (!isNaN(dateObj.getTime())) {
+                    datetimeAttr = dateObj.toISOString();
+                }
+            } catch (e) {
+                console.warn('Invalid date for post:', post.title);
+            }
+        }
+        
         return `
             <article class="card card-hover post-card" data-tags="${post.tags ? post.tags.join(',') : ''}">
                 <div class="post-meta">
-                    <time datetime="${post.date.toISOString()}">${dateStr}</time>
-                    <span class="post-reading-time">${post.readingTime} min read</span>
+                    <time ${datetimeAttr ? `datetime="${datetimeAttr}"` : ''}>${dateStr}</time>
+                    <span class="post-reading-time">${post.readingTime || '5'} min read</span>
                 </div>
                 <h2 class="post-title">
                     <a href="/blog/post.html?post=${post.slug}">${post.title}</a>

@@ -29,6 +29,12 @@ const ProjectsManager = {
         const projectsPromises = this.projectFiles.map(async (filename) => {
             try {
                 const response = await fetch(`/projects/data/${filename}`);
+                
+                if (!response.ok) {
+                    console.warn(`Failed to load project: ${filename} (${response.status})`);
+                    return null;
+                }
+                
                 const content = await response.text();
                 const { metadata } = MarkdownUtils.parseFrontmatter(content);
                 

@@ -254,12 +254,18 @@ class SkillBarAnimation {
 // Navigation Background Change on Scroll
 class NavScrollEffect {
     constructor() {
-        this.nav = document.querySelector('.nav');
+        this.nav = document.querySelector('.nav') || document.querySelector('.nav-container');
+        if (!this.nav) {
+            console.log('Nav element not found for scroll effect');
+            return;
+        }
         this.init();
     }
 
     init() {
         window.addEventListener('scroll', () => {
+            if (!this.nav) return;
+            
             if (window.scrollY > 100) {
                 this.nav.style.background = 'rgba(15, 23, 42, 0.98)';
                 this.nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
