@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Projects by Tian Pretorius - Computer Vision, Industrial Automation, IoT">
+    <title>Projects | Tian Pretorius</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="assets/profile.png">
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-content">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <span class="prompt">&gt;</span>
+                    <span class="nav-text">tian@dev:~$</span>
+                </a>
+            </div>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="resume.html">Resume</a></li>
+                <li>
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                        🌙
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="projects-header">
+            <div class="container">
+                <h1 class="section-title">
+                    <span class="prompt">&gt;</span> Projects
+                </h1>
+                <p class="projects-subtitle">
+                    A collection of my work in computer vision, industrial automation, IoT, and web development. 
+                    Each project represents real-world problem solving and technical innovation.
+                </p>
+            </div>
+        </section>
+
+        <section class="projects-controls">
+            <div class="container">
+                <div class="projects-controls-inner">
+                    <div class="search-box">
+                        <input 
+                            type="search" 
+                            id="projects-search" 
+                            placeholder="Search projects..."
+                            aria-label="Search projects"
+                        >
+                    </div>
+                    <div class="tag-filter">
+                        <label for="tag-select" class="sr-only">Filter by technology</label>
+                        <select id="tag-select" aria-label="Filter projects by technology">
+                            <option value="">All Technologies</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="projects-content">
+            <div class="container">
+                <div id="projects-grid" class="projects-grid">
+                    <!-- Projects will be dynamically loaded here -->
+                    <div class="loading-message">
+                        <span class="prompt">&gt;</span> Loading projects...
+                    </div>
+                </div>
+                
+                <div id="no-projects-message" class="no-projects-message" style="display: none;">
+                    <span class="prompt">&gt;</span> No projects found.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Tian Pretorius. Built with vanilla HTML, CSS, and JavaScript.</p>
+            <div class="footer-links">
+                <a href="https://github.com/tianpretorius" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://linkedin.com/in/tianpretorius" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="mailto:tian@example.com">Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/marked.min.js"></script>
+    <script src="js/markdown-utils.js"></script>
+    <script src="js/projects.js"></script>
+    <script src="js/theme.js"></script>
+    <script>
+        // Initialize theme
+        const themeManager = new ThemeManager();
+        themeManager.init();
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuToggle.classList.toggle('active');
+        });
+
+        // Projects functionality
+        let allProjects = [];
+        let filteredProjects = [];
+
+        async function initializeProjects() {
+            try {
+                // Load all projects
+                allProjects = await ProjectsManager.loadAllProjects();
+                filteredProjects = [...allProjects];
+                
+                // Populate tag filter
+                populateTagFilter();
+                
+                // Render projects
+                renderProjects(filteredProjects);
+                
+            } catch (error) {
+                console.error('Error loading projects:', error);
+                document.getElementById('projects-grid').innerHTML = `
+                    <div class="error-message">
+                        <span class="prompt">&gt;</span> Error loading projects. Please try again later.
+                    </div>
+                `;
+            }
+        }
+
+        function populateTagFilter() {
+            const tags = ProjectsManager.getAllTags();
+            const tagSelect = document.getElementById('tag-select');
+            
+            tags.forEach(tag => {
+                const option = document.createElement('option');
+                option.value = tag;
+                option.textContent = tag;
+                tagSelect.appendChild(option);
+            });
+        }
+
+        function renderProjects(projects) {
+            const container = document.getElementById('projects-grid');
+            const noProjectsMessage = document.getElementById('no-projects-message');
+            
+            if (projects.length === 0) {
+                container.style.display = 'none';
+                noProjectsMessage.style.display = 'block';
+                return;
+            }
+            
+            container.style.display = 'grid';
+            noProjectsMessage.style.display = 'none';
+            
+            container.innerHTML = projects.map(project => ProjectsManager.renderProjectCard(project)).join('');
+        }
+
+        // Search functionality
+        document.getElementById('projects-search').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const tagFilter = document.getElementById('tag-select').value;
+            
+            filterProjects(searchTerm, tagFilter);
+        });
+
+        // Tag filter functionality
+        document.getElementById('tag-select').addEventListener('change', (e) => {
+            const tagFilter = e.target.value;
+            const searchTerm = document.getElementById('projects-search').value.toLowerCase();
+            
+            filterProjects(searchTerm, tagFilter);
+        });
+
+        function filterProjects(searchTerm, tag) {
+            filteredProjects = allProjects.filter(project => {
+                const matchesSearch = !searchTerm || 
+                    project.title.toLowerCase().includes(searchTerm) ||
+                    project.description.toLowerCase().includes(searchTerm) ||
+                    project.tags.some(t => t.toLowerCase().includes(searchTerm));
+                
+                const matchesTag = !tag || project.tags.includes(tag);
+                
+                return matchesSearch && matchesTag;
+            });
+            
+            renderProjects(filteredProjects);
+        }
+
+        // Check for tag filter in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const tagParam = urlParams.get('tag');
+        if (tagParam) {
+            document.getElementById('tag-select').value = tagParam;
+        }
+
+        // Initialize on page load
+        initializeProjects();
+    </script>
+</body>
+</html>

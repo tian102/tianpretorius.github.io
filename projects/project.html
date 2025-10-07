@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Project by Tian Pretorius">
+    <title>Project | Tian Pretorius</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" type="image/png" href="../assets/profile.png">
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-content">
+            <div class="nav-brand">
+                <a href="../index.html">
+                    <span class="prompt">&gt;</span>
+                    <span class="nav-text">tian@dev:~$</span>
+                </a>
+            </div>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../projects.html" class="active">Projects</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../resume.html">Resume</a></li>
+                <li>
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                        🌙
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <article class="project-detail">
+            <div class="container">
+                <div class="project-header">
+                    <a href="../projects.html" class="back-link">
+                        <span class="prompt">&lt;</span> Back to Projects
+                    </a>
+                    
+                    <h1 class="project-title" id="project-title">Loading...</h1>
+                    
+                    <p class="project-description" id="project-description"></p>
+                    
+                    <div class="project-meta" id="project-meta">
+                        <span class="project-year"></span>
+                        <span class="project-separator">•</span>
+                        <span class="project-status"></span>
+                    </div>
+                    
+                    <div class="project-tags" id="project-tags"></div>
+                    
+                    <div class="project-links" id="project-links"></div>
+                </div>
+                
+                <div class="project-content" id="project-content">
+                    <div class="loading-message">
+                        <span class="prompt">&gt;</span> Loading project...
+                    </div>
+                </div>
+                
+                <div class="project-footer">
+                    <div class="project-navigation">
+                        <a href="../projects.html" class="btn btn-secondary">
+                            <span class="prompt">&lt;</span> All Projects
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Tian Pretorius. Built with vanilla HTML, CSS, and JavaScript.</p>
+            <div class="footer-links">
+                <a href="https://github.com/tianpretorius" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://linkedin.com/in/tianpretorius" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="mailto:tian@example.com">Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/marked.min.js"></script>
+    <script src="../js/markdown-utils.js"></script>
+    <script src="../js/projects.js"></script>
+    <script src="../js/theme.js"></script>
+    <script>
+        // Initialize theme
+        const themeManager = new ThemeManager();
+        themeManager.init();
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuToggle.classList.toggle('active');
+        });
+
+        // Get project slug from URL
+        function getProjectSlug() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('project');
+        }
+
+        // Load and render project
+        async function loadProject() {
+            const slug = getProjectSlug();
+            
+            if (!slug) {
+                document.getElementById('project-content').innerHTML = `
+                    <div class="error-message">
+                        <span class="prompt">&gt;</span> No project specified.
+                    </div>
+                `;
+                return;
+            }
+            
+            try {
+                const project = await ProjectsManager.loadProject(slug);
+                
+                if (!project) {
+                    throw new Error('Project not found');
+                }
+                
+                // Update page title
+                document.title = `${project.title} | Tian Pretorius`;
+                
+                // Update meta description
+                const metaDescription = document.querySelector('meta[name="description"]');
+                if (metaDescription) {
+                    metaDescription.content = project.description;
+                }
+                
+                // Render project title and description
+                document.getElementById('project-title').textContent = project.title;
+                document.getElementById('project-description').textContent = project.description;
+                
+                // Render project meta
+                const projectMeta = document.getElementById('project-meta');
+                projectMeta.querySelector('.project-year').textContent = project.year;
+                projectMeta.querySelector('.project-status').textContent = project.status;
+                
+                // Render tags
+                const tagsContainer = document.getElementById('project-tags');
+                tagsContainer.innerHTML = project.tags.map(tag => 
+                    `<a href="../projects.html?tag=${encodeURIComponent(tag)}" class="tag">${tag}</a>`
+                ).join('');
+                
+                // Render links
+                const linksContainer = document.getElementById('project-links');
+                const links = [];
+                
+                if (project.github) {
+                    links.push(`<a href="${project.github}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                        <span class="prompt">&gt;</span> View on GitHub
+                    </a>`);
+                }
+                
+                if (project.demo) {
+                    links.push(`<a href="${project.demo}" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+                        Live Demo →
+                    </a>`);
+                }
+                
+                linksContainer.innerHTML = links.join('');
+                
+                // Render project content
+                document.getElementById('project-content').innerHTML = project.html;
+                
+            } catch (error) {
+                console.error('Error loading project:', error);
+                document.getElementById('project-content').innerHTML = `
+                    <div class="error-message">
+                        <span class="prompt">&gt;</span> Error loading project. The project may not exist.
+                        <br><br>
+                        <a href="../projects.html" class="btn btn-secondary">Back to Projects</a>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize on page load
+        loadProject();
+    </script>
+</body>
+</html>

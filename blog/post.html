@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog post by Tian Pretorius">
+    <title>Post | Tian Pretorius</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" type="image/png" href="../assets/profile.png">
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-content">
+            <div class="nav-brand">
+                <a href="../index.html">
+                    <span class="prompt">&gt;</span>
+                    <span class="nav-text">tian@dev:~$</span>
+                </a>
+            </div>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../blog.html" class="active">Blog</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../resume.html">Resume</a></li>
+                <li>
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                        🌙
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <article class="blog-post">
+            <div class="container">
+                <div class="post-header">
+                    <a href="../blog.html" class="back-link">
+                        <span class="prompt">&lt;</span> Back to Blog
+                    </a>
+                    
+                    <h1 class="post-title" id="post-title">Loading...</h1>
+                    
+                    <div class="post-meta" id="post-meta">
+                        <span class="post-date"></span>
+                        <span class="post-separator">•</span>
+                        <span class="post-reading-time"></span>
+                        <span class="post-separator">•</span>
+                        <span class="post-author"></span>
+                    </div>
+                    
+                    <div class="post-tags" id="post-tags"></div>
+                </div>
+                
+                <div class="post-content" id="post-content">
+                    <div class="loading-message">
+                        <span class="prompt">&gt;</span> Loading post...
+                    </div>
+                </div>
+                
+                <div class="post-footer">
+                    <div class="post-navigation">
+                        <a href="../blog.html" class="btn btn-secondary">
+                            <span class="prompt">&lt;</span> All Posts
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Tian Pretorius. Built with vanilla HTML, CSS, and JavaScript.</p>
+            <div class="footer-links">
+                <a href="https://github.com/tianpretorius" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://linkedin.com/in/tianpretorius" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="mailto:tian@example.com">Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/marked.min.js"></script>
+    <script src="../js/markdown-utils.js"></script>
+    <script src="../js/blog.js"></script>
+    <script src="../js/theme.js"></script>
+    <script>
+        // Initialize theme
+        const themeManager = new ThemeManager();
+        themeManager.init();
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuToggle.classList.toggle('active');
+        });
+
+        // Get post slug from URL
+        function getPostSlug() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('post');
+        }
+
+        // Load and render post
+        async function loadPost() {
+            const slug = getPostSlug();
+            
+            if (!slug) {
+                document.getElementById('post-content').innerHTML = `
+                    <div class="error-message">
+                        <span class="prompt">&gt;</span> No post specified.
+                    </div>
+                `;
+                return;
+            }
+            
+            try {
+                const post = await BlogManager.loadPost(slug);
+                
+                if (!post) {
+                    throw new Error('Post not found');
+                }
+                
+                // Update page title
+                document.title = `${post.title} | Tian Pretorius`;
+                
+                // Update meta description
+                const metaDescription = document.querySelector('meta[name="description"]');
+                if (metaDescription) {
+                    metaDescription.content = post.excerpt;
+                }
+                
+                // Render post title
+                document.getElementById('post-title').textContent = post.title;
+                
+                // Render post meta
+                const postMeta = document.getElementById('post-meta');
+                postMeta.querySelector('.post-date').textContent = post.formattedDate;
+                postMeta.querySelector('.post-reading-time').textContent = post.readingTime;
+                postMeta.querySelector('.post-author').textContent = `By ${post.author}`;
+                
+                // Render tags
+                const tagsContainer = document.getElementById('post-tags');
+                tagsContainer.innerHTML = post.tags.map(tag => 
+                    `<a href="../blog.html?tag=${encodeURIComponent(tag)}" class="tag">${tag}</a>`
+                ).join('');
+                
+                // Render post content
+                document.getElementById('post-content').innerHTML = post.html;
+                
+            } catch (error) {
+                console.error('Error loading post:', error);
+                document.getElementById('post-content').innerHTML = `
+                    <div class="error-message">
+                        <span class="prompt">&gt;</span> Error loading post. The post may not exist.
+                        <br><br>
+                        <a href="../blog.html" class="btn btn-secondary">Back to Blog</a>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize on page load
+        loadPost();
+    </script>
+</body>
+</html>
