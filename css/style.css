@@ -110,7 +110,7 @@ a:hover {
 }
 
 section {
-    padding: var(--spacing-3xl) 0;
+    padding: var(--spacing-xl) 0;
 }
 
 .hidden {
@@ -127,6 +127,7 @@ section {
     right: 0;
     z-index: 999;
     background-color: rgba(255, 255, 255, 0.95);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
     transition: all var(--transition-base);
@@ -524,7 +525,7 @@ section {
    ========================================== */
 .projects {
     background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
-    padding: var(--spacing-3xl) 0;
+    padding: var(--spacing-xl) 0;
     position: relative;
 }
 
@@ -615,6 +616,7 @@ section {
     padding: 2px;
     background: linear-gradient(135deg, var(--text-primary), transparent);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     opacity: 0;
@@ -1066,7 +1068,7 @@ section {
    ========================================== */
 .blog-preview {
     background-color: var(--bg-primary);
-    padding: var(--spacing-3xl) 0;
+    padding: var(--spacing-xl) 0;
     position: relative;
 }
 
