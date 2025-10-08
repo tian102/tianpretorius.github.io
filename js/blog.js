@@ -95,6 +95,12 @@ async function loadBlogPosts() {
         blogPost.classList.add('hidden');
         if (blogHeader) blogHeader.classList.remove('hidden');
         if (blogFilters) blogFilters.classList.remove('hidden');
+        
+        // Show pagination when viewing blog list
+        const paginationSection = document.getElementById('pagination-section');
+        if (paginationSection) {
+            paginationSection.style.display = 'block';
+        }
     }
 
     // Display posts
@@ -133,16 +139,20 @@ async function loadBlogPosts() {
         
         blogList.innerHTML = postsToDisplay.map(post => `
             <article class="blog-card" data-slug="${post.slug}">
-                <div class="blog-card-content">
-                    <div class="blog-card-meta">
+                <div class="blog-image">
+                    <img src="${post.image || 'https://via.placeholder.com/400x250/1a1a1a/00ff88?text=' + encodeURIComponent(post.title)}" alt="${post.title}">
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
                         <span class="blog-date">${new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                        <span>•</span>
                         <span class="blog-read-time">${calculateReadTime(post.content)} min read</span>
                     </div>
-                    <h2 class="blog-card-title">${post.title}</h2>
-                    <p class="blog-card-excerpt">${post.excerpt}</p>
-                    <div class="blog-card-tags">
+                    <h2 class="blog-title">${post.title}</h2>
+                    <p class="blog-excerpt">${post.excerpt}</p>
+                    <div class="blog-tags">
                         ${post.tags.map(tag => `
-                            <span class="blog-card-tag" data-tag="${tag}">${tag}</span>
+                            <span class="blog-tag" data-tag="${tag}">${tag}</span>
                         `).join('')}
                     </div>
                 </div>
@@ -153,7 +163,7 @@ async function loadBlogPosts() {
         document.querySelectorAll('.blog-card').forEach(card => {
             card.addEventListener('click', (e) => {
                 // Don't navigate if clicking on a tag
-                if (e.target.classList.contains('blog-card-tag')) {
+                if (e.target.classList.contains('blog-tag')) {
                     return;
                 }
                 const slug = card.getAttribute('data-slug');
@@ -162,7 +172,7 @@ async function loadBlogPosts() {
         });
         
         // Add click handlers to tag chips
-        document.querySelectorAll('.blog-card-tag').forEach(tagEl => {
+        document.querySelectorAll('.blog-tag').forEach(tagEl => {
             tagEl.addEventListener('click', (e) => {
                 e.stopPropagation(); // Prevent card click
                 const tag = tagEl.getAttribute('data-tag');
@@ -319,6 +329,9 @@ async function loadBlogPosts() {
         blogPost.classList.remove('hidden');
         if (blogHeader) blogHeader.classList.add('hidden');
         if (blogFilters) blogFilters.classList.add('hidden');
+        
+        // Hide pagination when viewing individual post
+        hidePagination();
         
         try {
             const post = allPosts.find(p => p.slug === slug);

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tian Pretorius - Software Engineer</title>
     <meta name="description" content="Software Engineer with 5+ years of experience building scalable systems.">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=20251008">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -40,21 +40,21 @@
                 <div class="hero-text">
                     <div class="hero-greeting">
                         <span class="wave">👋</span>
-                        <span>Hi, I'm</span>
+                        <span id="hero-greeting">Hi, I'm</span>
                     </div>
                     <h1 class="hero-title">
-                        <span class="gradient-text">Tian Pretorius</span>
+                        <span class="gradient-text" id="hero-name">Tian Pretorius</span>
                     </h1>
                     <h2 class="hero-subtitle">
                         <span class="typed-text"></span>
                         <span class="cursor">|</span>
                     </h2>
-                    <p class="hero-description">
+                    <p class="hero-description" id="hero-description">
                         Dynamic Software Engineer with 5+ years in automation and systems design: I led custom micronutrient blend tools for industry leaders, revamped production lines for vitamin premix operations, and pioneered Android/Java apps with Python and OpenCV for precise sugar crystal analysis. CCNA- and SolidWorks-certified, I've driven R&D from RFID adoption barriers to digital security protocols, always delivering scalable, compliant innovations. These days, that expertise shapes my latest indie projects—explore the code, insights, and builds that keep the momentum going.
                     </p>
                     <div class="hero-cta">
-                        <a href="#about" class="btn-primary">About Me</a>
-                        <a href="contact.html" class="btn-secondary">Get In Touch</a>
+                        <a href="#about" class="btn-primary" id="hero-cta-primary">About Me</a>
+                        <a href="contact.html" class="btn-secondary" id="hero-cta-secondary">Get In Touch</a>
                     </div>
                     <div class="hero-social">
                         <a href="https://github.com/102" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
@@ -97,7 +97,7 @@
                 <div class="section-line"></div>
             </div>
             <div class="about-content-grid">
-                <div class="about-text">
+                <div class="about-text" id="about-preview-text">
                     <p class="about-intro">
                        As a software engineer with 5+ years of experience in automation, analytics, systems design, and full-stack development, I've delivered impactful solutions across diverse technical industries.
                        Highlights include leading automated tool development for food fortification, regulatory compliance, optimizing production workflows for efficiency, and engineering web- and mobile-based applications integrated with Python and OpenCV for high-precision particle analysis in industry use cases.
@@ -193,7 +193,7 @@
                 <h2 class="section-title">Latest from the Blog</h2>
                 <div class="section-line"></div>
             </div>
-            <p class="section-subtitle">Follow my journey from unemployed to solo SaaS founder</p>
+            <p class="section-subtitle" id="blog-section-subtitle">Follow my journey from unemployed to solo SaaS founder</p>
             <div class="carousel-container">
                 <button class="carousel-nav carousel-nav-left" id="blog-nav-left" aria-label="Previous post">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -227,8 +227,8 @@
                 <div class="section-line"></div>
             </div>
             <div class="contact-content">
-                <h3>Let's Build Something Amazing Together</h3>
-                <p>
+                <h3 id="contact-preview-title">Let's Build Something Amazing Together</h3>
+                <p id="contact-preview-intro">
                     I'm always interested in new opportunities, challenging projects, and meaningful 
                     collaborations. Whether you have a question, want to discuss a potential project, 
                     or just want to connect, I'd love to hear from you.
@@ -277,7 +277,7 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
+        <div class="container" id="footer-container">
             <div class="footer-content">
                 <div class="footer-left">
                     <p>&copy; 2025 Tian Pretorius. Built with vanilla HTML, CSS, and JavaScript.</p>
@@ -292,7 +292,8 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/marked@11.1.0/marked.min.js"></script>
-    <script src="js/main.js?v=9"></script>
-    <script src="js/index.js?v=9"></script>
+    <script src="js/content-loader.js?v=20251008"></script>
+    <script src="js/main.js?v=20251008"></script>
+    <script src="js/index.js?v=20251008"></script>
 </body>
 </html>

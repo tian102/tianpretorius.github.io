@@ -3,6 +3,7 @@ title: From Unemployed to SaaS Founder: My Journey Begins
 date: 2024-10-05
 tags: entrepreneurship, saas, personal-story, startup
 author: Tian Pretorius
+image: https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=500&fit=crop
 ---
 
 # From Unemployed to Solo SaaS Founder: The Beginning

@@ -38,40 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
     
-    // Typing Animation
-    const typedText = document.querySelector(".typed-text");
-    if (typedText) {
-        const texts = ["Software Engineer", "Full-Stack Developer", "Problem Solver", "Tech Enthusiast", "Future Solo SaaS Founder😉"];
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        
-        function type() {
-            const current = texts[textIndex];
-            if (isDeleting) {
-                typedText.textContent = current.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typedText.textContent = current.substring(0, charIndex + 1);
-                charIndex++;
-            }
-            
-            let delay = isDeleting ? 50 : 100;
-            
-            if (!isDeleting && charIndex === current.length) {
-                delay = 2000;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                textIndex = (textIndex + 1) % texts.length;
-                delay = 500;
-            }
-            
-            setTimeout(type, delay);
-        }
-        
-        setTimeout(type, 1000);
-    }
+    // Typing Animation is now handled by content-loader.js
     
     // Load Blog Posts Preview
     const blogGrid = document.getElementById("blog-preview-grid");
