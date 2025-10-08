@@ -4,9 +4,11 @@ date: 2024-10-05
 tags: entrepreneurship, saas, personal-story, startup
 author: Tian Pretorius
 image: https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=500&fit=crop
+tldr: Getting laid off after 6+ years led me to build my own SaaS product. I'm documenting the entire journey as a solo founder - from MVP to launch and beyond.
 ---
 
 # From Unemployed to Solo SaaS Founder: The Beginning
+
 The story of how I decided to build my own SaaS product after being laid off. This is the beginning of a journey filled with challenges, learning, and growth.
 
 ## The Decision

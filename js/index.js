@@ -160,7 +160,7 @@ async function loadLatestBlogPosts() {
                         <span class="blog-read-time">${post.readTime}</span>
                     </div>
                     <h3 class="blog-title">${post.title}</h3>
-                    <p class="blog-excerpt">${post.excerpt}</p>
+                    <p class="blog-excerpt">${post.tldr || post.excerpt}</p>
                     <div class="blog-tags">
                         ${post.tags.slice(0, 4).map(tag => `<span class="blog-tag">${tag}</span>`).join('')}
                     </div>

@@ -171,7 +171,7 @@ function displayPosts() {
                     <span class="blog-read-time">${calculateReadTime(post.content)} min read</span>
                 </div>
                 <h2 class="blog-title">${post.title}</h2>
-                <p class="blog-excerpt">${post.excerpt}</p>
+                <p class="blog-excerpt">${post.tldr || post.excerpt}</p>
                 <div class="blog-tags">
                     ${post.tags.map(tag => `<span class="blog-tag" data-tag="${tag}">${tag}</span>`).join('')}
                 </div>

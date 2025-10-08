@@ -3,6 +3,7 @@ title: Your Blog Post Title Here
 date: 2024-01-01
 tags: tag1, tag2, tag3
 author: Tian Pretorius
+tldr: Write a concise 1-2 sentence summary that captures the key takeaway of your post. This will be displayed in blog cards.
 ---
 
 # Your Blog Post Title
