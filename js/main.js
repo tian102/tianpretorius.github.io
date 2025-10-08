@@ -42,8 +42,12 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Navbar Shadow on Scroll
     const navbar = document.querySelector(".navbar");
+    
     window.addEventListener("scroll", () => {
-        if (window.pageYOffset > 100) {
+        const scrollPosition = window.pageYOffset;
+        
+        // Navbar shadow
+        if (scrollPosition > 100) {
             navbar.style.boxShadow = "var(--shadow-md)";
         } else {
             navbar.style.boxShadow = "none";

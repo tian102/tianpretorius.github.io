@@ -484,14 +484,25 @@ section {
     50% { transform: rotate(10deg); }
 }
 
+.hero-greeting {
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
 .hero-title {
     font-size: clamp(3rem, 7vw, 5rem);
     margin-bottom: var(--spacing-md);
     line-height: 1.1;
+    animation: fadeInUp 0.8s ease-out 0.35s both;
 }
 
 .gradient-text {
     color: var(--text-primary);
+    transition: all var(--transition-base);
+}
+
+.gradient-text:hover {
+    transform: translateY(-2px);
+    text-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
 }
 
 .hero-subtitle {
@@ -500,6 +511,7 @@ section {
     font-weight: 500;
     margin-bottom: var(--spacing-lg);
     min-height: 60px;
+    animation: fadeInUp 0.8s ease-out 0.5s both;
 }
 
 .typed-text {
@@ -522,6 +534,7 @@ section {
     line-height: 1.8;
     margin-bottom: var(--spacing-xl);
     max-width: 600px;
+    animation: fadeInUp 0.8s ease-out 0.65s both;
 }
 
 .hero-cta {
@@ -529,6 +542,7 @@ section {
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-xl);
     flex-wrap: wrap;
+    animation: fadeInUp 0.8s ease-out 0.8s both;
 }
 
 .hero-social {
@@ -549,6 +563,18 @@ section {
     border: 1px solid var(--border-color);
 }
 
+.hero-social a:nth-child(1) {
+    animation: slideInLeft 0.8s ease-out 0.95s both;
+}
+
+.hero-social a:nth-child(2) {
+    animation: fadeInUp 0.8s ease-out 1.05s both;
+}
+
+.hero-social a:nth-child(3) {
+    animation: slideInRight 0.8s ease-out 1.15s both;
+}
+
 .hero-social a:hover {
     background-color: var(--text-primary);
     color: var(--bg-primary);
@@ -558,6 +584,7 @@ section {
 
 .hero-image {
     position: relative;
+    animation: fadeInScale 1s ease-out 0.3s both;
 }
 
 .image-wrapper {
@@ -576,18 +603,6 @@ section {
 
 .image-wrapper:hover img {
     transform: scale(1.02);
-}
-
-.image-backdrop {
-    position: absolute;
-    top: 20px;
-    right: -20px;
-    width: 100%;
-    height: 100%;
-    background: var(--bg-secondary) url('../assets/banner.png') center/cover no-repeat;
-    border-radius: var(--radius-xl);
-    z-index: -1;
-    border: 1px solid var(--border-color);
 }
 
 .scroll-indicator {
@@ -645,6 +660,55 @@ section {
 @media (max-width: 568px) {
     .scroll-indicator {
         right: var(--spacing-sm);
+    }
+}
+
+/* ==========================================
+   Hero Animations
+   ========================================== */
+
+/* Entrance Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
     }
 }
 
