@@ -585,6 +585,7 @@ body.home .contact-preview > .container {
 
 .hero-image {
     position: relative;
+    padding: var(--spacing-xs);
     animation: fadeInScale 1s ease-out 0.3s both;
 }
 
