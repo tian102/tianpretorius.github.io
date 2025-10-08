@@ -79,28 +79,28 @@
 .post-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-xs);
     margin-top: var(--spacing-lg);
 }
 
 .post-tag {
-    display: inline-block;
-    padding: 0.4rem 1rem;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    font-size: 0.8125rem;
+    padding: 0.375rem 0.75rem;
+    background-color: var(--bg-secondary);
     color: var(--text-secondary);
-    text-decoration: none;
-    transition: all var(--transition-base);
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
     font-weight: 500;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    text-transform: lowercase;
 }
 
 .post-tag:hover {
-    background: var(--bg-primary);
-    color: var(--text-primary);
+    background-color: var(--text-primary);
+    color: var(--bg-primary);
     border-color: var(--text-primary);
-    transform: translateY(-2px);
 }
 
 /* Blog Post Content */
@@ -419,26 +419,26 @@
 .blog-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-xs);
 }
 
 .blog-tag {
-    padding: 0.35rem 0.875rem;
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    font-size: 0.75rem;
+    padding: 0.375rem 0.75rem;
+    background-color: var(--bg-secondary);
     color: var(--text-secondary);
-    transition: all var(--transition-base);
-    cursor: pointer;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
     font-weight: 500;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-transform: lowercase;
 }
 
 .blog-tag:hover {
-    background: var(--bg-primary);
-    color: var(--text-primary);
+    background-color: var(--text-primary);
+    color: var(--bg-primary);
     border-color: var(--text-primary);
-    transform: translateY(-2px);
 }
 
 /* ==========================================
