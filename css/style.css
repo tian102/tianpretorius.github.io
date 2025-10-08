@@ -171,6 +171,7 @@ body:not(.content-loading) .skeleton-placeholder {
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    scroll-padding-top: 70px; /* Account for fixed navbar */
 }
 
 body {
@@ -227,6 +228,30 @@ a:hover {
 
 section {
     padding: var(--spacing-lg) 0;
+}
+
+/* Section Scroll Behavior - Ensure sections fill viewport */
+section[id] {
+    min-height: calc(100vh - 70px); /* Full viewport minus navbar */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    scroll-margin-top: 70px; /* Account for fixed navbar */
+}
+
+/* Hero section already fills viewport */
+.hero {
+    min-height: 100vh;
+    scroll-margin-top: 0;
+}
+
+/* Ensure section content is centered vertically */
+section[id] > .container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
 }
 
 .hidden {
@@ -390,11 +415,10 @@ section {
    Hero Section
    ========================================== */
 .hero {
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 70px;
     position: relative;
     overflow: hidden;
 }
@@ -1156,6 +1180,13 @@ section {
 .about-section {
     background-color: var(--bg-primary);
     padding: var(--spacing-sm) 0;
+}
+
+.about-section .section-title {
+    background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .about-content-grid {
@@ -1968,6 +1999,13 @@ section {
     padding: var(--spacing-xl) 0;
 }
 
+.contact-preview .section-title {
+    background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
 .contact-preview-content {
     max-width: 900px;
     margin: 0 auto;
@@ -2038,7 +2076,7 @@ section {
     gap: var(--spacing-md);
 }
 
-.about-section h2 {
+.about-main h2 {
     font-size: 1.75rem;
     margin-bottom: var(--spacing-md);
     color: var(--text-primary);
@@ -2415,6 +2453,17 @@ section {
 }
 
 @media (max-width: 768px) {
+    /* Section Scroll Behavior - Mobile Override */
+    section[id] {
+        min-height: auto; /* Let content determine height on mobile */
+        padding: var(--spacing-2xl) 0;
+    }
+    
+    /* Keep hero full height on mobile */
+    .hero {
+        min-height: 100vh;
+    }
+    
     /* Contact Page Tablet */
     .contact-methods-grid {
         grid-template-columns: repeat(2, 1fr);

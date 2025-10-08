@@ -50,6 +50,45 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    // Enhanced Scroll Indicator
+    const scrollIndicator = document.querySelector(".scroll-indicator");
+    if (scrollIndicator) {
+        // Fade out scroll indicator when scrolling down
+        let lastScrollTop = 0;
+        window.addEventListener("scroll", () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Fade out after scrolling 100px down
+            if (scrollTop > 100) {
+                scrollIndicator.style.opacity = "0";
+                scrollIndicator.style.pointerEvents = "none";
+            } else {
+                scrollIndicator.style.opacity = "1";
+                scrollIndicator.style.pointerEvents = "auto";
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+        
+        // Enhanced click handler with precise positioning
+        scrollIndicator.addEventListener("click", (e) => {
+            e.preventDefault();
+            const targetId = scrollIndicator.getAttribute("href")?.substring(1);
+            if (targetId) {
+                const target = document.getElementById(targetId);
+                if (target) {
+                    const navHeight = navbar.offsetHeight;
+                    const targetPosition = target.offsetTop - navHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            }
+        });
+    }
+
     // Section Navigation
     const sectionNav = document.querySelector('.section-nav');
     const navUpBtn = document.getElementById('nav-up');
