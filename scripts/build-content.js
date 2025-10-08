@@ -71,6 +71,7 @@ blogFiles.forEach(file => {
             tags: metadata.tags || [],
             author: metadata.author || 'Tian Pretorius',
             image: metadata.image || '',
+            tldr: metadata.tldr || '',
             content: markdown,
             excerpt: excerpt || markdown.substring(0, 200) + '...'
         });
