@@ -1,6 +1,6 @@
 ---
-title: Your Blog Post Title Here
-date: 2024-01-01
+title: Testing a new blog
+date: 2025-10-08
 tags: tag1, tag2, tag3
 author: Tian Pretorius
 ---
