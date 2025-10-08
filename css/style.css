@@ -443,35 +443,37 @@ section {
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: var(--spacing-xs);
-    color: var(--text-tertiary);
-    font-size: 0.875rem;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    color: var(--text-secondary);
     text-decoration: none;
     cursor: pointer;
     transition: all var(--transition-base);
     animation: bounce 2s infinite;
+    box-shadow: var(--shadow-sm);
 }
 
 .scroll-indicator:hover {
     color: var(--text-primary);
+    background: var(--bg-secondary);
+    border-color: var(--text-primary);
+    box-shadow: var(--shadow-md);
     transform: translateX(-50%) translateY(-5px);
+}
+
+.scroll-indicator svg {
+    transform: rotate(180deg);
 }
 
 @keyframes bounce {
     0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
     40% { transform: translateX(-50%) translateY(-10px); }
     60% { transform: translateX(-50%) translateY(-5px); }
-}
-
-.scroll-indicator:hover .scroll-arrow {
-    animation: arrowPulse 0.6s ease-in-out infinite;
-}
-
-@keyframes arrowPulse {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(5px); }
 }
 
 .scroll-arrow {
@@ -566,7 +568,8 @@ section {
     overflow-x: auto;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
-    padding-bottom: var(--spacing-md);
+    padding-top: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
 }
 
 .projects .carousel-container .projects-grid::-webkit-scrollbar {
@@ -1095,7 +1098,8 @@ section {
     overflow-x: auto;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
-    padding-bottom: var(--spacing-md);
+    padding-top: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
 }
 
 .blog-preview .carousel-container .blog-grid::-webkit-scrollbar {
