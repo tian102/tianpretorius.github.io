@@ -230,23 +230,35 @@ section {
     padding: var(--spacing-lg) 0;
 }
 
-/* Section Scroll Behavior - Ensure sections fill viewport */
-section[id] {
+/* Section Scroll Behavior - Ensure sections fill viewport (Homepage only) */
+.hero,
+.about-section,
+.projects,
+.blog-preview,
+.contact-preview {
+    scroll-margin-top: 70px; /* Account for fixed navbar */
+}
+
+.about-section,
+.projects,
+.blog-preview,
+.contact-preview {
     min-height: calc(100vh - 70px); /* Full viewport minus navbar */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    scroll-margin-top: 70px; /* Account for fixed navbar */
 }
 
 /* Hero section already fills viewport */
 .hero {
-    min-height: 100vh;
     scroll-margin-top: 0;
 }
 
-/* Ensure section content is centered vertically */
-section[id] > .container {
+/* Ensure section content is centered vertically (Homepage only) */
+.about-section > .container,
+.projects > .container,
+.blog-preview > .container,
+.contact-preview > .container {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -2453,8 +2465,11 @@ section[id] > .container {
 }
 
 @media (max-width: 768px) {
-    /* Section Scroll Behavior - Mobile Override */
-    section[id] {
+    /* Section Scroll Behavior - Mobile Override (Homepage only) */
+    .about-section,
+    .projects,
+    .blog-preview,
+    .contact-preview {
         min-height: auto; /* Let content determine height on mobile */
         padding: var(--spacing-2xl) 0;
     }
