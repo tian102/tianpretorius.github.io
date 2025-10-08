@@ -1,0 +1,57 @@
+[
+  {
+    "slug": "sample-post",
+    "filename": "sample-post.md",
+    "title": "Untitled",
+    "date": "2025-10-08",
+    "tags": [],
+    "author": "Tian Pretorius",
+    "content": "# Sample Blog Post\n\nWelcome to my portfolio blog! This is a sample post to demonstrate how markdown content will be rendered on the site.\n\n## Introduction\n\nIn this blog, I will share insights about my projects, experiences, and thoughts on various topics related to programming and design.\n\n## Content\n\nFeel free to explore the different sections of my portfolio. You can find my CV [here](../assets/Tian-Pretorius-CV.pdf) and learn more about me in the [About](../about.html) section.\n\n### Conclusion\n\nThank you for visiting my blog! Stay tuned for more posts.",
+    "excerpt": "Welcome to my portfolio blog! This is a sample post to demonstrate how markdown content will be rendered on the site."
+  },
+  {
+    "slug": "unemployed-to-saas-founder",
+    "filename": "unemployed-to-saas-founder.md",
+    "title": "From Unemployed to SaaS Founder: My Journey Begins",
+    "date": "2024-10-05",
+    "tags": [
+      "entrepreneurship",
+      "saas",
+      "personal-story",
+      "startup"
+    ],
+    "author": "Tian Pretorius",
+    "content": "\r\n# From Unemployed to Solo SaaS Founder: The Beginning\r\nThe story of how I decided to build my own SaaS product after being laid off. This is the beginning of a journey filled with challenges, learning, and growth.\r\n\r\n## The Decision\r\n\r\nAfter 6+ years of building systems and leading teams, I found myself at a crossroads. Getting laid off was unexpected, but it gave me the freedom to pursue something I'd been thinking about for years: building my own product.\r\n\r\n## What I'm Building\r\n\r\nI'm working on a SaaS platform that solves a problem I've encountered repeatedly in my career. The goal is to launch an MVP within 3 months and start getting real users.\r\n\r\n## The Challenge\r\n\r\nBuilding a SaaS product as a solo founder is challenging. You're not just a developer - you're also the designer, marketer, salesperson, and support team. But that's also what makes it exciting.\r\n\r\n## What's Next\r\n\r\nI'm documenting this entire journey - the wins, the failures, the lessons learned. Follow along as I build my SaaS from scratch, share my technical decisions, and hopefully inspire others to take the leap.\r\n\r\n## Key Takeaways\r\n\r\n- Sometimes losing your job can be the push you need\r\n- Building your own product is both scary and exciting\r\n- Documentation and sharing helps keep you accountable\r\n- The journey is just as important as the destination\r\n\r\nStay tuned for more updates!\r\n",
+    "excerpt": "The story of how I decided to build my own SaaS product after being laid off. This is the beginning of a journey filled with challenges, learning, and growth."
+  },
+  {
+    "slug": "building-scalable-systems",
+    "filename": "building-scalable-systems.md",
+    "title": "Building Scalable Systems: Lessons from 6+ Years",
+    "date": "2024-09-28",
+    "tags": [
+      "architecture",
+      "engineering",
+      "best-practices",
+      "scalability"
+    ],
+    "author": "Tian Pretorius",
+    "content": "\r\n# Building Scalable Systems: Lessons from 6+ Years\r\n\r\nKey insights and lessons learned from building and scaling systems over 6+ years as a software engineer and CTO.\r\n\r\n## Lesson 1: Start Simple\r\n\r\nDon't over-engineer from day one. Build for your current scale, not your imagined future scale. I've seen too many projects fail because they tried to build for 10 million users when they had zero.\r\n\r\n### Why This Matters\r\n\r\n- Faster time to market\r\n- Less complexity to maintain\r\n- Easier to pivot when needed\r\n- Lower infrastructure costs\r\n\r\n## Lesson 2: Monitor Everything\r\n\r\nYou can't fix what you can't measure. Implement comprehensive monitoring from the start. Logging, metrics, alerts - they're not optional.\r\n\r\n### Essential Metrics\r\n\r\n- Response times\r\n- Error rates\r\n- Database performance\r\n- User activity\r\n- System resources\r\n\r\n## Lesson 3: Database Design Matters\r\n\r\nA poorly designed database will haunt you forever. Spend time upfront thinking about your data model and relationships. It's much harder to fix later.\r\n\r\n### Best Practices\r\n\r\n- Normalize when it makes sense\r\n- Use indexes wisely\r\n- Plan for growth\r\n- Document your schema\r\n- Regular backups are non-negotiable\r\n\r\n## Lesson 4: Automate Early\r\n\r\nCI/CD, automated testing, deployment scripts - automate everything you can. Your future self will thank you.\r\n\r\n### What to Automate\r\n\r\n- Testing (unit, integration, e2e)\r\n- Deployments\r\n- Database migrations\r\n- Backups\r\n- Security scans\r\n\r\n## Lesson 5: Technical Debt is Real\r\n\r\nEvery shortcut you take now is a loan you'll have to repay with interest. Sometimes it's necessary, but be intentional about it.\r\n\r\n### Managing Technical Debt\r\n\r\n- Document it when you create it\r\n- Prioritize paying it down\r\n- Don't let it accumulate\r\n- Balance features vs. refactoring\r\n\r\n## Conclusion\r\n\r\nBuilding scalable systems is as much about good practices as it is about technology choices. Focus on the fundamentals, and the scale will follow.\r\n",
+    "excerpt": "Key insights and lessons learned from building and scaling systems over 6+ years as a software engineer and CTO."
+  },
+  {
+    "slug": "my-saas-tech-stack",
+    "filename": "my-saas-tech-stack.md",
+    "title": "My SaaS Tech Stack: Why I Chose These Technologies",
+    "date": "2024-09-15",
+    "tags": [
+      "tech-stack",
+      "tools",
+      "saas",
+      "development"
+    ],
+    "author": "Tian Pretorius",
+    "content": "\r\n# My SaaS Tech Stack: Why I Chose These Technologies\r\n\r\nA deep dive into the technology choices I made for building my SaaS product, and why each one matters.\r\n\r\n## Frontend: React + TypeScript\r\n\r\nI chose React with TypeScript for the frontend. Type safety is crucial for catching bugs early, and React's ecosystem is mature and well-supported.\r\n\r\n### Why React?\r\n\r\n- Component-based architecture\r\n- Huge ecosystem of libraries\r\n- Great developer experience\r\n- Strong community support\r\n- Excellent tooling\r\n\r\n### Why TypeScript?\r\n\r\n- Catches bugs at compile time\r\n- Better IDE support\r\n- Self-documenting code\r\n- Easier refactoring\r\n- Improved team collaboration\r\n\r\n## Backend: Node.js + Express\r\n\r\nNode.js with Express provides the flexibility I need while keeping the codebase in JavaScript/TypeScript. This allows for code sharing between frontend and backend.\r\n\r\n### Benefits\r\n\r\n- Same language across the stack\r\n- Fast and lightweight\r\n- Excellent for APIs\r\n- Great package ecosystem\r\n- Easy to scale horizontally\r\n\r\n## Database: PostgreSQL + Redis\r\n\r\nPostgreSQL for relational data because it's proven, reliable, and has excellent support for complex queries. Redis for caching and session management to keep things fast.\r\n\r\n### PostgreSQL Advantages\r\n\r\n- ACID compliance\r\n- Powerful query capabilities\r\n- JSON support\r\n- Excellent performance\r\n- Rock-solid reliability\r\n\r\n### Redis Use Cases\r\n\r\n- Session storage\r\n- Cache layer\r\n- Real-time features\r\n- Message queues\r\n- Rate limiting\r\n\r\n## Deployment: AWS + Docker\r\n\r\nContainerization with Docker makes deployments consistent and reliable. AWS provides all the infrastructure I need with great scaling capabilities.\r\n\r\n### AWS Services Used\r\n\r\n- EC2 for compute\r\n- RDS for PostgreSQL\r\n- ElastiCache for Redis\r\n- S3 for file storage\r\n- CloudFront for CDN\r\n- Route 53 for DNS\r\n\r\n### Docker Benefits\r\n\r\n- Consistent environments\r\n- Easy local development\r\n- Simplified deployments\r\n- Portable across providers\r\n- Better resource utilization\r\n\r\n## Development Tools\r\n\r\n### Version Control\r\n\r\n- Git + GitHub\r\n- Feature branch workflow\r\n- Pull request reviews\r\n- CI/CD integration\r\n\r\n### CI/CD\r\n\r\n- GitHub Actions\r\n- Automated testing\r\n- Automatic deployments\r\n- Environment management\r\n\r\n### Monitoring\r\n\r\n- Application logs\r\n- Performance metrics\r\n- Error tracking\r\n- User analytics\r\n- Uptime monitoring\r\n\r\n## Why These Choices?\r\n\r\nI chose technologies I know well and that have strong communities. When you're a solo founder, you don't have time to learn everything from scratch. Pick what you know and what works.\r\n\r\n### Key Principles\r\n\r\n- Use proven technology\r\n- Leverage your existing knowledge\r\n- Choose tools with good communities\r\n- Don't over-engineer\r\n- Prioritize developer experience\r\n\r\n## What I'd Do Differently\r\n\r\nLooking back, there are a few things I might change:\r\n\r\n- Consider serverless for some services\r\n- Use managed databases from the start\r\n- Invest more in monitoring early on\r\n- Set up better local development environment\r\n\r\n## Conclusion\r\n\r\nYour tech stack should enable you to move fast and build reliably. Choose what you know, but be willing to adapt as you grow.\r\n",
+    "excerpt": "A deep dive into the technology choices I made for building my SaaS product, and why each one matters."
+  }
+]

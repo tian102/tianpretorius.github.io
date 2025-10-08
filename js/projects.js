@@ -1,34 +1,6 @@
-// Projects functionality - Load and display projects from markdown files
+// Projects functionality - Load and display projects from JSON
 const projectsData = [];
 let allProjects = [];
-
-// Function to parse frontmatter from markdown
-function parseFrontmatter(markdown) {
-    const frontmatterRegex = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/;
-    const match = markdown.match(frontmatterRegex);
-    
-    if (!match) return { frontmatter: {}, content: markdown };
-    
-    const frontmatterText = match[1];
-    const content = match[2];
-    const frontmatter = {};
-    
-    frontmatterText.split(/\r?\n/).forEach(line => {
-        const [key, ...valueParts] = line.split(':');
-        if (key && valueParts.length) {
-            let value = valueParts.join(':').trim();
-            
-            // Parse arrays like tags: [tag1, tag2]
-            if (value.startsWith('[') && value.endsWith(']')) {
-                value = value.slice(1, -1).split(',').map(item => item.trim());
-            }
-            
-            frontmatter[key.trim()] = value;
-        }
-    });
-    
-    return { frontmatter, content };
-}
 
 // Function to convert markdown to HTML using marked.js
 function parseMarkdown(markdown) {
@@ -47,41 +19,30 @@ function parseMarkdown(markdown) {
     return html;
 }
 
-// Load all project markdown files
+// Load all projects from JSON
 async function loadProjects() {
-    const projectFiles = [
-        'saas-platform.md',
-        'real-time-dashboard.md',
-        'mobile-fitness-app.md',
-        'api-gateway.md'
-    ];
+    console.log('Loading projects from JSON...');
     
-    for (const file of projectFiles) {
-        try {
-            const response = await fetch(`projects/posts/${file}`);
-            const markdown = await response.text();
-            const { frontmatter, content } = parseFrontmatter(markdown);
-            
-            const slug = file.replace('.md', '');
-            projectsData.push({
-                slug,
-                title: frontmatter.title || 'Untitled',
-                description: frontmatter.description || '',
-                tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
-                demo: frontmatter.demo || '',
-                github: frontmatter.github || '',
-                image: frontmatter.image || '',
-                date: frontmatter.date || '',
-                content: content
-            });
-        } catch (error) {
-            console.error(`Error loading project ${file}:`, error);
+    try {
+        const response = await fetch('data/projects.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const projects = await response.json();
+        console.log(`Loaded ${projects.length} projects from JSON`);
+        
+        projectsData.push(...projects);
+        allProjects = [...projectsData];
+        displayProjects(allProjects);
+        setupFilters();
+    } catch (error) {
+        console.error('Error loading projects:', error);
+        const projectsList = document.getElementById('projects-list');
+        if (projectsList) {
+            projectsList.innerHTML = '<p class="no-results">Error loading projects. Please try again later.</p>';
         }
     }
-    
-    allProjects = [...projectsData];
-    displayProjects(allProjects);
-    setupFilters();
 }
 
 // Display projects as cards

@@ -7,83 +7,32 @@ let currentSort = 'date-desc';
 let currentPage = 1;
 let itemsPerPage = 10;
 
-// List of markdown files in blog/posts directory
-const blogPostFiles = [
-    'unemployed-to-saas-founder.md',
-    'building-scalable-systems.md',
-    'my-saas-tech-stack.md',
-    'template.md'
-];
-
-// Parse frontmatter from markdown
-function parseFrontmatter(content) {
-        // Handle both \n and \r\n line endings
-        const frontmatterRegex = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/;
-        const match = content.match(frontmatterRegex);
-        
-        if (!match) {
-            console.log('No frontmatter match found');
-            return { metadata: {}, content: content };
-        }
-        
-        const frontmatterText = match[1];
-        const mainContent = match[2];
-        
-        console.log('Frontmatter text:', frontmatterText);
-        console.log('Main content length:', mainContent.length);
-        
-        const metadata = {};
-        frontmatterText.split(/\r?\n/).forEach(line => {
-            const [key, ...valueParts] = line.split(':');
-            if (key && valueParts.length > 0) {
-                const value = valueParts.join(':').trim();
-                if (key.trim() === 'tags') {
-                    metadata[key.trim()] = value.split(',').map(tag => tag.trim());
-                } else {
-                    metadata[key.trim()] = value;
-                }
-            }
-        });
-        
-        console.log('Parsed metadata:', metadata);
-        
-        return { metadata, content: mainContent };
-    }
+// Load all blog posts from JSON
+async function loadBlogPosts() {
+    const blogList = document.getElementById('blog-list');
     
-    // Load all blog posts
-    async function loadBlogPosts() {
-        const blogList = document.getElementById('blog-list');
-        
-        console.log('Loading blog posts from files:', blogPostFiles);
-        
-        try {
-            allPosts = await Promise.all(blogPostFiles.map(async (filename) => {
-                console.log('Fetching:', filename);
-                const response = await fetch(`blog/posts/${filename}`);
-                const markdown = await response.text();
-                console.log('Loaded file:', filename, 'Length:', markdown.length);
-                const { metadata, content } = parseFrontmatter(markdown);
-                
-                const title = metadata.title || content.split('\n')[0].replace(/^#\s*/, '');
-                const excerpt = content.split('\n').slice(1, 4).join(' ').substring(0, 150) + '...';
-                const date = metadata.date || '2024-10-01';
-                const tags = metadata.tags || [];
-                const slug = filename.replace('.md', '');
-                
-                return { title, excerpt, date, tags, slug, filename, content };
-            }));
-            
-            // Populate tag filter
-            populateTagFilter();
-            
-            // Display posts
-            displayPosts();
-            
-        } catch (error) {
-            console.error('Error loading blog posts:', error);
-            blogList.innerHTML = '<p>Error loading blog posts. Please try again later.</p>';
+    console.log('Loading blog posts from JSON...');
+    
+    try {
+        const response = await fetch('data/blog-posts.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
+        
+        allPosts = await response.json();
+        console.log(`Loaded ${allPosts.length} blog posts from JSON`);
+        
+        // Populate tag filter
+        populateTagFilter();
+        
+        // Display posts
+        displayPosts();
+        
+    } catch (error) {
+        console.error('Error loading blog posts:', error);
+        blogList.innerHTML = '<p class="no-results">Error loading blog posts. Please try again later.</p>';
     }
+}
     
     // Populate tag filter dropdown
     function populateTagFilter() {
