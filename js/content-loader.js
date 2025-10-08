@@ -277,6 +277,120 @@
         setTimeout(type, 1000);
     }
 
+    /**
+     * Render homepage about preview section
+     * @param {string} containerId - The ID of the container element
+     */
+    function renderHomeAboutPreview(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        
+        const aboutPreview = getContent('homepage.aboutPreview');
+        if (!aboutPreview) return;
+        
+        const html = `
+            <p class="about-intro">${aboutPreview.intro}</p>
+            ${aboutPreview.paragraphs.map(p => `<p>${p}</p>`).join('')}
+            <div class="about-cta">
+                <a href="${aboutPreview.ctaLink}" class="btn-secondary">${aboutPreview.ctaText}</a>
+            </div>
+        `;
+        
+        container.innerHTML = html;
+    }
+
+    /**
+     * Render homepage skills grid
+     * @param {string} containerId - The ID of the container element
+     */
+    function renderHomeSkills(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        
+        const skills = getContent('homepage.skills');
+        if (!skills) return;
+        
+        const html = `
+            <h3>${skills.title}</h3>
+            <div class="skills-grid">
+                ${skills.categories.map(category => `
+                    <div class="skill-category">
+                        <h4>${category.name}</h4>
+                        <div class="tech-tags">
+                            ${category.tags.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+        
+        container.innerHTML = html;
+    }
+
+    /**
+     * Populate section headers with numbers and titles
+     * @param {Object} mappings - Object with {containerId: sectionKey} pairs
+     */
+    function populateSectionHeaders(mappings) {
+        for (const [containerId, sectionKey] of Object.entries(mappings)) {
+            const container = document.getElementById(containerId);
+            if (!container) continue;
+            
+            const section = getContent(`homepage.sections.${sectionKey}`);
+            if (!section) continue;
+            
+            // Find section-number and section-title elements within container
+            const numberEl = container.querySelector('.section-number');
+            const titleEl = container.querySelector('.section-title');
+            
+            if (numberEl) numberEl.textContent = section.number;
+            if (titleEl) titleEl.textContent = section.title;
+        }
+    }
+
+    /**
+     * Render navigation menu
+     * @param {string} currentPage - The current page filename (e.g., 'index.html')
+     */
+    function renderNavigation(currentPage = '') {
+        const nav = getContent('navigation');
+        if (!nav) return;
+        
+        // Update brand name
+        const brandNameEl = document.querySelector('.brand-name');
+        if (brandNameEl) {
+            brandNameEl.textContent = nav.brandName;
+        }
+        
+        // Update navigation links
+        const navMenu = document.querySelector('.nav-menu');
+        if (navMenu) {
+            const linksHtml = nav.links.map(link => {
+                const isActive = currentPage === link.url || 
+                                 (currentPage === '' && link.url === 'index.html');
+                return `<li><a href="${link.url}" class="nav-link${isActive ? ' active' : ''}">${link.text}</a></li>`;
+            }).join('');
+            
+            const resumeHtml = `<li><a href="${nav.resumeLink}" class="nav-link resume-link" download>${nav.resumeText}</a></li>`;
+            
+            navMenu.innerHTML = linksHtml + resumeHtml;
+        }
+    }
+
+    /**
+     * Show content by removing loading class
+     */
+    function showContent() {
+        document.body.classList.remove('content-loading');
+    }
+
+    /**
+     * Hide content by adding loading class
+     */
+    function hideContent() {
+        document.body.classList.add('content-loading');
+    }
+
     // Export public API
     window.ContentLoader = {
         load: loadSiteContent,
@@ -288,7 +402,13 @@
         renderExperience: renderExperience,
         renderContactMethods: renderContactMethods,
         renderFooter: renderFooter,
-        initHeroTypedText: initHeroTypedText
+        initHeroTypedText: initHeroTypedText,
+        renderHomeAboutPreview: renderHomeAboutPreview,
+        renderHomeSkills: renderHomeSkills,
+        populateSectionHeaders: populateSectionHeaders,
+        renderNavigation: renderNavigation,
+        showContent: showContent,
+        hideContent: hideContent
     };
 
 })(window);

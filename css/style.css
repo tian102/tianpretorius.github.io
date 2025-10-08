@@ -44,6 +44,40 @@
 }
 
 /* ==========================================
+   Content Loading State (Prevent FOUC)
+   ========================================== */
+body.content-loading .hero-description,
+body.content-loading .hero-cta,
+body.content-loading #hero-greeting,
+body.content-loading #hero-name,
+body.content-loading #about-preview-text,
+body.content-loading .about-skills,
+body.content-loading .contact-content h3,
+body.content-loading .contact-content p,
+body.content-loading .contact-methods,
+body.content-loading #blog-section-subtitle,
+body.content-loading .section-title,
+body.content-loading .section-number {
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+body:not(.content-loading) .hero-description,
+body:not(.content-loading) .hero-cta,
+body:not(.content-loading) #hero-greeting,
+body:not(.content-loading) #hero-name,
+body:not(.content-loading) #about-preview-text,
+body:not(.content-loading) .about-skills,
+body:not(.content-loading) .contact-content h3,
+body:not(.content-loading) .contact-content p,
+body:not(.content-loading) .contact-methods,
+body:not(.content-loading) #blog-section-subtitle,
+body:not(.content-loading) .section-title,
+body:not(.content-loading) .section-number {
+    opacity: 1;
+}
+
+/* ==========================================
    Base Styles
    ========================================== */
 * {

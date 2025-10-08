@@ -125,9 +125,9 @@
   },
   
   "contact": {
-    "pageTitle": "Get In Touch",
-    "pageTagline": "Let's build something amazing together",
-    "intro": "I'm always interested in new opportunities, challenging projects, and meaningful collaborations. Whether you have a question, want to discuss a potential project, or just want to connect, I'd love to hear from you.",
+    "pageTitle": "Get in Touch",
+    "pageTagline": "I'm always interested in new opportunities, challenging projects, and meaningful collaborations",
+    "intro": "If you have a question, want to discuss a potential project, or just want to connect, I'd love to hear from you.",
     "methods": [
       {
         "icon": "✉️",
@@ -148,6 +148,76 @@
         "link": "https://github.com/tian102"
       }
     ]
+  },
+  
+  "navigation": {
+    "brandName": "Tian Pretorius",
+    "links": [
+      { "text": "Home", "url": "index.html", "active": true },
+      { "text": "About", "url": "about.html" },
+      { "text": "Projects", "url": "projects.html" },
+      { "text": "Blog", "url": "blog.html" },
+      { "text": "Contact", "url": "contact.html" }
+    ],
+    "resumeLink": "assets/Tian-Pretorius-CV.pdf",
+    "resumeText": "Résumé"
+  },
+  
+  "homepage": {
+    "aboutPreview": {
+      "intro": "As a software engineer with 5+ years of experience in automation, analytics, systems design, and full-stack development, I've delivered impactful solutions across diverse technical industries. Highlights include leading automated tool development for food fortification, regulatory compliance, optimizing production workflows for efficiency, and engineering web- and mobile-based applications integrated with Python and OpenCV for high-precision particle analysis in industry use cases.",
+      "paragraphs": [
+        "My background encompasses end-to-end R&D — from prototyping hardware-software integrations like Bluetooth-enabled RFID systems with cross-platform apps, to implementing secure protocols and scalable architectures that ensure robust performance. I've consistently bridged theoretical concepts with practical implementations, fostering collaboration to create efficient, adaptable tech that drives operational success in dynamic environments.",
+        "Driven by a love for solving complex problems through clean, scalable code, I'm enthusiastic about joining a team where I can apply my technical depth and collaborative spirit to innovative projects. Let's connect to talk about how my skills in system architecture and development can help elevate your engineering efforts."
+      ],
+      "ctaText": "Learn More About Me →",
+      "ctaLink": "about.html"
+    },
+    "skills": {
+      "title": "Skills & Technologies",
+      "categories": [
+        {
+          "name": "Frontend",
+          "tags": ["React", "TypeScript", "JavaScript"]
+        },
+        {
+          "name": "Backend",
+          "tags": ["Node.js", "Express", "PostgreSQL"]
+        },
+        {
+          "name": "DevOps",
+          "tags": ["AWS", "Docker", "CI/CD"]
+        },
+        {
+          "name": "Other",
+          "tags": ["Git", "REST APIs", "GraphQL"]
+        }
+      ]
+    },
+    "sections": {
+      "about": {
+        "number": "01.",
+        "title": "About Me"
+      },
+      "projects": {
+        "number": "02.",
+        "title": "Featured Projects",
+        "cta": "View All Projects →",
+        "ctaLink": "projects.html"
+      },
+      "blog": {
+        "number": "03.",
+        "title": "Latest from the Blog",
+        "cta": "View All Posts →",
+        "ctaLink": "blog.html"
+      },
+      "contact": {
+        "number": "04.",
+        "title": "Get In Touch",
+        "cta": "Send Me a Message",
+        "ctaLink": "contact.html"
+      }
+    }
   },
   
   "footer": {

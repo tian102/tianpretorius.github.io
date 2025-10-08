@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tian Pretorius - Software Engineer</title>
     <meta name="description" content="Software Engineer with 5+ years of experience building scalable systems.">
-    <link rel="stylesheet" href="css/style.css?v=20251008-2">
+    <link rel="stylesheet" href="css/style.css?v=20251008-15">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="content-loading">
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
@@ -92,63 +92,17 @@
     <!-- About Section -->
     <section id="about" class="about-section">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" id="about-section-header">
                 <span class="section-number">01.</span>
                 <h2 class="section-title">About Me</h2>
                 <div class="section-line"></div>
             </div>
             <div class="about-content-grid">
                 <div class="about-text" id="about-preview-text">
-                    <p class="about-intro">
-                       As a software engineer with 5+ years of experience in automation, analytics, systems design, and full-stack development, I've delivered impactful solutions across diverse technical industries.
-                       Highlights include leading automated tool development for food fortification, regulatory compliance, optimizing production workflows for efficiency, and engineering web- and mobile-based applications integrated with Python and OpenCV for high-precision particle analysis in industry use cases.
-                    </p>
-                    <p>
-                        My background encompasses end-to-end R&D — from prototyping hardware-software integrations like Bluetooth-enabled RFID systems with cross-platform apps, to implementing secure protocols and scalable architectures that ensure robust performance. I've consistently bridged theoretical concepts with practical implementations, fostering collaboration to create efficient, adaptable tech that drives operational success in dynamic environments.
-                    </p>
-                    <p>
-                        Driven by a love for solving complex problems through clean, scalable code, I'm enthusiastic about joining a team where I can apply my technical depth and collaborative spirit to innovative projects. Let's connect to talk about how my skills in system architecture and development can help elevate your engineering efforts.
-                    </p>
-                    <div class="about-cta">
-                        <a href="about.html" class="btn-secondary">Learn More About Me →</a>
-                    </div>
+                    <!-- Content loaded dynamically by ContentLoader -->
                 </div>
-                <div class="about-skills">
-                    <h3>Skills & Technologies</h3>
-                    <div class="skills-grid">
-                        <div class="skill-category">
-                            <h4>Frontend</h4>
-                            <div class="tech-tags">
-                                <span class="tech-tag">React</span>
-                                <span class="tech-tag">TypeScript</span>
-                                <span class="tech-tag">JavaScript</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
-                            <h4>Backend</h4>
-                            <div class="tech-tags">
-                                <span class="tech-tag">Node.js</span>
-                                <span class="tech-tag">Express</span>
-                                <span class="tech-tag">PostgreSQL</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
-                            <h4>DevOps</h4>
-                            <div class="tech-tags">
-                                <span class="tech-tag">AWS</span>
-                                <span class="tech-tag">Docker</span>
-                                <span class="tech-tag">CI/CD</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
-                            <h4>Other</h4>
-                            <div class="tech-tags">
-                                <span class="tech-tag">Git</span>
-                                <span class="tech-tag">REST APIs</span>
-                                <span class="tech-tag">GraphQL</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="about-skills" id="about-skills">
+                    <!-- Content loaded dynamically by ContentLoader -->
                 </div>
             </div>
         </div>
@@ -157,7 +111,7 @@
     <!-- Featured Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" id="projects-section-header">
                 <span class="section-number">02.</span>
                 <h2 class="section-title">Featured Projects</h2>
                 <div class="section-line"></div>
@@ -181,7 +135,7 @@
                 </button>
             </div>
             <div class="projects-cta">
-                <a href="projects.html" class="btn-secondary">View All Projects →</a>
+                <a href="projects.html" class="btn-secondary" id="projects-cta">View All Projects →</a>
             </div>
         </div>
     </section>
@@ -189,7 +143,7 @@
     <!-- Latest Blog Posts Section -->
     <section id="blog" class="blog-preview">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" id="blog-section-header">
                 <span class="section-number">03.</span>
                 <h2 class="section-title">Latest from the Blog</h2>
                 <div class="section-line"></div>
@@ -214,7 +168,7 @@
                 </button>
             </div>
             <div class="blog-cta">
-                <a href="blog.html" class="btn-secondary">View All Posts →</a>
+                <a href="blog.html" class="btn-secondary" id="blog-cta">View All Posts →</a>
             </div>
         </div>
     </section>
@@ -222,7 +176,7 @@
     <!-- Contact Section -->
     <section id="contact" class="contact-preview">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" id="contact-section-header">
                 <span class="section-number">04.</span>
                 <h2 class="section-title">Get In Touch</h2>
                 <div class="section-line"></div>
@@ -234,30 +188,10 @@
                     collaborations. Whether you have a question, want to discuss a potential project, 
                     or just want to connect, I'd love to hear from you.
                 </p>
-                <div class="contact-methods">
-                    <a href="mailto:tianpretorius@gmail.com" class="contact-method">
-                        <div class="contact-icon">✉️</div>
-                        <div class="contact-info">
-                            <h4>Email</h4>
-                            <p>tianpretorius@gmail.com</p>
-                        </div>
-                    </a>
-                    <a href="https://www.linkedin.com/in/tian-pretorius-817a2189/" target="_blank" rel="noopener noreferrer" class="contact-method">
-                        <div class="contact-icon">💼</div>
-                        <div class="contact-info">
-                            <h4>LinkedIn</h4>
-                            <p>Connect with me professionally</p>
-                        </div>
-                    </a>
-                    <a href="https://github.com/tian102" target="_blank" rel="noopener noreferrer" class="contact-method">
-                        <div class="contact-icon">💻</div>
-                        <div class="contact-info">
-                            <h4>GitHub</h4>
-                            <p>Check out my code</p>
-                        </div>
-                    </a>
+                <div class="contact-methods" id="contact-methods-preview">
+                    <!-- Content loaded dynamically by ContentLoader -->
                 </div>
-                <a href="contact.html" class="btn-primary">Send Me a Message</a>
+                <a href="contact.html" class="btn-primary" id="contact-cta">Send Me a Message</a>
             </div>
         </div>
     </section>
@@ -293,8 +227,8 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/marked@11.1.0/marked.min.js"></script>
-    <script src="js/content-loader.js?v=20251008"></script>
+    <script src="js/content-loader.js?v=20251008-16"></script>
     <script src="js/main.js?v=20251008"></script>
-    <script src="js/index.js?v=20251008"></script>
+    <script src="js/index.js?v=20251008-16"></script>
 </body>
 </html>

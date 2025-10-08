@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Tian Pretorius</title>
-    <link rel="stylesheet" href="css/style.css?v=20251008-12">
+    <link rel="stylesheet" href="css/style.css?v=20251008-15">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="content-loading">
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
@@ -104,11 +104,14 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/marked@11.1.0/marked.min.js"></script>
-    <script src="js/content-loader.js"></script>
+    <script src="js/content-loader.js?v=20251008-16"></script>
     <script>
         // Load and populate projects page content
         document.addEventListener('DOMContentLoaded', async function() {
             await ContentLoader.load();
+            
+            // Render navigation
+            ContentLoader.renderNavigation('projects.html');
             
             // Populate page header
             ContentLoader.populate('projects-page-title', 'projects.pageTitle');
@@ -116,6 +119,9 @@
             
             // Render footer
             ContentLoader.renderFooter('footer-container');
+            
+            // Show content
+            ContentLoader.showContent();
         });
     </script>
     <script src='js/main.js?v=20251008-6'></script>

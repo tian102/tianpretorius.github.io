@@ -3,6 +3,9 @@ document.addEventListener("DOMContentLoaded", async function() {
     // Load site content first
     await ContentLoader.load();
     
+    // Render navigation
+    ContentLoader.renderNavigation('index.html');
+    
     // Populate hero section
     ContentLoader.populateMultiple({
         'hero-greeting': 'hero.greeting',
@@ -15,6 +18,20 @@ document.addEventListener("DOMContentLoaded", async function() {
     // Initialize hero typed text animation
     ContentLoader.initHeroTypedText();
     
+    // Populate section headers
+    ContentLoader.populateSectionHeaders({
+        'about-section-header': 'about',
+        'projects-section-header': 'projects',
+        'blog-section-header': 'blog',
+        'contact-section-header': 'contact'
+    });
+    
+    // Render about preview section
+    ContentLoader.renderHomeAboutPreview('about-preview-text');
+    
+    // Render skills section
+    ContentLoader.renderHomeSkills('about-skills');
+    
     // Populate blog section subtitle
     ContentLoader.populate('blog-section-subtitle', 'blog.sectionTitle');
     
@@ -22,12 +39,28 @@ document.addEventListener("DOMContentLoaded", async function() {
     ContentLoader.populate('contact-preview-title', 'contact.pageTitle');
     ContentLoader.populate('contact-preview-intro', 'contact.intro');
     
+    // Render contact methods preview
+    ContentLoader.renderContactMethods('contact-methods-preview');
+    
+    // Populate CTAs
+    const projectsCta = ContentLoader.get('homepage.sections.projects.cta');
+    if (projectsCta) document.getElementById('projects-cta').textContent = projectsCta;
+    
+    const blogCta = ContentLoader.get('homepage.sections.blog.cta');
+    if (blogCta) document.getElementById('blog-cta').textContent = blogCta;
+    
+    const contactCta = ContentLoader.get('homepage.sections.contact.cta');
+    if (contactCta) document.getElementById('contact-cta').textContent = contactCta;
+    
     // Render footer
     ContentLoader.renderFooter('footer-container');
     
     // Load dynamic content
     loadFeaturedProjects();
     loadLatestBlogPosts();
+    
+    // Show content (remove loading class)
+    ContentLoader.showContent();
 });
 
 // Load featured projects from JSON

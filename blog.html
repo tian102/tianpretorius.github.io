@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Tian Pretorius</title>
-    <link rel="stylesheet" href="css/style.css?v=20251008-12">
+    <link rel="stylesheet" href="css/style.css?v=20251008-15">
     <link rel="stylesheet" href="css/blog.css?v=20251008-12">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="content-loading">
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
@@ -104,11 +104,14 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/marked@11.1.0/marked.min.js"></script>
-    <script src="js/content-loader.js"></script>
+    <script src="js/content-loader.js?v=20251008-16"></script>
     <script>
         // Load and populate blog page content
         document.addEventListener('DOMContentLoaded', async function() {
             await ContentLoader.load();
+            
+            // Render navigation
+            ContentLoader.renderNavigation('blog.html');
             
             // Populate page header
             ContentLoader.populate('blog-page-title', 'blog.pageTitle');
@@ -116,6 +119,9 @@
             
             // Render footer
             ContentLoader.renderFooter('footer-container');
+            
+            // Show content
+            ContentLoader.showContent();
         });
     </script>
     <script src="js/main.js?v=20251008-6"></script>
