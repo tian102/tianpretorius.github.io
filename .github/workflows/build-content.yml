@@ -1,0 +1,42 @@
+name: Build Content
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'blog/posts/**'
+      - 'projects/posts/**'
+      - 'scripts/build-content.js'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Build content from markdown
+        run: node scripts/build-content.js
+      
+      - name: Check for changes
+        id: check_changes
+        run: |
+          git diff --quiet data/ || echo "changed=true" >> $GITHUB_OUTPUT
+      
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/*.json
+          git commit -m "Auto-build content from markdown [skip ci]"
+          git push

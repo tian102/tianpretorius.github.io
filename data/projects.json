@@ -1,0 +1,73 @@
+[
+  {
+    "slug": "saas-platform",
+    "filename": "saas-platform.md",
+    "title": "SaaS Platform",
+    "description": "A comprehensive SaaS platform with user management, billing, and analytics dashboard built for scalability.",
+    "tags": [
+      "saas",
+      "react",
+      "node",
+      "typescript",
+      "stripe"
+    ],
+    "demo": "https://demo.example.com",
+    "github": "https://github.com/tianpretorius/saas-platform",
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800",
+    "date": "2024-03-15",
+    "content": "\r\n# SaaS Platform\r\n\r\nA full-stack SaaS application designed to handle multi-tenant architecture with robust user management and subscription billing.\r\n\r\n## Key Features\r\n\r\n- **Multi-tenant Architecture**: Secure data isolation per organization\r\n- **Subscription Billing**: Integrated with Stripe for recurring payments\r\n- **Analytics Dashboard**: Real-time metrics and insights\r\n- **Role-based Access Control**: Granular permissions management\r\n- **REST API**: Well-documented API for third-party integrations\r\n\r\n## Technology Stack\r\n\r\n- **Frontend**: React, TypeScript, Tailwind CSS\r\n- **Backend**: Node.js, Express, PostgreSQL\r\n- **Infrastructure**: Docker, AWS, Redis\r\n- **Payment**: Stripe Integration\r\n- **Auth**: JWT with refresh tokens\r\n\r\n## Challenges Overcome\r\n\r\nOne of the biggest challenges was implementing efficient multi-tenancy while maintaining data security and query performance. I solved this using a hybrid approach with schema-per-tenant for larger clients and shared schema with row-level security for smaller accounts.\r\n\r\n## Results\r\n\r\n- Handles 10,000+ active users\r\n- 99.9% uptime SLA\r\n- Sub-200ms API response times\r\n- Successfully processing $100K+ MRR\r\n"
+  },
+  {
+    "slug": "real-time-dashboard",
+    "filename": "real-time-dashboard.md",
+    "title": "Real-Time Analytics Dashboard",
+    "description": "High-performance dashboard displaying real-time metrics with WebSocket connections and interactive visualizations.",
+    "tags": [
+      "react",
+      "websocket",
+      "chartjs",
+      "python",
+      "redis"
+    ],
+    "demo": "https://dashboard.example.com",
+    "github": "https://github.com/tianpretorius/analytics-dashboard",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
+    "date": "2024-01-20",
+    "content": "\r\n# Real-Time Analytics Dashboard\r\n\r\nA powerful real-time analytics dashboard that processes and visualizes thousands of events per second with minimal latency.\r\n\r\n## Key Features\r\n\r\n- **Real-Time Updates**: WebSocket-based live data streaming\r\n- **Interactive Charts**: Customizable visualizations with Chart.js\r\n- **Data Aggregation**: Efficient time-series data processing\r\n- **Responsive Design**: Works seamlessly on all devices\r\n- **Export Capabilities**: Download reports in CSV/PDF formats\r\n\r\n## Technology Stack\r\n\r\n- **Frontend**: React, Redux, Chart.js, Socket.io\r\n- **Backend**: Python, FastAPI, Redis, PostgreSQL\r\n- **Real-time**: WebSocket connections\r\n- **Caching**: Redis for fast data retrieval\r\n\r\n## Performance Optimizations\r\n\r\nImplemented several optimization strategies:\r\n- Data aggregation at ingestion time\r\n- In-memory caching with Redis\r\n- Efficient WebSocket connection pooling\r\n- Debounced chart re-rendering\r\n- Virtual scrolling for large datasets\r\n\r\n## Impact\r\n\r\nThe dashboard reduced decision-making time by 60% by providing instant insights into critical business metrics. It now serves as the central monitoring tool for the entire operations team.\r\n"
+  },
+  {
+    "slug": "mobile-fitness-app",
+    "filename": "mobile-fitness-app.md",
+    "title": "Mobile Fitness Tracker",
+    "description": "Cross-platform mobile app for workout tracking, meal planning, and progress analytics with offline-first capabilities.",
+    "tags": [
+      "react-native",
+      "mobile",
+      "firebase",
+      "typescript"
+    ],
+    "demo": "https://apps.apple.com/app/fitness-tracker",
+    "github": "",
+    "image": "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800",
+    "date": "2023-11-10",
+    "content": "\r\n# Mobile Fitness Tracker\r\n\r\nA comprehensive fitness tracking application built with React Native, featuring workout logging, nutrition tracking, and detailed progress analytics.\r\n\r\n## Key Features\r\n\r\n- **Workout Tracking**: Log exercises with sets, reps, and weights\r\n- **Meal Planning**: Track calories and macronutrients\r\n- **Progress Photos**: Visual progress tracking over time\r\n- **Offline Mode**: Full functionality without internet connection\r\n- **Social Features**: Share achievements with friends\r\n- **Custom Workouts**: Create and save personalized routines\r\n\r\n## Technology Stack\r\n\r\n- **Framework**: React Native (iOS & Android)\r\n- **State Management**: Redux Toolkit\r\n- **Backend**: Firebase (Auth, Firestore, Storage)\r\n- **Local Storage**: WatermelonDB for offline-first architecture\r\n- **Charts**: Victory Native for data visualizations\r\n\r\n## Technical Highlights\r\n\r\n### Offline-First Architecture\r\n\r\nImplemented a robust offline-first system using WatermelonDB that syncs seamlessly with Firebase when connectivity is restored. This ensures users can log workouts anywhere, anytime.\r\n\r\n### Performance\r\n\r\n- Optimized images with lazy loading and caching\r\n- Implemented memoization for expensive calculations\r\n- Used FlatList optimization for smooth scrolling\r\n- Reduced app size by 40% through code splitting\r\n\r\n## User Reception\r\n\r\n- 4.8★ rating on App Store\r\n- 10,000+ downloads in first 3 months\r\n- Featured in \"New Apps We Love\"\r\n- 70% daily active user retention\r\n"
+  },
+  {
+    "slug": "api-gateway",
+    "filename": "api-gateway.md",
+    "title": "Microservices API Gateway",
+    "description": "High-performance API gateway handling authentication, rate limiting, and request routing for microservices architecture.",
+    "tags": [
+      "golang",
+      "microservices",
+      "docker",
+      "kubernetes",
+      "api"
+    ],
+    "demo": "",
+    "github": "https://github.com/tianpretorius/api-gateway",
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800",
+    "date": "2023-09-05",
+    "content": "\r\n# Microservices API Gateway\r\n\r\nA custom-built API gateway in Go designed to handle high-throughput traffic with intelligent routing, caching, and security features.\r\n\r\n## Key Features\r\n\r\n- **Intelligent Routing**: Dynamic service discovery and load balancing\r\n- **Authentication**: JWT validation with token refresh\r\n- **Rate Limiting**: Configurable per-endpoint rate limits\r\n- **Request/Response Caching**: Redis-based caching layer\r\n- **Circuit Breaker**: Automatic failover and retry logic\r\n- **Monitoring**: Built-in metrics and distributed tracing\r\n\r\n## Technology Stack\r\n\r\n- **Language**: Go (Golang)\r\n- **Cache**: Redis\r\n- **Service Mesh**: Kubernetes with Istio\r\n- **Monitoring**: Prometheus & Grafana\r\n- **Containerization**: Docker\r\n\r\n## Architecture Decisions\r\n\r\n### Why Go?\r\n\r\nChose Go for its exceptional performance, built-in concurrency, and low memory footprint. The gateway handles 50,000+ requests per second on modest hardware.\r\n\r\n### Rate Limiting Strategy\r\n\r\nImplemented a distributed rate limiter using Redis and the token bucket algorithm, ensuring fair resource allocation across all microservices.\r\n\r\n## Performance Metrics\r\n\r\n- **Throughput**: 50,000+ RPS\r\n- **Latency**: p99 < 10ms\r\n- **Uptime**: 99.99%\r\n- **Memory Usage**: < 100MB under load\r\n\r\n## Security Features\r\n\r\n- TLS termination\r\n- SQL injection prevention\r\n- CORS configuration\r\n- Request validation and sanitization\r\n- IP whitelisting/blacklisting\r\n\r\nThe gateway serves as the single entry point for all external API requests, providing a secure and performant interface to our microservices ecosystem.\r\n"
+  }
+]

@@ -4,74 +4,19 @@ document.addEventListener("DOMContentLoaded", function() {
     loadLatestBlogPosts();
 });
 
-// Parse frontmatter from markdown
-function parseFrontmatter(markdown) {
-    const frontmatterRegex = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/;
-    const match = markdown.match(frontmatterRegex);
-    
-    if (!match) return { frontmatter: {}, content: markdown };
-    
-    const frontmatterText = match[1];
-    const content = match[2];
-    const frontmatter = {};
-    
-    frontmatterText.split(/\r?\n/).forEach(line => {
-        const [key, ...valueParts] = line.split(':');
-        if (key && valueParts.length) {
-            let value = valueParts.join(':').trim();
-            
-            // Parse arrays like tags: [tag1, tag2] or tags: tag1, tag2, tag3
-            if (value.startsWith('[') && value.endsWith(']')) {
-                value = value.slice(1, -1).split(',').map(item => item.trim());
-            } else if (key.trim() === 'tags' && value.includes(',')) {
-                value = value.split(',').map(item => item.trim());
-            }
-            
-            frontmatter[key.trim()] = value;
-        }
-    });
-    
-    return { frontmatter, content };
-}
-
-// Load featured projects
+// Load featured projects from JSON
 async function loadFeaturedProjects() {
     const projectsGrid = document.getElementById('projects-grid');
     if (!projectsGrid) return;
     
-    const projectFiles = [
-        'saas-platform.md',
-        'real-time-dashboard.md',
-        'mobile-fitness-app.md',
-        'api-gateway.md'
-    ];
-    
     try {
-        const projects = [];
-        
-        for (const file of projectFiles) {
-            try {
-                const response = await fetch(`projects/posts/${file}`);
-                if (!response.ok) continue;
-                
-                const markdown = await response.text();
-                const { frontmatter } = parseFrontmatter(markdown);
-                
-                const slug = file.replace('.md', '');
-                projects.push({
-                    slug,
-                    title: frontmatter.title || 'Untitled',
-                    description: frontmatter.description || '',
-                    tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
-                    demo: frontmatter.demo || '',
-                    github: frontmatter.github || '',
-                    image: frontmatter.image || '',
-                    date: frontmatter.date || ''
-                });
-            } catch (error) {
-                console.error(`Error loading project ${file}:`, error);
-            }
+        const response = await fetch('data/projects.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
+        
+        const projects = await response.json();
+        console.log(`Loaded ${projects.length} projects for homepage`);
         
         // Display up to 3 projects
         const featuredProjects = projects.slice(0, 3);
@@ -118,62 +63,29 @@ async function loadFeaturedProjects() {
     }
 }
 
-// Load latest blog posts
+// Load latest blog posts from JSON
 async function loadLatestBlogPosts() {
     const blogGrid = document.getElementById('blog-preview-grid');
     if (!blogGrid) return;
     
-    const blogFiles = [
-        'unemployed-to-saas-founder.md',
-        'building-scalable-systems.md',
-        'my-saas-tech-stack.md',
-        'template.md'
-    ];
-    
     try {
-        const posts = [];
-        
-        for (const file of blogFiles) {
-            try {
-                const response = await fetch(`blog/posts/${file}`);
-                if (!response.ok) continue;
-                
-                const markdown = await response.text();
-                const { frontmatter, content } = parseFrontmatter(markdown);
-                
-                const slug = file.replace('.md', '');
-                
-                // Create excerpt from content (content already has frontmatter stripped by parseFrontmatter)
-                let excerpt = content
-                    .replace(/^#\s+.+$/gm, '') // Remove all headings
-                    .replace(/[#*`]/g, '') // Remove markdown formatting
-                    .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1') // Remove markdown links
-                    .trim()
-                    .split('\n')
-                    .filter(line => line.trim().length > 0 && !line.startsWith('---')) // Filter empty lines and any stray frontmatter markers
-                    .slice(0, 2)
-                    .join(' ')
-                    .substring(0, 150);
-                
-                if (excerpt.length >= 150) {
-                    excerpt += '...';
-                }
-                
-                posts.push({
-                    slug,
-                    title: frontmatter.title || 'Untitled',
-                    excerpt: excerpt || 'No excerpt available.',
-                    tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
-                    date: frontmatter.date || '',
-                    readTime: frontmatter.readTime || '5 min read'
-                });
-            } catch (error) {
-                console.error(`Error loading blog post ${file}:`, error);
-            }
+        const response = await fetch('data/blog-posts.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        // Sort by date (most recent first) and take top 3
-        posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+        const posts = await response.json();
+        console.log(`Loaded ${posts.length} blog posts for homepage`);
+        
+        // Calculate read time for each post
+        posts.forEach(post => {
+            const wordsPerMinute = 200;
+            const wordCount = post.content.split(/\s+/).length;
+            const readTime = Math.ceil(wordCount / wordsPerMinute);
+            post.readTime = `${readTime} min read`;
+        });
+        
+        // Take top 3 most recent posts (already sorted by build script)
         const latestPosts = posts.slice(0, 3);
         
         if (latestPosts.length === 0) {
