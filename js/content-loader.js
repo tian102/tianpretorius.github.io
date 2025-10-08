@@ -219,7 +219,6 @@
                 </div>
                 <div class="method-content">
                     <h4 class="method-title">${method.title}</h4>
-                    <p class="method-value">${method.value}</p>
                     ${method.description ? `<p class="method-description">${method.description}</p>` : ''}
                 </div>
                 <div class="method-arrow">

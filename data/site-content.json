@@ -125,9 +125,8 @@
   
   "contact": {
     "pageTitle": "Get in Touch",
-    "pageTagline": "I'm always interested in new opportunities, challenging projects, and meaningful collaborations",
+    "pageTagline": "Whether you have a project in mind, want to discuss opportunities, or just want to connect, I'd love to hear from you. Choose your preferred way to reach out:",
     "badge": "Available for opportunities",
-    "intro": "Whether you have a project in mind, want to discuss opportunities, or just want to connect, I'd love to hear from you. Choose your preferred way to reach out:",
     "methods": [
       {
         "icon": "email",
@@ -135,7 +134,7 @@
         "value": "tianpretorius@gmail.com",
         "description": "For detailed inquiries and project discussions",
         "link": "mailto:tianpretorius@gmail.com",
-        "primary": true
+        "primary": false
       },
       {
         "icon": "whatsapp",
@@ -143,7 +142,7 @@
         "value": "+27 76 679 6839",
         "description": "Quick questions and real-time chat",
         "link": "https://wa.me/27766796839",
-        "primary": true
+        "primary": false
       },
       {
         "icon": "linkedin",
