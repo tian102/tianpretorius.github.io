@@ -127,42 +127,70 @@
     "pageTitle": "Get in Touch",
     "pageTagline": "I'm always interested in new opportunities, challenging projects, and meaningful collaborations",
     "badge": "Available for opportunities",
-    "intro": "If you have a question, want to discuss a potential project, or just want to connect, I'd love to hear from you.",
+    "intro": "Whether you have a project in mind, want to discuss opportunities, or just want to connect, I'd love to hear from you. Choose your preferred way to reach out:",
     "methods": [
       {
-        "icon": "✉️",
+        "icon": "email",
         "title": "Email",
         "value": "tianpretorius@gmail.com",
-        "link": "mailto:tianpretorius@gmail.com"
+        "description": "For detailed inquiries and project discussions",
+        "link": "mailto:tianpretorius@gmail.com",
+        "primary": true
       },
       {
-        "icon": "💼",
+        "icon": "whatsapp",
+        "title": "WhatsApp",
+        "value": "+27 76 679 6839",
+        "description": "Quick questions and real-time chat",
+        "link": "https://wa.me/27766796839",
+        "primary": true
+      },
+      {
+        "icon": "linkedin",
         "title": "LinkedIn",
-        "value": "Connect with me professionally",
+        "value": "Tian Pretorius",
+        "description": "Professional networking and opportunities",
         "link": "https://www.linkedin.com/in/tian-pretorius-817a2189/"
       },
       {
-        "icon": "💻",
+        "icon": "github",
         "title": "GitHub",
-        "value": "Check out my code",
+        "value": "@tian102",
+        "description": "View my code and open source work",
         "link": "https://github.com/tian102"
       }
     ],
     "infoCards": [
       {
+        "type": "location",
         "icon": "location",
         "title": "Location",
-        "value": "Remote / Flexible"
+        "value": "Hilton, South Africa",
+        "coordinates": {
+          "lat": -29.555353,
+          "lng": 30.2819635
+        },
+        "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56925.89242357891!2d30.2819635!3d-29.555353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ef6a5c1c140393d%3A0x58968436568fb100!2sHilton%2C%20South%20Africa!5e0!3m2!1sen!2s!4v1234567890"
       },
       {
-        "icon": "clock",
-        "title": "Response Time",
-        "value": "Less than 24 hours"
+        "type": "calendar",
+        "icon": "calendar",
+        "title": "Book a Meeting",
+        "value": "Schedule a time to chat",
+        "calendarUrl": "https://calendly.com/tianpretorius",
+        "description": "Available Mon-Fri, 8AM-5PM SAST"
       },
       {
+        "type": "openTo",
         "icon": "briefcase",
         "title": "Open To",
-        "value": "Full-time & Contract"
+        "value": "Exploring new opportunities",
+        "items": [
+          "Full-time positions",
+          "Contract projects (3-12 months)",
+          "Technical consulting",
+          "Coffee chats & networking"
+        ]
       }
     ]
   },

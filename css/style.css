@@ -1681,79 +1681,132 @@ section {
     margin: 0;
 }
 
-/* Contact Methods Grid */
+/* Contact Methods Grid - New Design */
 .contact-methods-grid {
     display: grid;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-md);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
-.contact-method {
+.contact-method-card {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: var(--spacing-md);
-    padding: var(--spacing-md);
-    background-color: var(--bg-primary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    background-color: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
     transition: all var(--transition-base);
     text-decoration: none;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
 }
 
-.contact-method::before {
+.contact-method-card::before {
     content: '';
     position: absolute;
-    left: 0;
     top: 0;
-    bottom: 0;
-    width: 3px;
-    background-color: var(--accent-color);
-    transform: scaleY(0);
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent-gradient);
+    transform: scaleX(0);
+    transform-origin: left;
     transition: transform var(--transition-base);
 }
 
-.contact-method:hover::before {
-    transform: scaleY(1);
+.contact-method-card.primary {
+    background-color: var(--bg-primary);
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-sm);
 }
 
-.contact-method:hover {
-    background-color: var(--bg-secondary);
-    border-color: var(--text-primary);
-    transform: translateX(4px);
+.contact-method-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
 }
 
-.contact-icon {
-    font-size: 1.5rem;
-    color: var(--text-secondary);
+.contact-method-card:hover::before {
+    transform: scaleX(1);
+}
+
+.method-icon {
+    width: 48px;
+    height: 48px;
     flex-shrink: 0;
-    transition: all var(--transition-fast);
-}
-
-.contact-method:hover .contact-icon {
-    color: var(--accent-color);
-    transform: scale(1.1);
-}
-
-.contact-info {
-    flex: 1;
-}
-
-.contact-info h4 {
-    font-size: 0.75rem;
-    margin-bottom: 0.25rem;
-    color: var(--text-tertiary);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-}
-
-.contact-info p {
-    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-primary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
     color: var(--text-primary);
-    margin: 0;
+    transition: all var(--transition-base);
+}
+
+.contact-method-card.primary .method-icon {
+    background-color: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: var(--bg-primary);
+}
+
+.contact-method-card:hover .method-icon {
+    background-color: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: var(--bg-primary);
+    transform: scale(1.1) rotate(5deg);
+}
+
+.contact-method-card.primary:hover .method-icon {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.method-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.method-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.method-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 0.25rem 0;
+}
+
+.method-value {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    margin: 0 0 0.5rem 0;
     font-weight: 500;
     word-break: break-word;
+}
+
+.method-description {
+    font-size: 0.8125rem;
+    color: var(--text-tertiary);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.method-arrow {
+    flex-shrink: 0;
+    color: var(--text-tertiary);
+    transition: all var(--transition-base);
+    opacity: 0;
+    transform: translateX(-8px);
+}
+
+.contact-method-card:hover .method-arrow {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--accent-primary);
 }
 
 /* Side Cards */
@@ -1808,6 +1861,89 @@ section {
     font-size: 0.875rem;
     color: var(--text-secondary);
     margin: 0;
+}
+
+/* Enhanced Contact Info Cards */
+.contact-info-card .card-description {
+    font-size: 0.8125rem;
+    color: var(--text-tertiary);
+    margin-top: var(--spacing-xs);
+}
+
+/* Location Card with Map */
+.location-card .location-map {
+    margin-top: var(--spacing-md);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.location-card .location-map iframe {
+    display: block;
+    border: 1px solid var(--border-color);
+}
+
+/* Calendar Booking Card */
+.calendar-card {
+    text-align: center;
+}
+
+.calendar-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background-color: var(--accent-primary);
+    color: var(--bg-primary);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--transition-base);
+    border: 2px solid var(--accent-primary);
+}
+
+.calendar-button:hover {
+    background-color: var(--bg-primary);
+    color: var(--accent-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.calendar-button svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Open To Card with List */
+.open-to-card {
+    text-align: left;
+}
+
+.open-to-list {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--spacing-md);
+}
+
+.open-to-list li {
+    position: relative;
+    padding-left: var(--spacing-lg);
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.open-to-list li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent-primary);
+    font-weight: bold;
+}
+
+.open-to-list li:last-child {
+    margin-bottom: 0;
 }
 
 /* Contact Preview (Homepage) */
