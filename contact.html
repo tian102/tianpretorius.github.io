@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Tian Pretorius</title>
-    <link rel="stylesheet" href="css/style.css?v=20251008-5">
+    <link rel="stylesheet" href="css/style.css?v=20251008-14">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -32,25 +32,79 @@
         </div>
     </nav>
 
-    <!-- Contact Header -->
-    <section class="page-header">
+    <!-- Contact Hero -->
+    <section class="contact-hero">
         <div class="container">
-            <h1 id="contact-page-title">Get In Touch</h1>
-            <p class="page-tagline" id="contact-page-tagline">Let's build something amazing together</p>
+            <div class="contact-hero-content">
+                <div class="contact-badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                        <line x1="9" y1="9" x2="9.01" y2="9"/>
+                        <line x1="15" y1="9" x2="15.01" y2="9"/>
+                    </svg>
+                    <span>Available for opportunities</span>
+                </div>
+                <h1 id="contact-page-title">Let's Work Together</h1>
+                <p class="contact-hero-text" id="contact-page-tagline">
+                    I'm always interested in new opportunities, challenging projects, and meaningful collaborations.
+                </p>
+            </div>
         </div>
     </section>
 
     <!-- Contact Content -->
-    <section class="section">
+    <section class="contact-section">
         <div class="container">
-            <div class="contact-content">
-                <p id="contact-intro">
-                    I'm always interested in new opportunities, challenging projects, and meaningful 
-                    collaborations. Whether you have a question, want to discuss a potential project, 
-                    or just want to connect, I'd love to hear from you.
-                </p>
-                <div class="contact-methods" id="contact-methods-container">
-                    <!-- Contact methods will be loaded dynamically -->
+            <div class="contact-grid">
+                <!-- Main Contact Card -->
+                <div class="contact-main-card">
+                    <div class="contact-card-header">
+                        <h2>Get in Touch</h2>
+                        <p id="contact-intro">
+                            Whether you have a question, want to discuss a potential project, 
+                            or just want to connect, I'd love to hear from you.
+                        </p>
+                    </div>
+                    <div class="contact-methods-grid" id="contact-methods-container">
+                        <!-- Contact methods will be loaded dynamically -->
+                    </div>
+                </div>
+
+                <!-- Quick Info Card -->
+                <div class="contact-side-cards">
+                    <div class="contact-info-card">
+                        <div class="info-card-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <h3>Location</h3>
+                        <p>Remote / Flexible</p>
+                    </div>
+
+                    <div class="contact-info-card">
+                        <div class="info-card-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <h3>Response Time</h3>
+                        <p>Within 24 hours</p>
+                    </div>
+
+                    <div class="contact-info-card">
+                        <div class="info-card-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                            </svg>
+                        </div>
+                        <h3>Open To</h3>
+                        <p>Full-time & Contract</p>
+                    </div>
                 </div>
             </div>
         </div>
