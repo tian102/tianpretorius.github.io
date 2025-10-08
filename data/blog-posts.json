@@ -14,14 +14,18 @@
     "excerpt": "This is a test post to verify that GitHub Actions automatically builds JSON files from markdown. If this works, the JSON should be generated and committed automatically!"
   },
   {
-    "slug": "sample-post",
-    "filename": "sample-post.md",
-    "title": "Untitled",
+    "slug": "sample-test-post",
+    "filename": "sample-test-post.md",
+    "title": "Sample Post",
     "date": "2025-10-08",
-    "tags": [],
+    "tags": [
+      "testing",
+      "automation",
+      "github-actions"
+    ],
     "author": "Tian Pretorius",
-    "content": "# Sample Blog Post\n\nWelcome to my portfolio blog! This is a sample post to demonstrate how markdown content will be rendered on the site.\n\n## Introduction\n\nIn this blog, I will share insights about my projects, experiences, and thoughts on various topics related to programming and design.\n\n## Content\n\nFeel free to explore the different sections of my portfolio. You can find my CV [here](../assets/Tian-Pretorius-CV.pdf) and learn more about me in the [About](../about.html) section.\n\n### Conclusion\n\nThank you for visiting my blog! Stay tuned for more posts.",
-    "excerpt": "Welcome to my portfolio blog! This is a sample post to demonstrate how markdown content will be rendered on the site."
+    "content": "\n# Testing GitHub Actions Auto-Build\n\nThis is a test post to verify that GitHub Actions automatically builds JSON files from markdown. If this works, the JSON should be generated and committed automatically!\n\n## Section 1: Introduction\n\nStart with an engaging introduction that hooks the reader and explains what they'll learn from this post.\n\n### Key Points\n- Use bullet points to highlight important information\n- Keep your writing clear and concise\n- Use examples to illustrate your points\n\n## Section 2: Main Content\n\nDive into the main content of your blog post. Break it up into digestible sections with clear headings.\n\n```javascript\n// Include code examples when relevant\nfunction example() {\n    console.log('Code blocks help illustrate technical concepts');\n}\n```\n\n### Subsection Example\n\nUse subsections to organize complex topics into smaller, more manageable chunks.\n\n## Section 3: Practical Examples\n\nShare real-world examples, case studies, or scenarios that demonstrate your points.\n\n1. First example or step\n2. Second example or step\n3. Third example or step\n\n## Section 4: Best Practices\n\n- Share tips and best practices\n- Include lessons learned\n- Provide actionable advice readers can apply\n\n## Conclusion\n\nSummarize the main points and provide a clear takeaway for your readers. End with a call-to-action or thought-provoking question.\n\n### Key Takeaways\n\n- Summarize the main points\n- Highlight what readers should remember\n- Provide next steps or additional resources\n\n---\n\n## Markdown Formatting Guide\n\n### Text Formatting\n- **Bold text** using `**text**`\n- *Italic text* using `*text*`\n- `Inline code` using backticks\n- ~~Strikethrough~~ using `~~text~~`\n\n### Links\n[Link text](https://example.com)\n\n### Images\n![Alt text](image-url.jpg)\n\n### Quotes\n> Use blockquotes for important quotes or callouts\n\n### Lists\n**Unordered:**\n- Item 1\n- Item 2\n  - Nested item\n\n**Ordered:**\n1. First item\n2. Second item\n3. Third item\n\n### Code Blocks\n```language\n// Specify the language for syntax highlighting\nconst code = 'example';\n```\n\n---\n\n**Tips for Writing Great Blog Posts:**\n- Keep paragraphs short (3-4 sentences max)\n- Use headings to break up content\n- Include code examples for technical topics\n- Add images or diagrams when helpful\n- Proofread before publishing\n- Make sure your frontmatter date is current\n- Choose relevant tags (3-5 tags recommended)\n- Estimate read time accurately (150-200 words per minute)\n",
+    "excerpt": "This is a test post to verify that GitHub Actions automatically builds JSON files from markdown. If this works, the JSON should be generated and committed automatically!"
   },
   {
     "slug": "unemployed-to-saas-founder",
