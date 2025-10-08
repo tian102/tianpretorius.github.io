@@ -1078,8 +1078,8 @@ section {
 
 .about-content-grid {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: var(--spacing-md);
+    grid-template-columns: 1fr 350px;
+    gap: var(--spacing-2xl);
     margin-top: var(--spacing-2xl);
     align-items: start;
 }
