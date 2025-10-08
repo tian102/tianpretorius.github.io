@@ -379,6 +379,7 @@ function showBlogPost(slug) {
                     <div class="post-tags">
                         ${post.tags.map(tag => `<span class="post-tag">${tag}</span>`).join('')}
                     </div>
+                    ${post.tldr ? `<blockquote class="post-tldr"><em>${post.tldr}</em></blockquote>` : ''}
                 </header>
                 <div class="blog-post-content">
                     ${htmlContent}
