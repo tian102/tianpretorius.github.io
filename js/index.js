@@ -32,12 +32,8 @@ document.addEventListener("DOMContentLoaded", async function() {
     // Render skills section
     ContentLoader.renderHomeSkills('about-skills');
     
-    // Populate blog section subtitle
-    ContentLoader.populate('blog-section-subtitle', 'blog.sectionSubtitle');
-    
-    // Populate contact preview
-    ContentLoader.populate('contact-preview-title', 'contact.pageTitle');
-    ContentLoader.populate('contact-preview-intro', 'contact.intro');
+    // Populate contact preview intro
+    ContentLoader.populate('contact-preview-intro', 'contact.pageTagline');
     
     // Render contact methods preview
     ContentLoader.renderContactMethods('contact-methods-preview');
