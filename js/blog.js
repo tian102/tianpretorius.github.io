@@ -379,7 +379,17 @@ function showBlogPost(slug) {
                     <div class="post-tags">
                         ${post.tags.map(tag => `<span class="post-tag">${tag}</span>`).join('')}
                     </div>
-                    ${post.tldr ? `<blockquote class="post-tldr"><em>${post.tldr}</em></blockquote>` : ''}
+                    ${post.tldr ? `
+                    <details class="post-tldr-details">
+                        <summary class="post-tldr-summary">
+                            <span class="tldr-label">TL;DR</span>
+                            <svg class="tldr-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </summary>
+                        <blockquote class="post-tldr"><em>${post.tldr}</em></blockquote>
+                    </details>
+                    ` : ''}
                 </header>
                 <div class="blog-post-content">
                     ${htmlContent}
