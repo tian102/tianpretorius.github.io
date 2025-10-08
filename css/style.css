@@ -441,8 +441,7 @@ section {
 .scroll-indicator {
     position: absolute;
     bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
+    right: var(--spacing-xl);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -455,7 +454,7 @@ section {
     text-decoration: none;
     cursor: pointer;
     transition: all var(--transition-base);
-    animation: bounce 2s infinite;
+    animation: bounceRight 2s infinite;
     box-shadow: var(--shadow-sm);
 }
 
@@ -464,21 +463,37 @@ section {
     background: var(--bg-secondary);
     border-color: var(--text-primary);
     box-shadow: var(--shadow-md);
-    transform: translateX(-50%) translateY(-5px);
+    transform: translateY(-5px);
 }
 
 .scroll-indicator svg {
     transform: rotate(180deg);
 }
 
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-    40% { transform: translateX(-50%) translateY(-10px); }
-    60% { transform: translateX(-50%) translateY(-5px); }
+@keyframes bounceRight {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
 }
 
-.scroll-arrow {
-    font-size: 1.5rem;
+/* Responsive scroll indicator */
+@media (max-width: 968px) {
+    .scroll-indicator {
+        right: var(--spacing-md);
+        width: 40px;
+        height: 40px;
+    }
+    
+    .scroll-indicator svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 568px) {
+    .scroll-indicator {
+        right: var(--spacing-sm);
+    }
 }
 
 /* ==========================================
