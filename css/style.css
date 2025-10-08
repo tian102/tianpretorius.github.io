@@ -2540,7 +2540,7 @@ body.home .contact-preview > .container {
         grid-template-columns: 1fr;
     }
     
-    .about-sidebar {
+    .about-main {
         order: -1;
     }
 }
