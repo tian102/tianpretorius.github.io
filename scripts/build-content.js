@@ -45,7 +45,7 @@ const blogFiles = fs.readdirSync(blogPostsDir);
 console.log(`Found ${blogFiles.length} files in blog/posts`);
 
 blogFiles.forEach(file => {
-    if (file.endsWith('.md') && file !== 'template.md') {
+    if (file.endsWith('.md')) {
         console.log(`  Processing blog post: ${file}`);
         const content = fs.readFileSync(path.join(blogPostsDir, file), 'utf8');
         const { metadata, content: markdown } = parseFrontmatter(content);
@@ -101,7 +101,7 @@ const projectFiles = fs.readdirSync(projectsDir);
 console.log(`Found ${projectFiles.length} files in projects/posts`);
 
 projectFiles.forEach(file => {
-    if (file.endsWith('.md') && file !== 'template.md') {
+    if (file.endsWith('.md')) {
         console.log(`  Processing project: ${file}`);
         const content = fs.readFileSync(path.join(projectsDir, file), 'utf8');
         const { metadata, content: markdown } = parseFrontmatter(content);
