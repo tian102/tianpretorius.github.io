@@ -427,7 +427,8 @@ body.home .contact-preview > .container {
    Hero Section
    ========================================== */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
+    padding-top: 70px; /* Account for fixed navbar */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -647,19 +648,26 @@ body.home .contact-preview > .container {
 @media (max-width: 968px) {
     .scroll-indicator {
         right: var(--spacing-md);
-        width: 40px;
-        height: 40px;
+        width: 44px; /* Minimum touch target size */
+        height: 44px;
     }
     
     .scroll-indicator svg {
-        width: 20px;
-        height: 20px;
+        width: 22px;
+        height: 22px;
     }
 }
 
 @media (max-width: 568px) {
     .scroll-indicator {
         right: var(--spacing-sm);
+    }
+}
+
+/* Hide scroll indicator on landscape mobile to prevent overlap */
+@media (max-height: 500px) and (orientation: landscape) {
+    .scroll-indicator {
+        display: none;
     }
 }
 
@@ -2501,6 +2509,7 @@ body.home .contact-preview > .container {
         box-shadow: var(--shadow-lg);
         padding: var(--spacing-xl) 0;
         border-bottom: 1px solid var(--border-color);
+        z-index: 998; /* Below navbar but above content */
     }
     
     .nav-menu.active {
@@ -2560,7 +2569,7 @@ body.home .contact-preview > .container {
 
 @media (max-width: 640px) {
     :root {
-        font-size: 14px;
+        font-size: 16px; /* Keep readable font size on mobile */
     }
     
     .container {
