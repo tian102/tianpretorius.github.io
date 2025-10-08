@@ -1,13 +1,13 @@
 ---
-title: Testing a new blog
+title: Testing GitHub Actions Auto-Build
 date: 2025-10-08
-tags: tag1, tag2, tag3
+tags: testing, automation, github-actions
 author: Tian Pretorius
 ---
 
-# Your Blog Post Title
+# Testing GitHub Actions Auto-Build
 
-A brief introduction or excerpt that summarizes what this blog post is about. This will be shown in the blog preview cards on the homepage and blog page.
+This is a test post to verify that GitHub Actions automatically builds JSON files from markdown. If this works, the JSON should be generated and committed automatically!
 
 ## Section 1: Introduction
 
