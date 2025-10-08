@@ -21,7 +21,7 @@
       "Problem Solver",
       "Tech Enthusiast"
     ],
-    "description": "Software Engineer with 5+ years in automation and systems design. I’ve built custom tools for micronutrient production, optimized manufacturing lines, and developed Python–OpenCV web and mobile apps for precision analysis. CCNA- and SolidWorks-certified, I bridge engineering precision with scalable, secure software — now channeling that expertise into independent and collaborative projects. Explore the code, insights, and builds that keep the momentum going.",
+    "description": "Dynamic Software Engineer with 5+ years in automation and systems design: I led custom micronutrient blend tools for industry leaders, revamped production lines for vitamin premix operations, and pioneered Android/Java apps with Python and OpenCV for precise sugar crystal analysis. CCNA- and SolidWorks-certified, I've driven R&D from RFID adoption barriers to digital security protocols, always delivering scalable, compliant innovations. These days, that expertise shapes my latest indie projects—explore the code, insights, and builds that keep the momentum going.",
     "cta": {
       "primary": "About Me",
       "primaryLink": "#about",
@@ -37,7 +37,7 @@
       {
         "title": "Who I Am",
         "content": [
-          "I'm Tian Pretorius, a Software Engineer with over 5 years of hands-on experience in automation, systems design, and full-stack development. My work has centered on crafting scalable solutions that integrate hardware and software, from image analysis tools using Python and OpenCV to Bluetooth-enabled RFID prototypes with cross-platform mobile and web apps.",
+          "I'm Tian Pretorius, a Software engineer with over 5 years of hands-on experience in automation, systems design, and full-stack development. My work has centered on crafting scalable solutions that integrate hardware and software, from image analysis tools using Python and OpenCV to Bluetooth-enabled RFID prototypes with cross-platform mobile and web apps.",
           "I've led R&D initiatives tackling challenges like adoption barriers in tracking technologies and digital security protocols, always prioritizing compliant, efficient architectures. Whether optimizing production workflows or developing regulatory-focused applications, I thrive on turning complex problems into robust, impactful tech."
         ]
       },
@@ -69,7 +69,7 @@
           "React",
           "Python",
           "C#",
-          "MySQL",
+          "MySQl",
           "PostgreSQL",
           "Django",
           "Docker",
@@ -85,24 +85,24 @@
         "items": [
           {
             "title": "CTO & Software Engineer",
-            "duration": "1 year",
-            "description": "Developed vitamin premixes for nutrition and food fortification; optimized production lines for compliance; consulted on global fortification projects; managed and optimized sourcing operations."
+            "duration": "1 years",
+            "description": "Developed vitamin premixes for nutrition and food fortification; optimized production lines for compliance; consulted on global fortification projects and managed and optimized sourcing operations."
           },
           {
             "title": "Computer/Solution Engineer",
-            "duration": "5 years",
-            "description": "Developed automation for micronutrient blends and quality assurance systems; implemented digital security and international compliance; provided R&D support, system development, and technical procurement."
+            "duration": "5+ years",
+            "description": "Developed automation for micronutrient blends and quality assurance systems; implemented digital security and international compliance; provided R&D support/system development and technical procurement."
           },
           {
             "title": "Lead/R&D Engineer",
-            "duration": "5 years",
-            "description": "Developed vitamin testing platforms, including a sophisticated particle recognition algorithm using OpenCV, Python, and Java for Android to detect vitamin A in sugar crystals; deployed software to web-based (full stack) and mobile-based (Android/Java) platforms; bridged academic research with industrial applications."
+            "duration": "5+ years",
+            "description": "Developed vitamin testing platforms, including sophisticated particle recognition algorithm using OpenCV, Python, and Java for Android to detect vitamin A in sugar crystals; deployed software to web-based (full stack) and mobile-based (Android/Java) platforms; bridged academic research with industrial applications."
           }
         ]
       },
       "currentFocus": {
         "title": "Current Focus",
-        "description": "Actively seeking software engineering opportunities where I can leverage my full-stack expertise and R&D background to build high-impact systems. Open to roles in automation, web/mobile development, or system architecture."
+        "description": "Actively seeking software engineering opportunities where I can leverage my full-stack expertise and R&D background to build high-impact systems. Open to roles in automation, web/mobile development, or system architecture"
       }
     }
   },
@@ -226,7 +226,7 @@
         },
         {
           "name": "Backend",
-          "tags": ["Django", "PostgreSQL", "Node.js", "Express"]
+          "tags": ["Node.js", "Express", "PostgreSQL"]
         },
         {
           "name": "DevOps",
