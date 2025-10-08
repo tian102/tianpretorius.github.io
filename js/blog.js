@@ -233,11 +233,6 @@ function displayPosts() {
         // Calculate total pages
         const totalPages = Math.ceil(totalPosts / itemsPerPage);
         
-        if (totalPages <= 1) {
-            paginationButtons.innerHTML = '';
-            return;
-        }
-        
         // Generate pagination buttons
         let buttonsHTML = '';
         

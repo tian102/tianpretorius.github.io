@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async function() {
     ContentLoader.renderHomeSkills('about-skills');
     
     // Populate blog section subtitle
-    ContentLoader.populate('blog-section-subtitle', 'blog.sectionTitle');
+    ContentLoader.populate('blog-section-subtitle', 'blog.sectionSubtitle');
     
     // Populate contact preview
     ContentLoader.populate('contact-preview-title', 'contact.pageTitle');

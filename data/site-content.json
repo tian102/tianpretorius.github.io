@@ -1,6 +1,6 @@
 {
   "personal": {
-    "name": "Tian Pretorius",
+    "name": "Reinette Fritz",
     "title": "Software Engineer",
     "tagline": "Building scalable systems and turning ideas into reality",
     "email": "tianpretorius@gmail.com",
@@ -118,15 +118,15 @@
   "blog": {
     "pageTitle": "Blog",
     "pageTagline": "Thoughts on engineering, entrepreneurship, and building products.",
-    "sectionTitle": "Latest from the Blog",
+    "sectionTitle": "Latest from my Blog",
     "sectionNumber": "03.",
-    "sectionSubtitle": "Follow my journey...",
     "viewAllText": "View All Posts →"
   },
   
   "contact": {
     "pageTitle": "Get in Touch",
     "pageTagline": "I'm always interested in new opportunities, challenging projects, and meaningful collaborations",
+    "badge": "Available for opportunities",
     "intro": "If you have a question, want to discuss a potential project, or just want to connect, I'd love to hear from you.",
     "methods": [
       {
@@ -146,6 +146,23 @@
         "title": "GitHub",
         "value": "Check out my code",
         "link": "https://github.com/tian102"
+      }
+    ],
+    "infoCards": [
+      {
+        "icon": "location",
+        "title": "Location",
+        "value": "Remote / Flexible"
+      },
+      {
+        "icon": "clock",
+        "title": "Response Time",
+        "value": "Less than 24 hours"
+      },
+      {
+        "icon": "briefcase",
+        "title": "Open To",
+        "value": "Full-time & Contract"
       }
     ]
   },
@@ -207,7 +224,7 @@
       },
       "blog": {
         "number": "03.",
-        "title": "Latest from the Blog",
+        "title": "Latest from my Blog",
         "cta": "View All Posts →",
         "ctaLink": "blog.html"
       },

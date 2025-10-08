@@ -210,6 +210,45 @@
     }
 
     /**
+     * Render contact info cards
+     * @param {string} containerId - The ID of the container element
+     */
+    function renderContactInfoCards(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        
+        const infoCards = getContent('contact.infoCards');
+        if (!infoCards) return;
+        
+        const iconMap = {
+            location: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
+                <circle cx="12" cy="10" r="3"/>
+            </svg>`,
+            clock: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+            </svg>`,
+            briefcase: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+            </svg>`
+        };
+        
+        const html = infoCards.map(card => `
+            <div class="contact-info-card">
+                <div class="info-card-icon">
+                    ${iconMap[card.icon] || ''}
+                </div>
+                <h3>${card.title}</h3>
+                <p>${card.value}</p>
+            </div>
+        `).join('');
+        
+        container.innerHTML = html;
+    }
+
+    /**
      * Render footer content
      * @param {string} containerId - The ID of the container element
      */
@@ -401,6 +440,7 @@
         renderSkills: renderSkills,
         renderExperience: renderExperience,
         renderContactMethods: renderContactMethods,
+        renderContactInfoCards: renderContactInfoCards,
         renderFooter: renderFooter,
         initHeroTypedText: initHeroTypedText,
         renderHomeAboutPreview: renderHomeAboutPreview,
