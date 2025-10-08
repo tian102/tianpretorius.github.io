@@ -1604,8 +1604,9 @@ section {
 
 .experience-duration {
     font-size: 0.875rem;
+    font-style: italic;
     color: var(--text-tertiary);
-    margin-bottom: var(--spacing-xs);
+    padding-bottom: var(--spacing-xs);
 }
 
 .experience-desc {
