@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Tian Pretorius</title>
-    <link rel="stylesheet" href="css/style.css?v=20251008-2">
+    <link rel="stylesheet" href="css/style.css?v=20251008-12">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -41,12 +41,23 @@
     <section class="projects-filters" id="projects-filters">
         <div class="container">
             <div class="filters-row">
-                <div class="search-box">
-                    <input type="text" id="project-search" placeholder="Search projects...">
+                <div>
+                    <div class="search-box">
+                        <input type="text" id="project-search" placeholder="Search projects...">
+                    </div>
+                    <div class="sort-box">
+                        <label for="project-sort">Sort by:</label>
+                        <select id="project-sort" class="filter-select">
+                            <option value="date-desc">Newest First</option>
+                            <option value="date-asc">Oldest First</option>
+                            <option value="title-asc">Title A-Z</option>
+                            <option value="title-desc">Title Z-A</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="filter-tags" id="filter-tags">
-                    <!-- Filter buttons will be populated by JavaScript -->
-                </div>
+            </div>
+            <div class="filter-tags" id="filter-tags">
+                <!-- Filter buttons will be populated by JavaScript -->
             </div>
         </div>
     </section>
@@ -107,7 +118,7 @@
             ContentLoader.renderFooter('footer-container');
         });
     </script>
-    <script src='js/main.js?v=20251008'></script>
-    <script src='js/projects.js?v=20251008'></script>
+    <script src='js/main.js?v=20251008-6'></script>
+    <script src='js/projects.js?v=20251008-6'></script>
 </body>
 </html>

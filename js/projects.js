@@ -4,6 +4,7 @@ let allProjects = [];
 let currentPage = 1;
 let itemsPerPage = 10;
 let filteredProjects = [];
+let currentSort = 'date-desc';
 
 // Function to convert markdown to HTML using marked.js
 function parseMarkdown(markdown) {
@@ -38,6 +39,7 @@ async function loadProjects() {
         projectsData.push(...projects);
         allProjects = [...projectsData];
         filteredProjects = [...allProjects];
+        applySort(); // Apply default sort
         displayProjects();
         setupFilters();
         setupPagination();
@@ -233,6 +235,7 @@ function setupFilters() {
                 const tag = btn.getAttribute('data-tag');
                 if (tag === 'all') {
                     filteredProjects = [...allProjects];
+                    applySort();
                     currentPage = 1;
                     displayProjects();
                 } else {
@@ -252,15 +255,46 @@ function setupFilters() {
                 project.description.toLowerCase().includes(query) ||
                 project.tags.some(tag => tag.toLowerCase().includes(query))
             );
+            applySort();
+            currentPage = 1; // Reset to first page
+            displayProjects();
+        });
+    }
+    
+    // Sort functionality
+    const sortSelect = document.getElementById('project-sort');
+    if (sortSelect) {
+        sortSelect.addEventListener('change', (e) => {
+            currentSort = e.target.value;
+            applySort();
             currentPage = 1; // Reset to first page
             displayProjects();
         });
     }
 }
 
+// Apply current sort to filtered projects
+function applySort() {
+    filteredProjects.sort((a, b) => {
+        switch (currentSort) {
+            case 'date-desc':
+                return new Date(b.date) - new Date(a.date);
+            case 'date-asc':
+                return new Date(a.date) - new Date(b.date);
+            case 'title-asc':
+                return a.title.localeCompare(b.title);
+            case 'title-desc':
+                return b.title.localeCompare(a.title);
+            default:
+                return 0;
+        }
+    });
+}
+
 // Filter projects by tag
 function filterByTag(tag) {
     filteredProjects = allProjects.filter(project => project.tags.includes(tag));
+    applySort();
     currentPage = 1; // Reset to first page
     displayProjects();
     

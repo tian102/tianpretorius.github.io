@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Tian Pretorius</title>
-    <link rel="stylesheet" href="css/style.css?v=20251008-2">
-    <link rel="stylesheet" href="css/blog.css?v=20251008-2">
+    <link rel="stylesheet" href="css/style.css?v=20251008-12">
+    <link rel="stylesheet" href="css/blog.css?v=20251008-12">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -37,36 +37,42 @@
         </div>
     </section>
 
-    <!-- Filter Controls -->
+    <!-- Blog Filters -->
     <section class="blog-filters" id="blog-filters">
         <div class="container">
-            <div class="filter-bar">
-                <div class="filter-group">
-                    <label for="tag-filter">Filter by tag:</label>
-                    <select id="tag-filter" class="filter-select">
-                        <option value="all">All Posts</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="sort-filter">Sort by:</label>
-                    <select id="sort-filter" class="filter-select">
-                        <option value="date-desc">Newest First</option>
-                        <option value="date-asc">Oldest First</option>
-                        <option value="title-asc">Title A-Z</option>
-                        <option value="title-desc">Title Z-A</option>
-                    </select>
+            <div class="filters-row">
+                <div>
+                    <div class="search-box">
+                        <input type="text" id="blog-search" placeholder="Search blog posts...">
+                    </div>
+                    <div class="sort-box">
+                        <label for="blog-sort">Sort by:</label>
+                        <select id="blog-sort" class="filter-select">
+                            <option value="date-desc">Newest First</option>
+                            <option value="date-asc">Oldest First</option>
+                            <option value="title-asc">Title A-Z</option>
+                            <option value="title-desc">Title Z-A</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div id="active-filters" class="active-filters"></div>
+            <div class="filter-tags" id="filter-tags">
+                <!-- Filter buttons will be populated by JavaScript -->
+            </div>
         </div>
     </section>
 
-    <section class="blog-content">
-        <div class="container" id="blog-list">
-            <!-- Blog posts will be loaded here -->
-        </div>
-        <div class="container hidden" id="blog-post">
-            <!-- Individual blog post will be loaded here -->
+    <!-- Blog List -->
+    <section class="section">
+        <div class="container">
+            <div class="blog-list" id="blog-list">
+                <!-- Blog posts will be dynamically loaded here -->
+            </div>
+
+            <!-- Blog Detail View (hidden by default) -->
+            <div id="blog-post" class="hidden">
+                <!-- Blog post content will be dynamically loaded here -->
+            </div>
         </div>
     </section>
 
@@ -112,7 +118,7 @@
             ContentLoader.renderFooter('footer-container');
         });
     </script>
-    <script src="js/main.js?v=20251008"></script>
-    <script src="js/blog.js?v=20251008"></script>
+    <script src="js/main.js?v=20251008-6"></script>
+    <script src="js/blog.js?v=20251008-6"></script>
 </body>
 </html>
