@@ -841,8 +841,8 @@ body.home .contact-preview > .container {
 
 /* Carousel card sizing for homepage only */
 .projects .carousel-container .project-card {
-    min-width: 350px;
-    max-width: 400px;
+    min-width: 280px;
+    max-width: 320px;
     flex-shrink: 0;
     scroll-snap-align: start;
 }
@@ -875,7 +875,7 @@ body.home .contact-preview > .container {
 .project-image {
     position: relative;
     overflow: hidden;
-    height: 250px;
+    height: 180px;
 }
 
 .project-image img {
@@ -913,8 +913,8 @@ body.home .contact-preview > .container {
 }
 
 .project-links a {
-    width: 50px;
-    height: 50px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background-color: var(--bg-primary);
     color: var(--text-primary);
@@ -931,12 +931,12 @@ body.home .contact-preview > .container {
 }
 
 .project-content {
-    padding: var(--spacing-xl);
+    padding: var(--spacing-lg);
 }
 
 .project-title {
-    font-size: 1.625rem;
-    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-sm);
     color: var(--text-primary);
     font-weight: 700;
     line-height: 1.3;
@@ -949,9 +949,13 @@ body.home .contact-preview > .container {
 
 .project-description {
     color: var(--text-secondary);
-    margin-bottom: var(--spacing-lg);
-    line-height: 1.7;
-    font-size: 1rem;
+    margin-bottom: var(--spacing-md);
+    line-height: 1.6;
+    font-size: 0.9375rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .project-tech {
@@ -1441,8 +1445,8 @@ body.home .contact-preview > .container {
 
 /* Carousel card sizing for homepage only */
 .blog-preview .carousel-container .blog-card {
-    min-width: 350px;
-    max-width: 400px;
+    min-width: 280px;
+    max-width: 320px;
     flex-shrink: 0;
     scroll-snap-align: start;
 }
@@ -1474,7 +1478,7 @@ body.home .contact-preview > .container {
 .blog-image {
     position: relative;
     overflow: hidden;
-    height: 250px;
+    height: 180px;
 }
 
 .blog-image img {
@@ -1489,15 +1493,15 @@ body.home .contact-preview > .container {
 }
 
 .blog-content {
-    padding: var(--spacing-xl);
+    padding: var(--spacing-lg);
 }
 
 .blog-meta {
     display: flex;
     align-items: center;
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
-    font-size: 0.8125rem;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.75rem;
     color: var(--text-tertiary);
     font-family: var(--font-mono);
     text-transform: uppercase;
@@ -1506,8 +1510,8 @@ body.home .contact-preview > .container {
 }
 
 .blog-title {
-    font-size: 1.625rem;
-    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-sm);
     color: var(--text-primary);
     font-weight: 700;
     line-height: 1.3;
@@ -1520,9 +1524,13 @@ body.home .contact-preview > .container {
 
 .blog-excerpt {
     color: var(--text-secondary);
-    margin-bottom: var(--spacing-lg);
-    line-height: 1.7;
-    font-size: 1rem;
+    margin-bottom: var(--spacing-md);
+    line-height: 1.6;
+    font-size: 0.9375rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .blog-tags {
@@ -2590,6 +2598,47 @@ body.home .contact-preview > .container {
     .projects-grid,
     .blog-grid {
         grid-template-columns: 1fr;
+    }
+    
+    /* Make cards more compact on mobile */
+    .projects .carousel-container .project-card,
+    .blog-preview .carousel-container .blog-card {
+        min-width: 260px;
+        max-width: 280px;
+    }
+    
+    .project-image,
+    .blog-image {
+        height: 150px;
+    }
+    
+    .project-content,
+    .blog-content {
+        padding: var(--spacing-md);
+    }
+    
+    .project-title,
+    .blog-title {
+        font-size: 1.125rem;
+        margin-bottom: var(--spacing-xs);
+    }
+    
+    .project-description,
+    .blog-excerpt {
+        font-size: 0.875rem;
+        -webkit-line-clamp: 2;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .blog-meta {
+        font-size: 0.6875rem;
+        gap: var(--spacing-xs);
+    }
+    
+    .tech-tag,
+    .blog-tag {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.6875rem;
     }
     
     /* Contact Page Mobile */
