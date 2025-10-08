@@ -1,0 +1,171 @@
+{
+  "personal": {
+    "name": "Tian Pretorius",
+    "title": "Software Engineer",
+    "tagline": "Building scalable systems and turning ideas into reality",
+    "email": "tianpretorius@gmail.com",
+    "social": {
+      "github": "https://github.com/tian102",
+      "linkedin": "https://www.linkedin.com/in/tian-pretorius-817a2189/",
+      "email": "mailto:tianpretorius@gmail.com"
+    },
+    "resume": "assets/Tian-Pretorius-CV.pdf"
+  },
+  
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Tian Pretorius",
+    "typedRoles": [
+      "Software Engineer",
+      "Full-Stack Developer",
+      "Problem Solver",
+      "Tech Enthusiast"
+    ],
+    "description": "Dynamic Software Engineer with 5+ years in automation and systems design: I led custom micronutrient blend tools for industry leaders, revamped production lines for vitamin premix operations, and pioneered Android/Java apps with Python and OpenCV for precise sugar crystal analysis. CCNA- and SolidWorks-certified, I've driven R&D from RFID adoption barriers to digital security protocols, always delivering scalable, compliant innovations. These days, that expertise shapes my latest indie projects—explore the code, insights, and builds that keep the momentum going.",
+    "cta": {
+      "primary": "About Me",
+      "primaryLink": "#about",
+      "secondary": "Get In Touch",
+      "secondaryLink": "contact.html"
+    }
+  },
+  
+  "about": {
+    "pageTitle": "About Me",
+    "pageTagline": "Software Engineer building scalable systems and solving complex problems",
+    "sections": [
+      {
+        "title": "Who I Am",
+        "content": [
+          "I'm Tian Pretorius, a Software engineer with over 5 years of hands-on experience in automation, systems design, and full-stack development. My work has centered on crafting scalable solutions that integrate hardware and software, from image analysis tools using Python and OpenCV to Bluetooth-enabled RFID prototypes with cross-platform mobile and web apps.",
+          "I've led R&D initiatives tackling challenges like adoption barriers in tracking technologies and digital security protocols, always prioritizing compliant, efficient architectures. Whether optimizing production workflows or developing regulatory-focused applications, I thrive on turning complex problems into robust, impactful tech."
+        ]
+      },
+      {
+        "title": "What I Do",
+        "intro": "I specialize in building robust, scalable web applications and architecting systems that can handle growth. My focus is on:",
+        "list": [
+          "Full-stack development (Python, Java, C#, HTML, CSS, JS, Django)",
+          "Database design and SQL for scalable data management",
+          "System architecture, scalability, and secure protocol implementation",
+          "R&D prototyping, from embedded systems to compliant automation tools",
+          "Technical leadership, cross-functional collaboration, and problem-solving in dynamic environments"
+        ]
+      },
+      {
+        "title": "My Journey",
+        "content": [
+          "My engineering path began in academia, where I dove into computer and electronic engineering, building a strong foundation in embedded systems, programming, and data analytics. This sparked my passion for creating solutions that connect the physical and digital worlds—whether through IoT-enabled designs or data-driven efficiencies that support decisions in fast-paced industries.",
+          "From there, I've progressed through roles in R&D and technical leadership, prototyping innovative hardware-software hybrids like mobile RFID readers and developing full-lifecycle software for compliance and automation. Highlights include crafting particle recognition algorithms for precision testing and optimizing scalable production systems. Now, with 5+ years under my belt, I'm primarily seeking to channel this expertise into a collaborative software engineering role, while honing my skills through personal projects. Let's chat about how I can help tackle your team's next big challenge."
+        ]
+      }
+    ],
+    "sidebar": {
+      "skills": {
+        "title": "Skills & Technologies",
+        "tags": [
+          "JavaScript",
+          "TypeScript",
+          "React",
+          "Python",
+          "C#",
+          "MySQl",
+          "PostgreSQL",
+          "Django",
+          "Docker",
+          "Git",
+          "REST APIs",
+          "CI/CD",
+          "Linux",
+          "Embedded Programming"
+        ]
+      },
+      "experience": {
+        "title": "Experience",
+        "items": [
+          {
+            "title": "CTO & Software Engineer",
+            "duration": "1 years",
+            "description": "Developed vitamin premixes for nutrition and food fortification; optimized production lines for compliance; consulted on global fortification projects and managed and optimized sourcing operations."
+          },
+          {
+            "title": "Computer/Solution Engineer",
+            "duration": "5+ years",
+            "description": "Developed automation for micronutrient blends and quality assurance systems; implemented digital security and international compliance; provided R&D support/system development and technical procurement."
+          },
+          {
+            "title": "Lead/R&D Engineer",
+            "duration": "5+ years",
+            "description": "Developed vitamin testing platforms, including sophisticated particle recognition algorithm using OpenCV, Python, and Java for Android to detect vitamin A in sugar crystals; deployed software to web-based (full stack) and mobile-based (Android/Java) platforms; bridged academic research with industrial applications."
+          }
+        ]
+      },
+      "currentFocus": {
+        "title": "Current Focus",
+        "description": "Actively seeking software engineering opportunities where I can leverage my full-stack expertise and R&D background to build high-impact systems. Open to roles in automation, web/mobile development, or system architecture"
+      }
+    }
+  },
+  
+  "projects": {
+    "pageTitle": "My Projects",
+    "pageTagline": "A showcase of my work, from side projects to professional applications. Each project represents a unique challenge and learning experience.",
+    "sectionTitle": "Featured Projects",
+    "sectionNumber": "02.",
+    "viewAllText": "View All Projects →"
+  },
+  
+  "blog": {
+    "pageTitle": "Blog",
+    "pageTagline": "Thoughts on engineering, entrepreneurship, and building products.",
+    "sectionTitle": "Latest from the Blog",
+    "sectionNumber": "03.",
+    "sectionSubtitle": "Follow my journey...",
+    "viewAllText": "View All Posts →"
+  },
+  
+  "contact": {
+    "pageTitle": "Get In Touch",
+    "pageTagline": "Let's build something amazing together",
+    "intro": "I'm always interested in new opportunities, challenging projects, and meaningful collaborations. Whether you have a question, want to discuss a potential project, or just want to connect, I'd love to hear from you.",
+    "methods": [
+      {
+        "icon": "✉️",
+        "title": "Email",
+        "value": "tianpretorius@gmail.com",
+        "link": "mailto:tianpretorius@gmail.com"
+      },
+      {
+        "icon": "💼",
+        "title": "LinkedIn",
+        "value": "Connect with me professionally",
+        "link": "https://www.linkedin.com/in/tian-pretorius-817a2189/"
+      },
+      {
+        "icon": "💻",
+        "title": "GitHub",
+        "value": "Check out my code",
+        "link": "https://github.com/tian102"
+      }
+    ]
+  },
+  
+  "footer": {
+    "copyright": "© 2025 Tian Pretorius. All rights reserved.",
+    "builtWith": "Built with vanilla HTML, CSS, and JavaScript.",
+    "links": [
+      {
+        "text": "GitHub",
+        "url": "https://github.com/tian102"
+      },
+      {
+        "text": "LinkedIn",
+        "url": "https://www.linkedin.com/in/tian-pretorius-817a2189/"
+      },
+      {
+        "text": "Email",
+        "url": "mailto:tianpretorius@gmail.com"
+      }
+    ]
+  }
+}

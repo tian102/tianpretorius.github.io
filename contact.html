@@ -35,8 +35,8 @@
     <!-- Contact Header -->
     <section class="page-header">
         <div class="container">
-            <h1>Get In Touch</h1>
-            <p class="page-tagline">Let's build something amazing together</p>
+            <h1 id="contact-page-title">Get In Touch</h1>
+            <p class="page-tagline" id="contact-page-tagline">Let's build something amazing together</p>
         </div>
     </section>
 
@@ -44,33 +44,13 @@
     <section class="section">
         <div class="container">
             <div class="contact-content">
-                <p>
+                <p id="contact-intro">
                     I'm always interested in new opportunities, challenging projects, and meaningful 
                     collaborations. Whether you have a question, want to discuss a potential project, 
                     or just want to connect, I'd love to hear from you.
                 </p>
-                <div class="contact-methods">
-                    <a href="mailto:tianpretorius@gmail.com" class="contact-method">
-                        <div class="contact-icon">✉️</div>
-                        <div class="contact-info">
-                            <h4>Email</h4>
-                            <p>tianpretorius@gmail.com</p>
-                        </div>
-                    </a>
-                    <a href="https://www.linkedin.com/in/tian-pretorius-817a2189/" target="_blank" rel="noopener noreferrer" class="contact-method">
-                        <div class="contact-icon">💼</div>
-                        <div class="contact-info">
-                            <h4>LinkedIn</h4>
-                            <p>Connect with me professionally</p>
-                        </div>
-                    </a>
-                    <a href="https://github.com/tianpretorius" target="_blank" rel="noopener noreferrer" class="contact-method">
-                        <div class="contact-icon">💻</div>
-                        <div class="contact-info">
-                            <h4>GitHub</h4>
-                            <p>Check out my code</p>
-                        </div>
-                    </a>
+                <div class="contact-methods" id="contact-methods-container">
+                    <!-- Contact methods will be loaded dynamically -->
                 </div>
             </div>
         </div>
@@ -78,20 +58,31 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-left">
-                    <p>&copy; 2025 Tian Pretorius. All rights reserved.</p>
-                </div>
-                <div class="footer-right">
-                    <a href="mailto:tianpretorius@gmail.com">Email</a>
-                    <a href="https://www.linkedin.com/in/tian-pretorius-817a2189/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                    <a href="https://github.com/tianpretorius" target="_blank" rel="noopener noreferrer">GitHub</a>
-                </div>
-            </div>
+        <div class="container" id="footer-container">
+            <!-- Footer will be loaded dynamically -->
         </div>
     </footer>
 
+    <script src="js/content-loader.js"></script>
+    <script>
+        // Load and populate contact page content
+        document.addEventListener('DOMContentLoaded', async function() {
+            await ContentLoader.load();
+            
+            // Populate page header
+            ContentLoader.populate('contact-page-title', 'contact.pageTitle');
+            ContentLoader.populate('contact-page-tagline', 'contact.pageTagline');
+            
+            // Populate intro text
+            ContentLoader.populate('contact-intro', 'contact.intro');
+            
+            // Render contact methods
+            ContentLoader.renderContactMethods('contact-methods-container');
+            
+            // Render footer
+            ContentLoader.renderFooter('footer-container');
+        });
+    </script>
     <script src="js/main.js"></script>
 </body>
 </html>

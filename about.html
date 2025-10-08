@@ -35,8 +35,8 @@
     <!-- About Header -->
     <section class="page-header">
         <div class="container">
-            <h1>About Me</h1>
-            <p class="page-tagline">CTO & Software Engineer building scalable systems and solving complex problems</p>
+            <h1 id="about-page-title">About Me</h1>
+            <p class="page-tagline" id="about-page-tagline">CTO & Software Engineer building scalable systems and solving complex problems</p>
         </div>
     </section>
 
@@ -44,69 +44,28 @@
     <section class="section">
         <div class="container">
             <div class="about-grid">
-                <div class="about-main">
-                    <div class="about-section">
-                        <h2>Who I Am</h2>
-                        <p>I'm Tian Pretorius, a CTO and software engineer with over 6 years of experience building scalable systems and leading technical teams. Currently, I'm on a journey from unemployed to solo SaaS founder, documenting every step along the way.</p>
-                        <p>My expertise spans full-stack development, system architecture, and technical leadership. I've built systems that scale to millions of users and led teams in delivering complex technical projects.</p>
-                    </div>
-
-                    <div class="about-section">
-                        <h2>What I Do</h2>
-                        <p>I specialize in building robust, scalable web applications and architecting systems that can handle growth. My focus is on:</p>
-                        <ul class="about-list">
-                            <li>Full-stack web development (React, Node.js, TypeScript)</li>
-                            <li>System architecture and scalability</li>
-                            <li>Technical leadership and team building</li>
-                            <li>DevOps and cloud infrastructure (AWS, Docker)</li>
-                            <li>Building SaaS products from scratch</li>
-                        </ul>
-                    </div>
-
-                    <div class="about-section">
-                        <h2>My Journey</h2>
-                        <p>After spending years building systems for others, I decided to build something of my own. I'm currently documenting my journey as a solo founder building a SaaS product, sharing both the technical and business lessons I learn along the way.</p>
-                        <p>Follow my blog to see how I approach technical challenges, make architectural decisions, and navigate the path from idea to product.</p>
-                    </div>
-
-                    <div class="about-section">
-                        <a href="assets/Tian-Pretorius-CV.pdf" target="_blank" class="btn btn-primary">Download my Resume</a>
-                    </div>
+                <div class="about-main" id="about-sections-container">
+                    <!-- About sections will be loaded dynamically -->
                 </div>
 
                 <aside class="about-sidebar">
                     <div class="sidebar-card">
-                        <h3>Skills & Technologies</h3>
-                        <div class="skills-list">
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">TypeScript</span>
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Node.js</span>
-                            <span class="tech-tag">Express</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                            <span class="tech-tag">Redis</span>
-                            <span class="tech-tag">MongoDB</span>
-                            <span class="tech-tag">AWS</span>
-                            <span class="tech-tag">Docker</span>
-                            <span class="tech-tag">Git</span>
-                            <span class="tech-tag">REST APIs</span>
-                            <span class="tech-tag">GraphQL</span>
-                            <span class="tech-tag">CI/CD</span>
+                        <h3 id="skills-title">Skills & Technologies</h3>
+                        <div class="skills-list" id="skills-container">
+                            <!-- Skills will be loaded dynamically -->
                         </div>
                     </div>
 
                     <div class="sidebar-card">
-                        <h3>Experience</h3>
-                        <div class="experience-item">
-                            <h4>CTO & Software Engineer</h4>
-                            <p class="experience-duration">6+ years</p>
-                            <p class="experience-desc">Led technical teams and built scalable systems serving millions of users</p>
+                        <h3 id="experience-title">Experience</h3>
+                        <div id="experience-container">
+                            <!-- Experience will be loaded dynamically -->
                         </div>
                     </div>
 
                     <div class="sidebar-card">
-                        <h3>Current Focus</h3>
-                        <p>Building a SaaS product as a solo founder and documenting the entire journey</p>
+                        <h3 id="current-focus-title">Current Focus</h3>
+                        <p id="current-focus-text">Building a SaaS product as a solo founder and documenting the entire journey</p>
                     </div>
                 </aside>
             </div>
@@ -115,20 +74,38 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-left">
-                    <p>&copy; 2025 Tian Pretorius. All rights reserved.</p>
-                </div>
-                <div class="footer-right">
-                    <a href="mailto:tianpretorius@gmail.com">Email</a>
-                    <a href="https://www.linkedin.com/in/tian-pretorius-817a2189/" target="_blank">LinkedIn</a>
-                    <a href="https://github.com/tianpretorius" target="_blank">GitHub</a>
-                </div>
-            </div>
+        <div class="container" id="footer-container">
+            <!-- Footer will be loaded dynamically -->
         </div>
     </footer>
 
+    <script src="js/content-loader.js"></script>
+    <script>
+        // Load and populate about page content
+        document.addEventListener('DOMContentLoaded', async function() {
+            await ContentLoader.load();
+            
+            // Populate page header
+            ContentLoader.populate('about-page-title', 'about.pageTitle');
+            ContentLoader.populate('about-page-tagline', 'about.pageTagline');
+            
+            // Render about sections
+            ContentLoader.renderAboutSections('about-sections-container');
+            
+            // Populate sidebar titles
+            ContentLoader.populate('skills-title', 'about.sidebar.skills.title');
+            ContentLoader.populate('experience-title', 'about.sidebar.experience.title');
+            ContentLoader.populate('current-focus-title', 'about.sidebar.currentFocus.title');
+            ContentLoader.populate('current-focus-text', 'about.sidebar.currentFocus.text');
+            
+            // Render skills and experience
+            ContentLoader.renderSkills('skills-container');
+            ContentLoader.renderExperience('experience-container');
+            
+            // Render footer
+            ContentLoader.renderFooter('footer-container');
+        });
+    </script>
     <script src="js/main.js"></script>
 </body>
 </html>

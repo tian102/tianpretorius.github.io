@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Tian Pretorius</title>
-    <link rel="stylesheet" href="css/style.css?v=10">
+    <link rel="stylesheet" href="css/style.css?v=20251008">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -32,8 +32,8 @@
     <!-- Projects Header -->
     <section class="page-header" id="projects-header">
         <div class="container">
-            <h1>My Projects</h1>
-            <p class="page-tagline">A showcase of my work, from side projects to professional applications. Each project represents a unique challenge and learning experience.</p>
+            <h1 id="projects-page-title">My Projects</h1>
+            <p class="page-tagline" id="projects-page-tagline">A showcase of my work, from side projects to professional applications. Each project represents a unique challenge and learning experience.</p>
         </div>
     </section>
 
@@ -64,22 +64,50 @@
             </div>
         </div>
     </section>
-    <footer class='footer'>
-        <div class='container'>
-            <div class='footer-content'>
-                <div class='footer-left'>
-                    <p>&copy; 2025 Tian Pretorius. Built with vanilla HTML, CSS, and JavaScript.</p>
+
+    <!-- Pagination Controls -->
+    <section class="pagination-section" id="pagination-section">
+        <div class="container">
+            <div class="pagination-controls">
+                <div class="pagination-info">
+                    <span id="pagination-info-text">Showing 1-4 of 4 projects</span>
+                    <div class="items-per-page">
+                        <label for="items-per-page">Projects per page:</label>
+                        <select id="items-per-page" class="filter-select">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
                 </div>
-                <div class='footer-right'>
-                    <a href='https://github.com/tianpretorius' target='_blank' rel='noopener noreferrer'>GitHub</a>
-                    <a href='https://www.linkedin.com/in/tian-pretorius-817a2189/' target='_blank' rel='noopener noreferrer'>LinkedIn</a>
-                    <a href='mailto:tianpretorius@gmail.com'>Email</a>
+                <div class="pagination-buttons" id="pagination-buttons">
+                    <!-- Pagination buttons will be generated here -->
                 </div>
             </div>
         </div>
+    </section>
+
+    <footer class='footer'>
+        <div class='container' id="footer-container">
+            <!-- Footer will be loaded dynamically -->
+        </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/marked@11.1.0/marked.min.js"></script>
-    <script src='js/main.js?v=9'></script>
-    <script src='js/projects.js?v=9'></script>
+    <script src="js/content-loader.js"></script>
+    <script>
+        // Load and populate projects page content
+        document.addEventListener('DOMContentLoaded', async function() {
+            await ContentLoader.load();
+            
+            // Populate page header
+            ContentLoader.populate('projects-page-title', 'projects.pageTitle');
+            ContentLoader.populate('projects-page-tagline', 'projects.pageTagline');
+            
+            // Render footer
+            ContentLoader.renderFooter('footer-container');
+        });
+    </script>
+    <script src='js/main.js?v=20251008'></script>
+    <script src='js/projects.js?v=20251008'></script>
 </body>
 </html>

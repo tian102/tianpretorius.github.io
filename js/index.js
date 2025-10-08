@@ -1,5 +1,31 @@
 // Homepage functionality - Load featured projects and latest blog posts
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
+    // Load site content first
+    await ContentLoader.load();
+    
+    // Populate hero section
+    ContentLoader.populateMultiple({
+        'hero-greeting': 'hero.greeting',
+        'hero-name': 'hero.name',
+        'hero-description': 'hero.description',
+        'hero-cta-primary': { path: 'hero.cta.primary', options: { html: false } },
+        'hero-cta-secondary': { path: 'hero.cta.secondary', options: { html: false } }
+    });
+    
+    // Initialize hero typed text animation
+    ContentLoader.initHeroTypedText();
+    
+    // Populate blog section subtitle
+    ContentLoader.populate('blog-section-subtitle', 'blog.sectionTitle');
+    
+    // Populate contact preview
+    ContentLoader.populate('contact-preview-title', 'contact.pageTitle');
+    ContentLoader.populate('contact-preview-intro', 'contact.intro');
+    
+    // Render footer
+    ContentLoader.renderFooter('footer-container');
+    
+    // Load dynamic content
     loadFeaturedProjects();
     loadLatestBlogPosts();
 });
@@ -95,17 +121,21 @@ async function loadLatestBlogPosts() {
         
         blogGrid.innerHTML = latestPosts.map(post => `
             <article class="blog-card" onclick="window.location.href='blog.html?post=${post.slug}'">
-                <div class="blog-meta">
-                    <span class="blog-date">${formatDate(post.date)}</span>
-                    <span>•</span>
-                    <span class="blog-read-time">${post.readTime}</span>
+                <div class="blog-image">
+                    <img src="${post.image || 'https://via.placeholder.com/400x250/1a1a1a/00ff88?text=' + encodeURIComponent(post.title)}" alt="${post.title}">
                 </div>
-                <h3 class="blog-title">${post.title}</h3>
-                <p class="blog-excerpt">${post.excerpt}</p>
-                <div class="blog-tags">
-                    ${post.tags.slice(0, 3).map(tag => `<span class="blog-tag">${tag}</span>`).join('')}
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-date">${formatDate(post.date)}</span>
+                        <span>•</span>
+                        <span class="blog-read-time">${post.readTime}</span>
+                    </div>
+                    <h3 class="blog-title">${post.title}</h3>
+                    <p class="blog-excerpt">${post.excerpt}</p>
+                    <div class="blog-tags">
+                        ${post.tags.slice(0, 4).map(tag => `<span class="blog-tag">${tag}</span>`).join('')}
+                    </div>
                 </div>
-                <span class="blog-read-more">Read More →</span>
             </article>
         `).join('');
         

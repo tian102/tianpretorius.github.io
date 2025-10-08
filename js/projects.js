@@ -1,6 +1,9 @@
 // Projects functionality - Load and display projects from JSON
 const projectsData = [];
 let allProjects = [];
+let currentPage = 1;
+let itemsPerPage = 10;
+let filteredProjects = [];
 
 // Function to convert markdown to HTML using marked.js
 function parseMarkdown(markdown) {
@@ -34,8 +37,10 @@ async function loadProjects() {
         
         projectsData.push(...projects);
         allProjects = [...projectsData];
-        displayProjects(allProjects);
+        filteredProjects = [...allProjects];
+        displayProjects();
         setupFilters();
+        setupPagination();
     } catch (error) {
         console.error('Error loading projects:', error);
         const projectsList = document.getElementById('projects-list');
@@ -46,16 +51,24 @@ async function loadProjects() {
 }
 
 // Display projects as cards
-function displayProjects(projects) {
+function displayProjects() {
     const projectsList = document.getElementById('projects-list');
     if (!projectsList) return;
     
-    if (projects.length === 0) {
+    const totalProjects = filteredProjects.length;
+    
+    if (totalProjects === 0) {
         projectsList.innerHTML = '<p class="no-results">No projects found matching your criteria.</p>';
+        updatePagination(0, 0, 0);
         return;
     }
     
-    projectsList.innerHTML = projects.map(project => `
+    // Calculate pagination
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = Math.min(startIndex + itemsPerPage, totalProjects);
+    const paginatedProjects = filteredProjects.slice(startIndex, endIndex);
+    
+    projectsList.innerHTML = paginatedProjects.map(project => `
         <article class="project-card" data-slug="${project.slug}">
             ${project.image ? `<div class="project-image">
                 <img src="${project.image}" alt="${project.title}" loading="lazy">
@@ -105,6 +118,9 @@ function displayProjects(projects) {
             filterByTag(tagName);
         });
     });
+    
+    // Update pagination
+    updatePagination(totalProjects, startIndex, endIndex);
 }
 
 // Show individual project detail
@@ -122,6 +138,9 @@ function showProjectDetail(slug) {
     projectsHeader?.classList.add('hidden');
     projectsFilters?.classList.add('hidden');
     projectDetail?.classList.remove('hidden');
+    
+    // Hide pagination when viewing individual project
+    hidePagination();
     
     // Render project detail
     const html = parseMarkdown(project.content);
@@ -179,6 +198,12 @@ function hideProjectDetail() {
     projectsHeader?.classList.remove('hidden');
     projectsFilters?.classList.remove('hidden');
     
+    // Show pagination when viewing project list
+    const paginationSection = document.getElementById('pagination-section');
+    if (paginationSection) {
+        paginationSection.style.display = 'block';
+    }
+    
     // Update URL
     window.history.pushState({}, '', 'projects.html');
     window.scrollTo(0, 0);
@@ -207,7 +232,9 @@ function setupFilters() {
                 
                 const tag = btn.getAttribute('data-tag');
                 if (tag === 'all') {
-                    displayProjects(allProjects);
+                    filteredProjects = [...allProjects];
+                    currentPage = 1;
+                    displayProjects();
                 } else {
                     filterByTag(tag);
                 }
@@ -220,20 +247,22 @@ function setupFilters() {
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase();
-            const filtered = allProjects.filter(project => 
+            filteredProjects = allProjects.filter(project => 
                 project.title.toLowerCase().includes(query) ||
                 project.description.toLowerCase().includes(query) ||
                 project.tags.some(tag => tag.toLowerCase().includes(query))
             );
-            displayProjects(filtered);
+            currentPage = 1; // Reset to first page
+            displayProjects();
         });
     }
 }
 
 // Filter projects by tag
 function filterByTag(tag) {
-    const filtered = allProjects.filter(project => project.tags.includes(tag));
-    displayProjects(filtered);
+    filteredProjects = allProjects.filter(project => project.tags.includes(tag));
+    currentPage = 1; // Reset to first page
+    displayProjects();
     
     // Update active filter button
     const filterTags = document.getElementById('filter-tags');
@@ -244,6 +273,97 @@ function filterByTag(tag) {
                 btn.classList.add('active');
             }
         });
+    }
+}
+
+// Setup pagination
+function setupPagination() {
+    const itemsPerPageSelect = document.getElementById('items-per-page');
+    if (itemsPerPageSelect) {
+        itemsPerPageSelect.addEventListener('change', (e) => {
+            itemsPerPage = parseInt(e.target.value);
+            currentPage = 1;
+            displayProjects();
+        });
+    }
+}
+
+// Update pagination controls
+function updatePagination(totalProjects, startIndex, endIndex) {
+    const paginationSection = document.getElementById('pagination-section');
+    const paginationButtons = document.getElementById('pagination-buttons');
+    const paginationInfoText = document.getElementById('pagination-info-text');
+    
+    if (!paginationSection || totalProjects === 0) {
+        if (paginationSection) paginationSection.style.display = 'none';
+        return;
+    }
+    
+    // Show pagination section
+    paginationSection.style.display = 'block';
+    
+    // Update info text
+    const actualEndIndex = Math.min(endIndex, totalProjects);
+    paginationInfoText.textContent = `Showing ${startIndex + 1}-${actualEndIndex} of ${totalProjects} projects`;
+    
+    // Calculate total pages
+    const totalPages = Math.ceil(totalProjects / itemsPerPage);
+    
+    // Generate pagination buttons
+    let buttonsHTML = '';
+    
+    // Previous button
+    buttonsHTML += `
+        <button class="pagination-btn ${currentPage === 1 ? 'disabled' : ''}" 
+                ${currentPage === 1 ? 'disabled' : ''} 
+                onclick="changePage(${currentPage - 1})">
+            Previous
+        </button>
+    `;
+    
+    // Page numbers
+    for (let i = 1; i <= totalPages; i++) {
+        if (
+            i === 1 ||
+            i === totalPages ||
+            (i >= currentPage - 1 && i <= currentPage + 1)
+        ) {
+            buttonsHTML += `
+                <button class="pagination-btn ${i === currentPage ? 'active' : ''}" 
+                        onclick="changePage(${i})">
+                    ${i}
+                </button>
+            `;
+        } else if (i === currentPage - 2 || i === currentPage + 2) {
+            buttonsHTML += '<span class="pagination-ellipsis">...</span>';
+        }
+    }
+    
+    // Next button
+    buttonsHTML += `
+        <button class="pagination-btn ${currentPage === totalPages ? 'disabled' : ''}" 
+                ${currentPage === totalPages ? 'disabled' : ''} 
+                onclick="changePage(${currentPage + 1})">
+            Next
+        </button>
+    `;
+    
+    paginationButtons.innerHTML = buttonsHTML;
+}
+
+// Change page
+function changePage(page) {
+    currentPage = page;
+    displayProjects();
+    // Scroll to top of projects list
+    document.getElementById('projects-list').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Hide pagination
+function hidePagination() {
+    const paginationSection = document.getElementById('pagination-section');
+    if (paginationSection) {
+        paginationSection.style.display = 'none';
     }
 }
 
