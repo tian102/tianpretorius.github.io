@@ -9,8 +9,6 @@ coverImage: https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&
 
 # Building This Portfolio - A Labor of Love and Necessity
 
-![Cover Image](./cover.jpg)
-
 I'll be honest—this portfolio came out of necessity. But it also came from something deeper: the need to build, to create, to feel productive when everything else felt uncertain.
 
 The past few months have been... well, let's just say they haven't been what I expected. After being unemployed for longer than I'd care to admit, I found myself in a strange limbo. No job offers coming through, no daily routine, no sense of forward momentum. It's easy to feel a bit dejected when you're in that space.

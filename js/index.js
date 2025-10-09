@@ -87,6 +87,14 @@ async function loadFeaturedProjects() {
         const projects = await response.json();
         console.log(`Loaded ${projects.length} projects for homepage`);
         
+        // Calculate read time for each project
+        projects.forEach(project => {
+            const wordsPerMinute = 200;
+            const wordCount = project.content.split(/\s+/).length;
+            const readTime = Math.ceil(wordCount / wordsPerMinute);
+            project.readTime = `${readTime} min read`;
+        });
+        
         // Display up to 3 projects
         const featuredProjects = projects.slice(0, 3);
         
@@ -117,6 +125,11 @@ async function loadFeaturedProjects() {
                     <img src="${project.image || 'https://via.placeholder.com/400x250/1a1a1a/00ff88?text=' + encodeURIComponent(project.title)}" alt="${project.title}">
                 </div>
                 <div class="project-content">
+                    <div class="blog-meta">
+                        <span class="blog-date">${formatDate(project.date)}</span>
+                        <span>•</span>
+                        <span class="blog-read-time">${project.readTime}</span>
+                    </div>
                     <h3 class="project-title">${project.title}</h3>
                     <p class="project-description">${project.description}</p>
                     <div class="project-tech">

@@ -171,7 +171,7 @@ That's basically what I did here. Jekyll would have been the 2-minute solution. 
 
 But here's the thing: I don't regret it. Those 10 hours taught me things I wouldn't have learned otherwise. And now I have a portfolio that's uniquely mine.
 
-## 🚀 Future Improvements
+## Future Improvements
 
 - **Search Functionality**: Add client-side search across blog posts and projects
 - **Tag Filtering**: Filter content by technology tags

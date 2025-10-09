@@ -4,7 +4,7 @@ date: 2025-10-08
 tags: engineering, food-fortification, systems, public-health, career
 author: Tian Pretorius
 tldr: How I went from computer engineering to architecting systems for nutritional health, learning that meaningful engineering work can happen outside traditional tech—and that impact can be as simple as blending the right nutrients into maize meal.
-coverImage: https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&h=630&fit=crop
+coverImage: cover.jpg
 ---
 
 # My Time in the Food Fortification Industry
@@ -12,6 +12,8 @@ coverImage: https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&
 Most people think of engineering as circuits, code, or software—but for me, it became about vitamins, minerals, and ensuring that a child's porridge could actually improve their health. My time in the food fortification industry was where technology met nutrition, and where engineering met public health.
 
 It wasn't the path I expected to take. But looking back, it taught me more about systems thinking, operational efficiency, and the real-world impact of good engineering than any traditional tech role could have.
+
+![Cover Image](./cover.jpg)
 
 ## Getting into the Industry
 

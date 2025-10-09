@@ -56,6 +56,27 @@ function parseMarkdownWithImages(markdown, projectPath) {
     return html;
 }
 
+// Format date helper
+function formatDate(dateString) {
+    if (!dateString) return 'No date';
+    
+    try {
+        const date = new Date(dateString);
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        return date.toLocaleDateString('en-US', options);
+    } catch (error) {
+        return dateString;
+    }
+}
+
+// Calculate read time
+function calculateReadTime(content) {
+    const wordsPerMinute = 200;
+    const wordCount = content.trim().split(/\s+/).length;
+    const readTime = Math.ceil(wordCount / wordsPerMinute);
+    return `${readTime} min read`;
+}
+
 // Load all projects from JSON
 async function loadProjects() {
     console.log('Loading projects from JSON...');
@@ -68,6 +89,14 @@ async function loadProjects() {
         
         const projects = await response.json();
         console.log(`Loaded ${projects.length} projects from JSON`);
+        
+        // Calculate read time for each project
+        projects.forEach(project => {
+            const wordsPerMinute = 200;
+            const wordCount = project.content.split(/\s+/).length;
+            const readTime = Math.ceil(wordCount / wordsPerMinute);
+            project.readTime = `${readTime} min read`;
+        });
         
         projectsData.push(...projects);
         allProjects = [...projectsData];
@@ -125,6 +154,11 @@ function displayProjects() {
                 </div>
             </div>` : ''}
             <div class="project-content">
+                <div class="blog-meta">
+                    <span class="blog-date">${formatDate(project.date)}</span>
+                    <span>•</span>
+                    <span class="blog-read-time">${project.readTime}</span>
+                </div>
                 <h3 class="project-title">${project.title}</h3>
                 <p class="project-description">${project.description}</p>
                 <div class="project-tags">
@@ -201,6 +235,11 @@ function showProjectDetail(slug) {
                         Back to Projects
                     </button>
                     <h1>${project.title}</h1>
+                    <div class="blog-post-meta">
+                        <span class="blog-date">${new Date(project.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                        <span>•</span>
+                        <span class="blog-read-time">${project.readTime || calculateReadTime(project.content)}</span>
+                    </div>
                     <p class="project-detail-description">${project.description}</p>
                     <div class="project-detail-meta">
                         <div class="project-tags">

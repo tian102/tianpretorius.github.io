@@ -9,9 +9,7 @@ coverImage: cover.jpg
 
 # Building Vision from Light: My Journey in Particle Detection R&D
 
-![Cover Image](./cover.jpg)
-
-When I first joined the research team, I didn't expect my work to involve sugar. I was a computer and electronics engineer — my world was circuits, sensors, and algorithms — not microscopes and particle samples. But the challenge that landed on my desk was too fascinating to ignore:
+When I first joined the research team, I didn't expect my work to involve sugar. I was a computer and electronics engineer — my world was circuits, software, sensors, and algorithms — not microscopes and particle samples. But the challenge that landed on my desk was too fascinating to ignore:
 
 **Could we build a system that could see something invisible?**
 
@@ -19,23 +17,25 @@ Specifically, could we use cameras and light to detect Vitamin A particles in fo
 
 That was the beginning of a long, winding journey — part science experiment, part engineering adventure — that taught me more about problem-solving, persistence, and physics than any project before it.
 
+![Cover Image](./cover.jpg)
+
 ---
 
 ## The Challenge: Seeing What Isn't There
 
-The premise was simple enough: fortified foods contain tiny Vitamin A compounds, suspended in a uniform mixture. In theory, under specific conditions you can induce a certain level of energy via light that gets trapped between the double helix bonds of vitamin particles. This trapped light manifests as fluorescence — in essence, fluorescence is just trapped light. If a camera could capture that fluorescence and analyze it correctly, we could detect and even quantify (with very technical statistical models) the Vitamin A concentration — instantly, and without a laboratory.
+The premise was simple: Fortified foods contain tiny Vitamin A compounds, suspended in a uniform mixture. In theory, under specific wavelengths, you can excite these compounds with light, causing them to re-emit energy as fluorescence from their conjugated double bonds. A camera could capture that glow and analyze it to detect—and even quantify, using advanced statistical models—the Vitamin A concentration. Instantly. Without a laboratory.
 
 But theory is the easy part.
 
-In practice, we were trying to extract meaningful data from noise, light scatter, and materials that were anything but consistent. It was a perfect storm for an engineer — a problem that sat right between software, optics, and human nutrition.
+In practice, we were trying to extract meaningful data from noise, light scatter, and materials that were anything but consistent. It was a perfect storm — a problem that sat right between software, optics, and human nutrition.
 
-My task was to make the software brain that tied it all together.
+My task: Make the software brain that tied it all together.
 
 ---
 
 ## Stage 1: Building Vision from Light
 
-The first hurdle was **calibration**. When you're trying to identify faint fluorescent signals, lighting becomes everything. A single flicker, a slight color imbalance, or even ambient light from the room could throw off the entire reading.
+The first hurdle was **calibration**. When identifying faint fluorescent signals, lighting becomes everything. A single flicker, a slight color imbalance, or even ambient room light could throw off the entire reading.
 
 I designed a dynamic calibration module to stabilize the imaging process. It handled:
 
