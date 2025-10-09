@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Behind the Scenes - Tian Pretorius</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="css/style.css?v=20251009-51">
+    <link rel="stylesheet" href="css/blog.css?v=20251009-58">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="content-loading dev-page">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html" class="brand-link">
+                    <span class="brand-name">Tian Pretorius</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="assets/Tian-Pretorius-CV.pdf" class="nav-link resume-link" download>Resume</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dev Docs Header -->
+    <section class="page-header" id="dev-header">
+        <div class="container">
+            <h1 id="dev-page-title">Behind the Scenes</h1>
+            <p class="page-tagline" id="dev-page-tagline">Documentation and technical details about how this portfolio website works.</p>
+        </div>
+    </section>
+
+    <!-- Dev Docs Filters -->
+    <section class="projects-filters" id="dev-filters">
+        <div class="container">
+            <div class="filters-row">
+                <div>
+                    <div class="search-box">
+                        <input type="text" id="dev-search" placeholder="Search documentation...">
+                    </div>
+                    <div class="sort-box">
+                        <label for="dev-sort">Sort by:</label>
+                        <select id="dev-sort" class="filter-select">
+                            <option value="title-asc">Title A-Z</option>
+                            <option value="title-desc">Title Z-A</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dev Docs List -->
+    <section class="section">
+        <div class="container">
+            <div class="projects-grid" id="dev-list">
+                <!-- Dev docs will be dynamically loaded here -->
+            </div>
+
+            <!-- Dev Doc Detail View (hidden by default) -->
+            <div id="dev-detail" class="hidden">
+                <!-- Dev doc detail content will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Pagination Controls -->
+    <section class="pagination-section" id="dev-pagination-section">
+        <div class="container">
+            <div class="pagination-controls">
+                <div class="pagination-info">
+                    <span id="dev-pagination-info-text">Showing 1-4 of 4 docs</span>
+                    <div class="items-per-page">
+                        <label for="dev-items-per-page">Docs per page:</label>
+                        <select id="dev-items-per-page" class="filter-select">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="pagination-buttons" id="dev-pagination-buttons">
+                    <!-- Pagination buttons will be generated here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class='footer'>
+        <div class='container' id="footer-container">
+            <!-- Footer will be loaded dynamically -->
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.0/marked.min.js"></script>
+    <script src="js/content-loader.js?v=20251009-60"></script>
+    <script>
+        // Load and populate dev page content
+        document.addEventListener('DOMContentLoaded', async function() {
+            await ContentLoader.load();
+
+            // Populate page header
+            ContentLoader.populate('dev-page-title', 'dev.pageTitle');
+            ContentLoader.populate('dev-page-tagline', 'dev.pageTagline');
+
+            // Render footer
+            ContentLoader.renderFooter('footer-container');
+
+            // Show content
+            ContentLoader.showContent();
+        });
+    </script>
+    <script src='js/main.js?v=20251008-6'></script>
+    <script src='js/dev.js?v=20251009-60'></script>
+</body>
+</html>

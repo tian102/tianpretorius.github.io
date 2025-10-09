@@ -2397,6 +2397,46 @@ body.home .contact-preview > .container {
     width: 100%;
 }
 
+/* Footer flip animation */
+.footer-left {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.footer-left-flip {
+    position: relative;
+    transition: transform var(--transition-base);
+}
+
+.footer-left-front,
+.footer-left-back {
+    transition: opacity var(--transition-base);
+    width: 100%;
+}
+
+.footer-left-front {
+    opacity: 1;
+}
+
+.footer-left-back {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.footer-left:hover .footer-left-front {
+    opacity: 0;
+}
+
+.footer-left:hover .footer-left-back {
+    opacity: 1;
+}
+
 /* ==========================================
    Pagination Styles
    ========================================== */

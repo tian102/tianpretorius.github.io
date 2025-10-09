@@ -393,7 +393,14 @@
         const html = `
             <div class="footer-content">
                 <div class="footer-left">
-                    <p>${footer.copyright}</p>
+                    <div class="footer-left-flip">
+                        <div class="footer-left-front">
+                            <p>${footer.copyright}</p>
+                        </div>
+                        <div class="footer-left-back">
+                            <a href="dev.html">Behind the Scenes</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="footer-right">
                     ${footer.links.map(link => 

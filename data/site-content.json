@@ -147,6 +147,11 @@
     "viewAllText": "View All Posts →"
   },
   
+  "dev": {
+    "pageTitle": "Behind the Scenes",
+    "pageTagline": "Documentation and technical details about how this portfolio website works."
+  },
+  
   "contact": {
     "pageTitle": "Get in Touch",
     "pageTagline": "Whether you have a project in mind, want to discuss opportunities, or just want to connect, I'd love to hear from you. Choose your preferred way to reach out:",

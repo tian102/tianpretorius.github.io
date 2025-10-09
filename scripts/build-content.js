@@ -184,6 +184,60 @@ fs.writeFileSync(
 );
 console.log(`✓ Built ${projects.length} projects`);
 
+// Build dev docs
+console.log('\nBuilding dev docs...');
+const devDocsDir = path.join(__dirname, '../DevDocs');
+const devDocs = [];
+
+const devFiles = fs.readdirSync(devDocsDir, { withFileTypes: true })
+    .filter(dirent => dirent.isFile() && dirent.name.endsWith('.md'))
+    .map(dirent => dirent.name);
+console.log(`Found ${devFiles.length} dev doc files in DevDocs`);
+
+devFiles.forEach(filename => {
+    const filePath = path.join(devDocsDir, filename);
+    const slug = filename.replace('.md', '');
+    
+    console.log(`  Processing dev doc: ${filename}`);
+    const content = fs.readFileSync(filePath, 'utf8');
+    
+    // Extract title from first line (assuming it's a H1)
+    const lines = content.trim().split('\n');
+    let title = slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()); // Default title from filename
+    if (lines[0] && lines[0].startsWith('# ')) {
+        title = lines[0].substring(2).trim();
+    }
+    
+    // Extract excerpt from content (skip title, get first paragraph)
+    let excerpt = '';
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (line && !line.startsWith('#')) {
+            excerpt = line.substring(0, 200);
+            if (excerpt.length === 200) excerpt += '...';
+            break;
+        }
+    }
+    
+    devDocs.push({
+        slug,
+        title,
+        content,
+        excerpt: excerpt || content.substring(0, 200) + '...',
+        filename
+    });
+});
+
+// Sort dev docs alphabetically by title
+devDocs.sort((a, b) => a.title.localeCompare(b.title));
+
+fs.writeFileSync(
+    path.join(dataDir, 'dev-docs.json'),
+    JSON.stringify(devDocs, null, 2)
+);
+console.log(`✓ Built ${devDocs.length} dev docs`);
+
 console.log('\n✅ Build complete!');
 console.log(`   - data/blog-posts.json (${blogPosts.length} posts)`);
 console.log(`   - data/projects.json (${projects.length} projects)`);
+console.log(`   - data/dev-docs.json (${devDocs.length} docs)`);
