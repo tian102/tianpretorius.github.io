@@ -1,6 +1,6 @@
 ---
-title: Building This Portfolio - A Labor of Love and Necessity
-date: 2024-10-09
+title: 3. Building This Portfolio - A Labor of Love and Necessity
+date: 2025-10-09
 tags: personal, career, web-development
 author: Tian Pretorius
 tldr: How building this portfolio gave me purpose during unemployment, taught me the value of constraint-driven design, and reminded me why I love creating things.
@@ -8,6 +8,8 @@ coverImage: https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&
 ---
 
 # Building This Portfolio - A Labor of Love and Necessity
+
+![Cover Image](./cover.jpg)
 
 I'll be honest—this portfolio came out of necessity. But it also came from something deeper: the need to build, to create, to feel productive when everything else felt uncertain.
 

@@ -1,6 +1,6 @@
 ---
-title: My Time in the Food Fortification Industry
-date: 2024-11-15
+title: 2. My Time in the Food Fortification Industry
+date: 2025-10-08
 tags: engineering, food-fortification, systems, public-health, career
 author: Tian Pretorius
 tldr: How I went from computer engineering to architecting systems for nutritional health, learning that meaningful engineering work can happen outside traditional tech—and that impact can be as simple as blending the right nutrients into maize meal.

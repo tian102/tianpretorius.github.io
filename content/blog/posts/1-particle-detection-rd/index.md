@@ -1,13 +1,15 @@
 ---
-title: Building Vision from Light: My Journey in Particle Detection R&D
-date: 2024-09-20
+title: 1. Building Vision from Light: My Journey in Particle Detection R&D
+date: 2025-10-07
 tags: [computer-vision, research, optics, image-processing, engineering]
 author: Tian Pretorius
 tldr: How I built a computer vision system to detect microscopic Vitamin A particles using fluorescence imaging—and what I learned when physics pushed back against the solution.
-coverImage: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=1200&h=630&fit=crop"
+coverImage: cover.jpg
 ---
 
 # Building Vision from Light: My Journey in Particle Detection R&D
+
+![Cover Image](./cover.jpg)
 
 When I first joined the research team, I didn't expect my work to involve sugar. I was a computer and electronics engineer — my world was circuits, sensors, and algorithms — not microscopes and particle samples. But the challenge that landed on my desk was too fascinating to ignore:
 
