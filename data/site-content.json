@@ -21,7 +21,10 @@
       "Problem Solver",
       "Tech Enthusiast"
     ],
-    "description": "Software Engineer with 5+ years in automation and systems design. I’ve built custom tools for micronutrient production, optimized manufacturing lines, and developed Python–OpenCV web and mobile apps for precision analysis. CCNA- and SolidWorks-certified, I bridge engineering precision with scalable, secure software — now channeling that expertise into independent and collaborative projects. Explore the code, insights, and builds that keep the momentum going.",
+    "description": [
+    "Software Engineer with 5+ years in automation and systems design. I've built custom tools for micronutrient production, optimized manufacturing lines, and developed Python–OpenCV web and mobile apps for precision analysis.",
+    "Qualified (B.Eng) Computer and Electronic Engineer with experience leading R&D projects spanning particle recognition algorithms, RFID adoption analysis and prototype development, and digital security protocols — consistently delivering scalable, compliant, and innovative solutions."
+    ],
     "cta": {
       "primary": "About Me",
       "primaryLink": "#about",
@@ -37,26 +40,40 @@
       {
         "title": "Who I Am",
         "content": [
-          "I'm Tian Pretorius, a Software Engineer with over 5 years of hands-on experience in automation, systems design, and full-stack development. My work has centered on crafting scalable solutions that integrate hardware and software, from image analysis tools using Python and OpenCV to Bluetooth-enabled RFID prototypes with cross-platform mobile and web apps.",
-          "I've led R&D initiatives tackling challenges like adoption barriers in tracking technologies and digital security protocols, always prioritizing compliant, efficient architectures. Whether optimizing production workflows or developing regulatory-focused applications, I thrive on turning complex problems into robust, impactful tech."
+          "I’m Tian Pretorius, a software engineer who enjoys turning complex problems into systems that work reliably. Over the past five years, I’ve built tools and applications that improve workflows, automate processes, and make data more actionable.",
+          "My experience spans software development, automation, and projects that bring hardware and software together. I focus on connecting technical concepts with practical applications, creating systems that are dependable, maintainable, and straightforward to use."
         ]
       },
       {
         "title": "What I Do",
-        "intro": "I specialize in building robust, scalable web applications and architecting systems that can handle growth. My focus is on:",
+        "intro": "I design and build scalable, reliable systems, with a focus on:",
         "list": [
-          "Full-stack development (Python, Java, C#, HTML, CSS, JS, Django)",
-          "Database design and SQL for scalable data management",
-          "System architecture, scalability, and secure protocol implementation",
-          "R&D prototyping, from embedded systems to compliant automation tools",
-          "Technical leadership, cross-functional collaboration, and problem-solving in dynamic environments"
+          "Full-stack application development and architecture",
+          "Database design and scalable data management",
+          "System design, security, and protocol implementation",
+          "R&D · Prototyping · Software Systems · Hardware (occasional)",
+          "Leading projects, collaborating across teams, and solving complex technical problems"
         ]
       },
       {
-        "title": "My Journey",
+        "title": "My Approach",
         "content": [
-          "My engineering path began in academia, where I dove into computer and electronic engineering, building a strong foundation in embedded systems, programming, and data analytics. This sparked my passion for creating solutions that connect the physical and digital worlds—whether through IoT-enabled designs or data-driven efficiencies that support decisions in fast-paced industries.",
-          "From there, I've progressed through roles in R&D and technical leadership, prototyping innovative hardware-software hybrids like mobile RFID readers and developing full-lifecycle software for compliance and automation. Highlights include crafting particle recognition algorithms for precision testing and optimizing scalable production systems. Now, with 5+ years under my belt, I'm primarily seeking to channel this expertise into a collaborative software engineering role, while honing my skills through personal projects. Let's chat about how I can help tackle your team's next big challenge."
+          "I see engineering as a mix of problem-solving and craft. I break problems into smaller pieces, explore different solutions, and refine systems until they function smoothly. Maintainability, scalability, and usability guide my work, ensuring solutions continue to perform over time.",
+          "Collaboration is an important part of my process. I incorporate feedback, test ideas in practice, and adjust when necessary. Balancing technical rigor with practical results helps me build systems that are effective and usable in real-world contexts."
+        ]
+      },
+      {
+        "title": "Highlights from My Journey",
+        "content": [
+          "I enjoy working on challenging problems that require thoughtful solutions and careful design. I’m motivated by building systems that are reliable, adaptable, and easy to work with.",
+          "Continuous learning and experimentation are central to my practice. I value projects where technical depth meets practical outcomes, and I appreciate working with teams that focus on problem-solving and steady improvement."
+        ]
+      },
+      {
+        "title": "What Excites Me",
+        "content": [
+          "My journey began in computer and electronic engineering, where I developed a foundation in programming, data analysis, and system design. Early projects sparked my interest in connecting software to physical systems through prototypes, automation, and data-driven tools.",
+          "Since then, I’ve worked in R&D, full-stack development, and automation. I’ve developed precision analysis tools, optimized production workflows, and prototyped integrated systems. Each project reinforced the importance of creating solutions that are both technically sound and practical to use."
         ]
       }
     ],
@@ -91,18 +108,18 @@
           {
             "title": "Computer/Solution Engineer",
             "duration": "5 years",
-            "description": "Developed automation for micronutrient blends and quality assurance systems; implemented digital security and international compliance; provided R&D support, system development, and technical procurement."
+            "description": "Built automation systems for micronutrient production and quality assurance, implemented secure and compliant processes, and provided R&D support and technical system development."
           },
           {
             "title": "Lead/R&D Engineer",
             "duration": "5 years",
-            "description": "Developed vitamin testing platforms, including a sophisticated particle recognition algorithm using OpenCV, Python, and Java for Android to detect vitamin A in sugar crystals; deployed software to web-based (full stack) and mobile-based (Android/Java) platforms; bridged academic research with industrial applications."
+            "description": "Developed vitamin testing platforms, including particle recognition algorithms for detecting vitamin A in sugar crystals. Deployed software across web and mobile platforms, bridging research with practical industrial applications."
           }
         ]
       },
       "currentFocus": {
         "title": "Current Focus",
-        "description": "Actively seeking software engineering opportunities where I can leverage my full-stack expertise and R&D background to build high-impact systems. Open to roles in automation, web/mobile development, or system architecture."
+        "description": "Exploring software engineering opportunities where I can apply my experience, R&D background, and systems design skills. Open to roles across web, mobile, automation, data analytics, or system architecture."
       }
     }
   },
@@ -209,10 +226,11 @@
   
   "homepage": {
     "aboutPreview": {
-      "intro": "As a software engineer with 5+ years of experience in automation, analytics, systems design, and full-stack development, I've delivered impactful solutions across diverse technical industries. Highlights include leading automated tool development for food fortification, regulatory compliance, optimizing production workflows for efficiency, and engineering web- and mobile-based applications integrated with Python and OpenCV for high-precision particle analysis in industry use cases.",
+      "intro": "I’m a curious engineer who loves turning ideas into systems that work seamlessly. Whether it’s improving workflows, creating data-driven tools, or designing applications that solve real problems, I’m driven by the challenge of connecting technical concepts with practical outcomes.",
       "paragraphs": [
-        "My background encompasses end-to-end R&D — from prototyping hardware-software integrations like Bluetooth-enabled RFID systems with cross-platform apps, to implementing secure protocols and scalable architectures that ensure robust performance. I've consistently bridged theoretical concepts with practical implementations, fostering collaboration to create efficient, adaptable tech that drives operational success in dynamic environments.",
-        "Driven by a love for solving complex problems through clean, scalable code, I'm enthusiastic about joining a team where I can apply my technical depth and collaborative spirit to innovative projects. Let's connect to talk about how my skills in system architecture and development can help elevate your engineering efforts."
+        "Over the past five years, I’ve built solutions that span the full spectrum of engineering — from prototyping embedded systems to architecting scalable software platforms. This has taught me how to bridge theory and practice, ensuring that every system I design is both reliable and adaptable in real-world environments.",
+        "I approach every project with a focus on experimentation, iteration, and thoughtful design. I enjoy refining systems until they feel effortless to use, uniting technical depth with usability, and finding creative ways to make complex problems simpler and more maintainable.",
+        "At my core, I’m motivated by collaboration and impact. I love working on projects that combine innovation with tangible results, where software and technology come together to create meaningful solutions. If you’re building something ambitious, I’m excited to help bring it to life."
       ],
       "ctaText": "Learn More About Me →",
       "ctaLink": "about.html"

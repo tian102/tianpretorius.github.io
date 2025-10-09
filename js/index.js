@@ -10,10 +10,24 @@ document.addEventListener("DOMContentLoaded", async function() {
     ContentLoader.populateMultiple({
         'hero-greeting': 'hero.greeting',
         'hero-name': 'hero.name',
-        'hero-description': 'hero.description',
         'hero-cta-primary': { path: 'hero.cta.primary', options: { html: false } },
         'hero-cta-secondary': { path: 'hero.cta.secondary', options: { html: false } }
     });
+    
+    // Special handling for hero description (can be string or array)
+    const heroDescElement = document.getElementById('hero-description');
+    const heroDescription = ContentLoader.get('hero.description');
+    if (heroDescElement && heroDescription) {
+        if (Array.isArray(heroDescription)) {
+            // If array, create paragraph for each item
+            heroDescElement.innerHTML = heroDescription
+                .map(paragraph => `<p>${paragraph}</p>`)
+                .join('');
+        } else {
+            // If string, set as text content
+            heroDescElement.textContent = heroDescription;
+        }
+    }
     
     // Initialize hero typed text animation
     ContentLoader.initHeroTypedText();
@@ -230,6 +244,20 @@ function setupCarousel(gridId, leftBtnId, rightBtnId) {
     
     // Update on window resize
     window.addEventListener('resize', updateButtonStates);
+}
+
+// Special handling for hero description (can be string or array)
+const heroDescElement = document.getElementById('hero-description');
+if (heroDescElement && content.hero?.description) {
+    if (Array.isArray(content.hero.description)) {
+        // If array, create paragraph for each item
+        heroDescElement.innerHTML = content.hero.description
+            .map(paragraph => `<p>${paragraph}</p>`)
+            .join('');
+    } else {
+        // If string, set as single paragraph
+        heroDescElement.textContent = content.hero.description;
+    }
 }
 
 // Initialize carousels after content loads
