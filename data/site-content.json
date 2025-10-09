@@ -119,7 +119,14 @@
       },
       "currentFocus": {
         "title": "Current Focus",
-        "description": "Exploring software engineering opportunities where I can apply my experience, R&D background, and systems design skills. Open to roles across web, mobile, automation, data analytics, or system architecture."
+        "intro": "Exploring software engineering opportunities where I can apply my experience, R&D background, and systems design skills. Open to roles across:",
+        "list": [
+          "Web",
+          "Mobile",
+          "Automation",
+          "System Architecture & Design",
+          "Data analytics & visualization"
+        ]
       }
     }
   },

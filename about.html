@@ -6,7 +6,7 @@
     <title>About - Tian Pretorius</title>
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
-    <link rel="stylesheet" href="css/style.css?v=20251008-38">
+    <link rel="stylesheet" href="css/style.css?v=20251009-46">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -16,7 +16,9 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <span class="brand-name"></span>
+                <a href="index.html" class="brand-link">
+                    <span class="brand-name"></span>
+                </a>
             </div>
             <ul class="nav-menu">
                 <!-- Navigation links will be loaded dynamically -->
@@ -62,7 +64,9 @@
 
                     <div class="sidebar-card">
                         <h3 id="current-focus-title"></h3>
-                        <p id="current-focus-text"></p>
+                        <div id="current-focus-container">
+                            <!-- Current focus will be loaded dynamically -->
+                        </div>
                     </div>
                 </aside>
             </div>
@@ -76,7 +80,7 @@
         </div>
     </footer>
 
-    <script src="js/content-loader.js?v=20251008-16"></script>
+    <script src="js/content-loader.js?v=20251009-45"></script>
     <script>
         // Load and populate about page content
         document.addEventListener('DOMContentLoaded', async function() {
@@ -96,11 +100,11 @@
             ContentLoader.populate('skills-title', 'about.sidebar.skills.title');
             ContentLoader.populate('experience-title', 'about.sidebar.experience.title');
             ContentLoader.populate('current-focus-title', 'about.sidebar.currentFocus.title');
-            ContentLoader.populate('current-focus-text', 'about.sidebar.currentFocus.description');
             
-            // Render skills and experience
+            // Render skills, experience, and current focus
             ContentLoader.renderSkills('skills-container');
             ContentLoader.renderExperience('experience-container');
+            ContentLoader.renderCurrentFocus('current-focus-container');
             
             // Render footer
             ContentLoader.renderFooter('footer-container');

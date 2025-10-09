@@ -186,6 +186,39 @@
     }
 
     /**
+     * Render current focus section
+     * @param {string} containerId - The ID of the container element
+     */
+    function renderCurrentFocus(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        
+        const currentFocus = getContent('about.sidebar.currentFocus');
+        if (!currentFocus) return;
+        
+        let html = '';
+        
+        if (currentFocus.intro) {
+            html += `<p>${currentFocus.intro}</p>`;
+        }
+        
+        if (currentFocus.list) {
+            html += `
+                <ul class="about-list">
+                    ${currentFocus.list.map(item => `<li>${item}</li>`).join('')}
+                </ul>
+            `;
+        }
+        
+        // Fallback for old format (if description exists instead of intro/list)
+        if (currentFocus.description && !currentFocus.intro) {
+            html = `<p>${currentFocus.description}</p>`;
+        }
+        
+        container.innerHTML = html;
+    }
+
+    /**
      * Render contact methods
      * @param {string} containerId - The ID of the container element
      */
@@ -537,6 +570,7 @@
         renderAboutSections: renderAboutSections,
         renderSkills: renderSkills,
         renderExperience: renderExperience,
+        renderCurrentFocus: renderCurrentFocus,
         renderContactMethods: renderContactMethods,
         renderContactInfoCards: renderContactInfoCards,
         renderFooter: renderFooter,
