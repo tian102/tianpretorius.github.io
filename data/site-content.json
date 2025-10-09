@@ -246,20 +246,24 @@
       "title": "Skills & Technologies",
       "categories": [
         {
-          "name": "Frontend",
-          "tags": ["React", "TypeScript", "JavaScript"]
+          "name": "Backend & Systems",
+          "tags": ["Django", "PHP", "Node.js", "PostgreSQL", "REST APIs", "Authentication & Authorization",  "System Design"]
         },
         {
-          "name": "Backend",
-          "tags": ["Django", "PostgreSQL", "Node.js", "Express"]
+          "name": "DevOps & Infrastructure",
+          "tags": ["Docker", "CI/CD", "Containerization", "Deployment"]
         },
         {
-          "name": "DevOps",
-          "tags": ["AWS", "Docker", "CI/CD"]
+          "name": "Frontend & Development",
+          "tags": ["HTML", "CSS/SASS", "JavaScript", "Android", "Java", "C#", "Python"]
         },
         {
           "name": "Other",
-          "tags": ["Git", "REST APIs", "GraphQL"]
+          "tags": ["Git", "GitHub", "API Integration", "Agile Workflow", "Linux", "Scripting"]
+        },
+        {
+          "name": "Familiar with",
+          "tags": ["React", "Typescript", "Unit Testing", "Supabase"]
         }
       ]
     },

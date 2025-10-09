@@ -360,43 +360,74 @@ function showBlogPost(slug) {
     
     // Render blog post detail with processed image paths
     const htmlContent = parseMarkdownWithImages(post.content, post.postPath || `content/blog/posts/${slug}/`);
+    
+    // Generate TOC from content
+    const toc = generateTableOfContents(htmlContent);
+    
     blogPost.innerHTML = `
-        <div class="blog-post-detail">
-            <button class="back-button" onclick="hideBlogPost()">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                </svg>
-                Back to Blog
-            </button>
-            <article class="blog-post">
-                <header class="blog-post-header">
-                    <h1>${post.title}</h1>
-                    <div class="blog-post-meta">
-                        <span class="blog-date">${new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-                        <span>•</span>
-                        <span class="blog-read-time">${calculateReadTime(post.content)} min read</span>
+        <div class="blog-post-detail-wrapper">
+            <div class="blog-post-detail">
+                <button class="back-button" onclick="hideBlogPost()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Back to Blog
+                </button>
+                <article class="blog-post">
+                    <header class="blog-post-header">
+                        <h1>${post.title}</h1>
+                        <div class="blog-post-meta">
+                            <span class="blog-date">${new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                            <span>•</span>
+                            <span class="blog-read-time">${calculateReadTime(post.content)} min read</span>
+                        </div>
+                        <div class="post-tags">
+                            ${post.tags.map(tag => `<span class="post-tag">${tag}</span>`).join('')}
+                        </div>
+                        ${post.tldr ? `
+                        <details class="post-tldr-details">
+                            <summary class="post-tldr-summary">
+                                <span class="tldr-label">TL;DR</span>
+                                <svg class="tldr-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </summary>
+                            <blockquote class="post-tldr"><em>${post.tldr}</em></blockquote>
+                        </details>
+                        ` : ''}
+                    </header>
+                    <div class="blog-post-content" id="blog-content">
+                        ${htmlContent}
                     </div>
-                    <div class="post-tags">
-                        ${post.tags.map(tag => `<span class="post-tag">${tag}</span>`).join('')}
-                    </div>
-                    ${post.tldr ? `
-                    <details class="post-tldr-details">
-                        <summary class="post-tldr-summary">
-                            <span class="tldr-label">TL;DR</span>
-                            <svg class="tldr-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                </article>
+            </div>
+            ${toc.items.length > 0 ? `
+            <aside class="toc-sidebar">
+                <nav class="toc-container">
+                    <details class="toc-details">
+                        <summary class="toc-summary">
+                            <span class="toc-title">Contents</span>
+                            <svg class="toc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <polyline points="6 9 12 15 18 9"></polyline>
                             </svg>
                         </summary>
-                        <blockquote class="post-tldr"><em>${post.tldr}</em></blockquote>
+                        <ul class="toc-list">
+                            ${toc.html}
+                        </ul>
                     </details>
-                    ` : ''}
-                </header>
-                <div class="blog-post-content">
-                    ${htmlContent}
-                </div>
-            </article>
+                </nav>
+            </aside>
+            ` : ''}
         </div>
     `;
+    
+    // Add IDs to headings and setup scroll spy
+    if (toc.items.length > 0) {
+        addHeadingIds();
+        setupScrollSpy();
+        // Align TOC with blog-post-content
+        alignTOCWithContent();
+    }
     
     // Update URL
     window.history.pushState({ post: slug }, '', `?post=${slug}`);
@@ -518,6 +549,169 @@ function setupPagination() {
     }
 }
 
+// Generate table of contents from HTML content with nested h3s
+function generateTableOfContents(htmlContent) {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlContent;
+    
+    const headings = tempDiv.querySelectorAll('h2, h3');
+    const items = [];
+    let html = '';
+    let currentH2 = null;
+    let h3Children = [];
+    
+    headings.forEach((heading, index) => {
+        const text = heading.textContent.trim();
+        const level = heading.tagName.toLowerCase();
+        const id = text
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '');
+        
+        items.push({ id, text, level });
+        
+        if (level === 'h2') {
+            // Close previous h2 if it had children
+            if (currentH2 && h3Children.length > 0) {
+                html += `<ul class="toc-h3-list">${h3Children.join('')}</ul>`;
+            }
+            html += `</li>`;
+            
+            // Start new h2
+            const hasNextH3 = headings[index + 1] && headings[index + 1].tagName.toLowerCase() === 'h3';
+            currentH2 = { id, text, hasChildren: false };
+            h3Children = [];
+            
+            html += `
+                <li class="toc-item toc-h2${hasNextH3 ? ' has-children' : ''}" data-h2-id="${id}">
+                    <a href="#${id}" class="toc-link" data-heading-id="${id}">
+                        ${hasNextH3 ? `<svg class="toc-expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>` : ''}
+                        <span>${text}</span>
+                    </a>
+            `;
+        } else if (level === 'h3' && currentH2) {
+            // Add h3 as child of current h2
+            currentH2.hasChildren = true;
+            h3Children.push(`
+                <li class="toc-item toc-h3">
+                    <a href="#${id}" class="toc-link" data-heading-id="${id}">
+                        <span>${text}</span>
+                    </a>
+                </li>
+            `);
+        }
+    });
+    
+    // Close last h2 if it had children
+    if (currentH2 && h3Children.length > 0) {
+        html += `<ul class="toc-h3-list">${h3Children.join('')}</ul>`;
+    }
+    html += `</li>`;
+    
+    return { items, html };
+}
+
+// Add IDs to actual headings in the rendered content
+function addHeadingIds() {
+    const content = document.getElementById('blog-content');
+    if (!content) return;
+    
+    const headings = content.querySelectorAll('h2, h3');
+    headings.forEach(heading => {
+        const text = heading.textContent.trim();
+        const id = text
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '');
+        heading.id = id;
+    });
+}
+
+// Setup scroll spy for TOC
+function setupScrollSpy() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    if (tocLinks.length === 0) return;
+    
+    // Handle expand/collapse for h2s with children
+    document.querySelectorAll('.toc-item.toc-h2.has-children').forEach(h2Item => {
+        const link = h2Item.querySelector('.toc-link');
+        const icon = link.querySelector('.toc-expand-icon');
+        
+        if (icon) {
+            icon.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                h2Item.classList.toggle('expanded');
+            });
+        }
+    });
+    
+    // Smooth scroll to heading when clicking TOC link
+    tocLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            // Don't scroll if clicking the expand icon
+            if (e.target.closest('.toc-expand-icon')) {
+                return;
+            }
+            
+            e.preventDefault();
+            const targetId = link.getAttribute('data-heading-id');
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                const offset = 80; // Account for fixed header if any
+                const targetPosition = targetElement.offsetTop - offset;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Update active state
+                tocLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            }
+        });
+    });
+    
+    // Update active state on scroll
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                updateActiveHeading(tocLinks);
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+}
+
+// Update active TOC link based on scroll position
+function updateActiveHeading(tocLinks) {
+    const scrollPosition = window.scrollY + 100;
+    const headings = document.querySelectorAll('#blog-content h2, #blog-content h3');
+    
+    let activeHeading = null;
+    
+    headings.forEach(heading => {
+        if (heading.offsetTop <= scrollPosition) {
+            activeHeading = heading;
+        }
+    });
+    
+    if (activeHeading) {
+        const activeId = activeHeading.id;
+        tocLinks.forEach(link => {
+            const linkId = link.getAttribute('data-heading-id');
+            if (linkId === activeId) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
+}
+
 // Handle browser back/forward
 window.addEventListener('popstate', (event) => {
     if (event.state && event.state.post) {
@@ -526,6 +720,30 @@ window.addEventListener('popstate', (event) => {
         hideBlogPost();
     }
 });
+
+// Align TOC sidebar with bottom of blog-post-header
+function alignTOCWithContent() {
+    // Wait for next frame to ensure DOM is fully rendered
+    requestAnimationFrame(() => {
+        const blogHeader = document.querySelector('.blog-post-header');
+        const tocSidebar = document.querySelector('.toc-sidebar');
+        
+        if (blogHeader && tocSidebar) {
+            // Calculate sticky top position (navbar height + spacing)
+            const navbarHeight = 70; // Height of fixed navbar
+            const spacing = 16; // Additional spacing below navbar
+            const stickyTop = navbarHeight + spacing;
+            
+            // Set sticky top position to appear below navbar
+            tocSidebar.style.top = `${stickyTop}px`;
+            
+            // Set initial margin to align with header bottom
+            const wrapperTop = document.querySelector('.blog-post-detail-wrapper').offsetTop;
+            const offsetFromWrapper = blogHeader.offsetTop + blogHeader.offsetHeight - wrapperTop;
+            tocSidebar.style.marginTop = `${offsetFromWrapper}px`;
+        }
+    });
+}
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {

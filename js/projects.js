@@ -186,42 +186,75 @@ function showProjectDetail(slug) {
     
     // Render project detail with processed image paths
     const html = parseMarkdownWithImages(project.content, project.projectPath || `content/projects/posts/${slug}/`);
+    
+    // Generate TOC from content
+    const toc = generateTableOfContents(html);
+    
     projectDetail.innerHTML = `
-        <div class="project-detail-header">
-            <button class="back-button" onclick="hideProjectDetail()">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                </svg>
-                Back to Projects
-            </button>
-            <h1>${project.title}</h1>
-            <p class="project-detail-description">${project.description}</p>
-            <div class="project-detail-meta">
-                <div class="project-tags">
-                    ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+        <div class="project-detail-wrapper">
+            <div class="project-detail-main">
+                <div class="project-detail-header">
+                    <button class="back-button" onclick="hideProjectDetail()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        Back to Projects
+                    </button>
+                    <h1>${project.title}</h1>
+                    <p class="project-detail-description">${project.description}</p>
+                    <div class="project-detail-meta">
+                        <div class="project-tags">
+                            ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+                        </div>
+                        <div class="project-links">
+                            ${project.demo ? `<a href="${project.demo}" class="project-link-btn" target="_blank" rel="noopener noreferrer">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                    <polyline points="15 3 21 3 21 9"/>
+                                    <line x1="10" y1="14" x2="21" y2="3"/>
+                                </svg>
+                                Live Demo
+                            </a>` : ''}
+                            ${project.github ? `<a href="${project.github}" class="project-link-btn" target="_blank" rel="noopener noreferrer">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                                GitHub
+                            </a>` : ''}
+                        </div>
+                    </div>
                 </div>
-                <div class="project-links">
-                    ${project.demo ? `<a href="${project.demo}" class="project-link-btn" target="_blank" rel="noopener noreferrer">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                            <polyline points="15 3 21 3 21 9"/>
-                            <line x1="10" y1="14" x2="21" y2="3"/>
-                        </svg>
-                        Live Demo
-                    </a>` : ''}
-                    ${project.github ? `<a href="${project.github}" class="project-link-btn" target="_blank" rel="noopener noreferrer">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                        GitHub
-                    </a>` : ''}
+                <div class="project-detail-content" id="project-content">
+                    ${html}
                 </div>
             </div>
-        </div>
-        <div class="project-detail-content">
-            ${html}
+            ${toc.items.length > 0 ? `
+            <aside class="toc-sidebar">
+                <nav class="toc-container">
+                    <details class="toc-details">
+                        <summary class="toc-summary">
+                            <span class="toc-title">Contents</span>
+                            <svg class="toc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </summary>
+                        <ul class="toc-list">
+                            ${toc.html}
+                        </ul>
+                    </details>
+                </nav>
+            </aside>
+            ` : ''}
         </div>
     `;
+    
+    // Add IDs to headings and setup scroll spy
+    if (toc.items.length > 0) {
+        addHeadingIds();
+        setupScrollSpy();
+        // Align TOC with project-detail-content
+        alignTOCWithContent();
+    }
     
     // Update URL
     window.history.pushState({ project: slug }, '', `?project=${slug}`);
@@ -466,3 +499,190 @@ document.addEventListener('DOMContentLoaded', () => {
         checkUrlParams();
     });
 });
+
+// Generate table of contents from HTML content with nested h3s
+function generateTableOfContents(htmlContent) {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlContent;
+    
+    const headings = tempDiv.querySelectorAll('h2, h3');
+    const items = [];
+    let html = '';
+    let currentH2 = null;
+    let h3Children = [];
+    
+    headings.forEach((heading, index) => {
+        const text = heading.textContent.trim();
+        const level = heading.tagName.toLowerCase();
+        const id = text
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '');
+        
+        items.push({ id, text, level });
+        
+        if (level === 'h2') {
+            // Close previous h2 if it had children
+            if (currentH2 && h3Children.length > 0) {
+                html += `<ul class="toc-h3-list">${h3Children.join('')}</ul>`;
+            }
+            html += `</li>`;
+            
+            // Start new h2
+            const hasNextH3 = headings[index + 1] && headings[index + 1].tagName.toLowerCase() === 'h3';
+            currentH2 = { id, text, hasChildren: false };
+            h3Children = [];
+            
+            html += `
+                <li class="toc-item toc-h2${hasNextH3 ? ' has-children' : ''}" data-h2-id="${id}">
+                    <a href="#${id}" class="toc-link" data-heading-id="${id}">
+                        ${hasNextH3 ? `<svg class="toc-expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>` : ''}
+                        <span>${text}</span>
+                    </a>
+            `;
+        } else if (level === 'h3' && currentH2) {
+            // Add h3 as child of current h2
+            currentH2.hasChildren = true;
+            h3Children.push(`
+                <li class="toc-item toc-h3">
+                    <a href="#${id}" class="toc-link" data-heading-id="${id}">
+                        <span>${text}</span>
+                    </a>
+                </li>
+            `);
+        }
+    });
+    
+    // Close last h2 if it had children
+    if (currentH2 && h3Children.length > 0) {
+        html += `<ul class="toc-h3-list">${h3Children.join('')}</ul>`;
+    }
+    html += `</li>`;
+    
+    return { items, html };
+}
+
+// Add IDs to actual headings in the rendered content
+function addHeadingIds() {
+    const content = document.getElementById('project-content');
+    if (!content) return;
+    
+    const headings = content.querySelectorAll('h2, h3');
+    headings.forEach(heading => {
+        const text = heading.textContent.trim();
+        const id = text
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '');
+        heading.id = id;
+    });
+}
+
+// Setup scroll spy for TOC
+function setupScrollSpy() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    if (tocLinks.length === 0) return;
+    
+    // Handle expand/collapse for h2s with children
+    document.querySelectorAll('.toc-item.toc-h2.has-children').forEach(h2Item => {
+        const link = h2Item.querySelector('.toc-link');
+        const icon = link.querySelector('.toc-expand-icon');
+        
+        if (icon) {
+            icon.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                h2Item.classList.toggle('expanded');
+            });
+        }
+    });
+    
+    // Smooth scroll to heading when clicking TOC link
+    tocLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            // Don't scroll if clicking the expand icon
+            if (e.target.closest('.toc-expand-icon')) {
+                return;
+            }
+            
+            e.preventDefault();
+            const targetId = link.getAttribute('data-heading-id');
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                const offset = 80; // Account for fixed header if any
+                const targetPosition = targetElement.offsetTop - offset;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Update active state
+                tocLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            }
+        });
+    });
+    
+    // Update active state on scroll
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                updateActiveHeading(tocLinks);
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+}
+
+// Update active TOC link based on scroll position
+function updateActiveHeading(tocLinks) {
+    const scrollPosition = window.scrollY + 100;
+    const headings = document.querySelectorAll('#project-content h2, #project-content h3');
+    
+    let activeHeading = null;
+    
+    headings.forEach(heading => {
+        if (heading.offsetTop <= scrollPosition) {
+            activeHeading = heading;
+        }
+    });
+    
+    if (activeHeading) {
+        const activeId = activeHeading.id;
+        tocLinks.forEach(link => {
+            const linkId = link.getAttribute('data-heading-id');
+            if (linkId === activeId) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
+}
+
+// Align TOC sidebar with bottom of project-detail-header
+function alignTOCWithContent() {
+    // Wait for next frame to ensure DOM is fully rendered
+    requestAnimationFrame(() => {
+        const projectHeader = document.querySelector('.project-detail-header');
+        const tocSidebar = document.querySelector('.toc-sidebar');
+        
+        if (projectHeader && tocSidebar) {
+            // Calculate sticky top position (navbar height + spacing)
+            const navbarHeight = 70; // Height of fixed navbar
+            const spacing = 16; // Additional spacing below navbar
+            const stickyTop = navbarHeight + spacing;
+            
+            // Set sticky top position to appear below navbar
+            tocSidebar.style.top = `${stickyTop}px`;
+            
+            // Set initial margin to align with header bottom
+            const wrapperTop = document.querySelector('.project-detail-wrapper').offsetTop;
+            const offsetFromWrapper = projectHeader.offsetTop + projectHeader.offsetHeight - wrapperTop;
+            tocSidebar.style.marginTop = `${offsetFromWrapper}px`;
+        }
+    });
+}

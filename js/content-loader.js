@@ -484,12 +484,17 @@
             <h3>${skills.title}</h3>
             <div class="skills-grid">
                 ${skills.categories.map(category => `
-                    <div class="skill-category">
-                        <h4>${category.name}</h4>
+                    <details class="skill-category">
+                        <summary class="skill-category-summary">
+                            <h4>${category.name}</h4>
+                            <svg class="skill-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </summary>
                         <div class="tech-tags">
                             ${category.tags.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
                         </div>
-                    </div>
+                    </details>
                 `).join('')}
             </div>
         `;
