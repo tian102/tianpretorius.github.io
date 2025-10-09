@@ -359,7 +359,7 @@ function showBlogPost(slug) {
     hidePagination();
     
     // Render blog post detail with processed image paths
-    const htmlContent = parseMarkdownWithImages(post.content, post.postPath || `blog/posts/${slug}/`);
+    const htmlContent = parseMarkdownWithImages(post.content, post.postPath || `content/blog/posts/${slug}/`);
     blogPost.innerHTML = `
         <div class="blog-post-detail">
             <button class="back-button" onclick="hideBlogPost()">
@@ -517,6 +517,15 @@ function setupPagination() {
         });
     }
 }
+
+// Handle browser back/forward
+window.addEventListener('popstate', (event) => {
+    if (event.state && event.state.post) {
+        showBlogPost(event.state.post);
+    } else {
+        hideBlogPost();
+    }
+});
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {

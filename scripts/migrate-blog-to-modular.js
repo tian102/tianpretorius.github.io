@@ -16,8 +16,8 @@ const fs = require('fs');
 const path = require('path');
 
 // Configuration
-const POSTS_DIR = path.join(__dirname, '../blog/posts');
-const BACKUP_DIR = path.join(__dirname, '../blog/posts-backup');
+const POSTS_DIR = path.join(__dirname, '../content/blog/posts');
+const BACKUP_DIR = path.join(__dirname, '../content/blog/posts-backup');
 
 // Blog posts to migrate
 const BLOG_POSTS = [
@@ -80,8 +80,8 @@ BLOG_POSTS.forEach((slug) => {
 
 // Step 3: Migrate template
 console.log(`\n📝 Processing template...`);
-const oldTemplatePath = path.join(__dirname, '../blog/template.md');
-const newTemplateDir = path.join(__dirname, '../blog/template');
+const oldTemplatePath = path.join(__dirname, '../content/blog/template.md');
+const newTemplateDir = path.join(__dirname, '../content/blog/template');
 const newTemplatePath = path.join(newTemplateDir, 'index.md');
 
 if (fs.existsSync(oldTemplatePath)) {

@@ -185,7 +185,7 @@ function showProjectDetail(slug) {
     hidePagination();
     
     // Render project detail with processed image paths
-    const html = parseMarkdownWithImages(project.content, project.projectPath || `projects/posts/${slug}/`);
+    const html = parseMarkdownWithImages(project.content, project.projectPath || `content/projects/posts/${slug}/`);
     projectDetail.innerHTML = `
         <div class="project-detail-header">
             <button class="back-button" onclick="hideProjectDetail()">

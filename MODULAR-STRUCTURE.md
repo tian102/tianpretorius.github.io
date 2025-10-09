@@ -9,7 +9,7 @@ Your blog posts and projects now use a **modular directory structure** where eac
 ### Blog Posts
 
 ```
-blog/
+content/blog/
 ├── posts/
 │   ├── your-post-slug/
 │   │   ├── index.md          # Post content with frontmatter
@@ -29,7 +29,7 @@ blog/
 ### Projects
 
 ```
-projects/
+content/projects/
 ├── posts/
 │   ├── your-project-slug/
 │   │   ├── index.md          # Project description
@@ -51,15 +51,15 @@ projects/
 
 ### Creating a New Blog Post
 
-1. **Create a new directory** in `blog/posts/`:
+1. **Create a new directory** in `content/blog/posts/`:
    ```bash
-   mkdir blog/posts/my-new-post
-   mkdir blog/posts/my-new-post/assets
+   mkdir content/blog/posts/my-new-post
+   mkdir content/blog/posts/my-new-post/assets
    ```
 
 2. **Copy the template**:
    ```bash
-   cp blog/template/index.md blog/posts/my-new-post/index.md
+   cp content/blog/template/index.md content/blog/posts/my-new-post/index.md
    ```
 
 3. **Add your content** to `index.md`:
@@ -84,15 +84,15 @@ projects/
 
 ### Creating a New Project
 
-1. **Create a new directory** in `projects/posts/`:
+1. **Create a new directory** in `content/projects/posts/`:
    ```bash
-   mkdir projects/posts/my-new-project
-   mkdir projects/posts/my-new-project/assets
+   mkdir content/projects/posts/my-new-project
+   mkdir content/projects/posts/my-new-project/assets
    ```
 
 2. **Copy the template**:
    ```bash
-   cp projects/template/index.md projects/posts/my-new-project/index.md
+   cp content/projects/template/index.md content/projects/posts/my-new-project/index.md
    ```
 
 3. **Add your content** to `index.md`:
@@ -168,7 +168,7 @@ date: 2024-01-01
 ## Build Process
 
 The build script (`scripts/build-content.js`) automatically:
-- Scans for directories in `blog/posts/` and `projects/posts/`
+- Scans for directories in `content/blog/posts/` and `content/projects/posts/`
 - Reads `index.md` from each directory
 - Parses frontmatter and extracts metadata
 - Generates `data/blog-posts.json` and `data/projects.json`
@@ -229,12 +229,12 @@ Backups are created automatically in:
 
 ```bash
 # Create new blog post
-mkdir blog/posts/my-new-post && mkdir blog/posts/my-new-post/assets
-cp blog/template/index.md blog/posts/my-new-post/index.md
+mkdir content/blog/posts/my-new-post && mkdir content/blog/posts/my-new-post/assets
+cp content/blog/template/index.md content/blog/posts/my-new-post/index.md
 
 # Create new project
-mkdir projects/posts/my-new-project && mkdir projects/posts/my-new-project/assets
-cp projects/template/index.md projects/posts/my-new-project/index.md
+mkdir content/projects/posts/my-new-project && mkdir content/projects/posts/my-new-project/assets
+cp content/projects/template/index.md content/projects/posts/my-new-project/index.md
 
 # Build content
 node scripts/build-content.js
@@ -247,6 +247,6 @@ tree projects/posts
 ## Questions?
 
 If you encounter any issues or have questions about the new structure, refer to:
-- Template files: `blog/template/index.md` and `projects/template/index.md`
+- Template files: `content/blog/template/index.md` and `content/projects/template/index.md`
 - Migration scripts: `scripts/migrate-blog-to-modular.js` and `scripts/migrate-projects-to-modular.js`
 - Build script: `scripts/build-content.js`

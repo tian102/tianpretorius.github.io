@@ -16,8 +16,8 @@ const fs = require('fs');
 const path = require('path');
 
 // Configuration
-const POSTS_DIR = path.join(__dirname, '../projects/posts');
-const BACKUP_DIR = path.join(__dirname, '../projects/posts-backup');
+const POSTS_DIR = path.join(__dirname, '../content/projects/posts');
+const BACKUP_DIR = path.join(__dirname, '../content/projects/posts-backup');
 const IMAGES_DIR = path.join(__dirname, '../projects/images');
 
 // Projects to migrate
@@ -99,8 +99,8 @@ if (fs.existsSync(IMAGES_DIR)) {
 
 // Step 4: Migrate template
 console.log(`\n📝 Processing template...`);
-const oldTemplatePath = path.join(__dirname, '../projects/template.md');
-const newTemplateDir = path.join(__dirname, '../projects/template');
+const oldTemplatePath = path.join(__dirname, '../content/projects/template.md');
+const newTemplateDir = path.join(__dirname, '../content/projects/template');
 const newTemplatePath = path.join(newTemplateDir, 'index.md');
 
 if (fs.existsSync(oldTemplatePath)) {

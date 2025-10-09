@@ -193,7 +193,7 @@ State the license (e.g., MIT, Apache 2.0, etc.)
 ## 📁 Directory Structure for This Project
 
 ```
-projects/posts/your-project-slug/
+content/projects/posts/your-project-slug/
 ├── index.md          # This file (your project description)
 ├── cover.jpg         # Main project image/screenshot
 └── assets/           # Additional images and files

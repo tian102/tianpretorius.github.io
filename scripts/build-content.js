@@ -38,13 +38,13 @@ function parseFrontmatter(content) {
 
 // Build blog posts
 console.log('Building blog posts...');
-const blogPostsDir = path.join(__dirname, '../blog/posts');
+const blogPostsDir = path.join(__dirname, '../content/blog/posts');
 const blogPosts = [];
 
 const blogDirs = fs.readdirSync(blogPostsDir, { withFileTypes: true })
     .filter(dirent => dirent.isDirectory())
     .map(dirent => dirent.name);
-console.log(`Found ${blogDirs.length} blog post directories in blog/posts`);
+console.log(`Found ${blogDirs.length} blog post directories in content/blog/posts`);
 
 blogDirs.forEach(slug => {
     const postIndexPath = path.join(blogPostsDir, slug, 'index.md');
@@ -83,7 +83,7 @@ blogDirs.forEach(slug => {
             return imagePath;
         }
         // Otherwise, prepend the blog post path
-        return `blog/posts/${slug}/${imagePath}`;
+        return `content/blog/posts/${slug}/${imagePath}`;
     };
     
     blogPosts.push({
@@ -97,8 +97,8 @@ blogDirs.forEach(slug => {
         tldr: metadata.tldr || '',
         content: markdown,
         excerpt: excerpt || markdown.substring(0, 200) + '...',
-        assetsPath: hasAssets ? `blog/posts/${slug}/assets/` : '',
-        postPath: `blog/posts/${slug}/`
+        assetsPath: hasAssets ? `content/blog/posts/${slug}/assets/` : '',
+        postPath: `content/blog/posts/${slug}/`
     });
 });
 
@@ -119,13 +119,13 @@ console.log(`✓ Built ${blogPosts.length} blog posts`);
 
 // Build projects
 console.log('\nBuilding projects...');
-const projectsDir = path.join(__dirname, '../projects/posts');
+const projectsDir = path.join(__dirname, '../content/projects/posts');
 const projects = [];
 
 const projectDirs = fs.readdirSync(projectsDir, { withFileTypes: true })
     .filter(dirent => dirent.isDirectory())
     .map(dirent => dirent.name);
-console.log(`Found ${projectDirs.length} project directories in projects/posts`);
+console.log(`Found ${projectDirs.length} project directories in content/projects/posts`);
 
 projectDirs.forEach(slug => {
     const projectIndexPath = path.join(projectsDir, slug, 'index.md');
@@ -152,7 +152,7 @@ projectDirs.forEach(slug => {
             return imagePath;
         }
         // Otherwise, prepend the project path
-        return `projects/posts/${slug}/${imagePath}`;
+        return `content/projects/posts/${slug}/${imagePath}`;
     };
     
     projects.push({
@@ -166,8 +166,8 @@ projectDirs.forEach(slug => {
         coverImage: getImagePath(metadata.coverImage),
         date: metadata.date || '',
         content: markdown,
-        assetsPath: hasAssets ? `projects/posts/${slug}/assets/` : '',
-        projectPath: `projects/posts/${slug}/`
+        assetsPath: hasAssets ? `content/projects/posts/${slug}/assets/` : '',
+        projectPath: `content/projects/posts/${slug}/`
     });
 });
 

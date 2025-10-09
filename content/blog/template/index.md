@@ -116,7 +116,7 @@ const code = 'example';
 ## Directory Structure for This Post
 
 ```
-blog/posts/your-post-slug/
+content/blog/posts/your-post-slug/
 ├── index.md          # This file (your blog post content)
 ├── cover.jpg         # Cover image (optional)
 └── assets/           # Additional images and files
