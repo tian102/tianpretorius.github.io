@@ -4,11 +4,13 @@ description: High-performance dashboard displaying real-time metrics with WebSoc
 tags: [react, websocket, chartjs, python, redis]
 demo: https://dashboard.example.com
 github: https://github.com/tianpretorius/analytics-dashboard
-image: https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800
+coverImage: cover.jpg
 date: 2024-01-20
 ---
 
 # Real-Time Analytics Dashboard
+
+![Cover Image](cover.jpg)
 
 A powerful real-time analytics dashboard that processes and visualizes thousands of events per second with minimal latency.
 

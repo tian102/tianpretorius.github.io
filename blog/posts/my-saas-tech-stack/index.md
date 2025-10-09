@@ -3,8 +3,8 @@ title: My SaaS Tech Stack: Why I Chose These Technologies
 date: 2024-09-15
 tags: tech-stack, tools, saas, development
 author: Tian Pretorius
-image: https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=500&fit=crop
 tldr: React + TypeScript frontend, Node.js + Express backend, PostgreSQL + Redis for data, deployed on AWS with Docker. Choosing proven tech you know well beats learning everything from scratch.
+coverImage: https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=500&fit=crop
 ---
 
 # My SaaS Tech Stack: Why I Chose These Technologies

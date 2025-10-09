@@ -4,11 +4,22 @@ date: 2024-01-01
 tags: tag1, tag2, tag3
 author: Tian Pretorius
 tldr: Write a concise 1-2 sentence summary that captures the key takeaway of your post. This will be displayed in blog cards.
+coverImage: cover.jpg
 ---
 
 # Your Blog Post Title
 
+![Cover Image](./cover.jpg)
+
 A brief introduction or excerpt that summarizes what this blog post is about. This will be shown in the blog preview cards on the homepage and blog page.
+
+## Using Images in Your Post
+
+With the new modular structure, you can include images from your post's directory:
+
+- **Cover image**: Place it in the post directory and reference it as `coverImage: cover.jpg` in the frontmatter
+- **Inline images**: Store them in the `assets/` subdirectory and reference with relative paths: `![Alt text](./assets/image.jpg)`
+- **Multiple images**: Organize all your images in the `assets/` folder for better management
 
 ## Section 1: Introduction
 
@@ -72,7 +83,13 @@ Summarize the main points and provide a clear takeaway for your readers. End wit
 [Link text](https://example.com)
 
 ### Images
-![Alt text](image-url.jpg)
+
+**Using images from the post directory:**
+```markdown
+![Cover image in root](./cover.jpg)
+![Image in assets folder](./assets/screenshot.jpg)
+![Another asset](./assets/diagram.png)
+```
 
 ### Quotes
 > Use blockquotes for important quotes or callouts
@@ -93,6 +110,28 @@ Summarize the main points and provide a clear takeaway for your readers. End wit
 // Specify the language for syntax highlighting
 const code = 'example';
 ```
+
+---
+
+## Directory Structure for This Post
+
+```
+blog/posts/your-post-slug/
+├── index.md          # This file (your blog post content)
+├── cover.jpg         # Cover image (optional)
+└── assets/           # Additional images and files
+    ├── screenshot1.jpg
+    ├── screenshot2.jpg
+    └── diagram.svg
+```
+
+**Best Practices:**
+- Keep all post-related files together in one directory
+- Use descriptive filenames for images
+- Optimize images before adding them (compress, resize)
+- Use relative paths (./file.jpg or ./assets/file.jpg)
+- Store the cover image in the root of the post directory
+- Put additional assets in the assets/ subdirectory
 
 ---
 

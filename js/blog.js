@@ -358,8 +358,8 @@ function showBlogPost(slug) {
     // Hide pagination when viewing individual post
     hidePagination();
     
-    // Render blog post detail
-    const htmlContent = parseMarkdown(post.content);
+    // Render blog post detail with processed image paths
+    const htmlContent = parseMarkdownWithImages(post.content, post.postPath || `blog/posts/${slug}/`);
     blogPost.innerHTML = `
         <div class="blog-post-detail">
             <button class="back-button" onclick="hideBlogPost()">
@@ -468,6 +468,39 @@ function parseMarkdown(md) {
     
     // Parse markdown to HTML using marked.js
     const html = marked.parse(content);
+    
+    return html;
+}
+
+function parseMarkdownWithImages(md, postPath) {
+    // Use marked.js library for proper markdown parsing
+    if (typeof marked === 'undefined') {
+        console.error('Marked.js library not loaded');
+        return md;
+    }
+    
+    // Remove the first H1 heading (title is already shown in the header)
+    let content = md.replace(/^#\s+.+$/m, '');
+    
+    // Parse markdown to HTML using marked.js
+    let html = marked.parse(content);
+    
+    // Process image paths - convert relative paths to absolute
+    // Match: <img src="./..." or <img src="assets/..." but not external URLs
+    html = html.replace(/<img([^>]*?)src="(\.\/[^"]+|(?!https?:\/\/)[^"\/][^"]*)"([^>]*?)>/gi, (match, before, src, after) => {
+        let newSrc = src;
+        
+        // Handle ./file.jpg or ./assets/file.jpg
+        if (src.startsWith('./')) {
+            newSrc = postPath + src.substring(2);
+        }
+        // Handle relative paths without ./ prefix (e.g., assets/file.jpg or cover.jpg)
+        else if (!src.startsWith('http://') && !src.startsWith('https://') && !src.startsWith('/')) {
+            newSrc = postPath + src;
+        }
+        
+        return `<img${before}src="${newSrc}"${after}>`;
+    });
     
     return html;
 }

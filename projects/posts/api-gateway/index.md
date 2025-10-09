@@ -4,7 +4,7 @@ description: High-performance API gateway handling authentication, rate limiting
 tags: [golang, microservices, docker, kubernetes, api]
 demo: 
 github: https://github.com/tianpretorius/api-gateway
-image: projects\images\background-project-image.jpg
+coverImage: https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=500&fit=crop
 date: 2023-09-05
 ---
 

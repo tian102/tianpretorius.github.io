@@ -3,9 +3,11 @@ title: From Unemployed to SaaS Founder: My Journey Begins
 date: 2024-10-05
 tags: entrepreneurship, saas, personal-story, startup
 author: Tian Pretorius
-image: https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=500&fit=crop
 tldr: Getting laid off after 6+ years led me to build my own SaaS product. I'm documenting the entire journey as a solo founder - from MVP to launch and beyond.
+coverImage: https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=500&fit=crop
 ---
+
+![Cover Image](https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=500&fit=crop)
 
 # From Unemployed to Solo SaaS Founder: The Beginning
 
@@ -18,6 +20,8 @@ After 6+ years of building systems and leading teams, I found myself at a crossr
 ## What I'm Building
 
 I'm working on a SaaS platform that solves a problem I've encountered repeatedly in my career. The goal is to launch an MVP within 3 months and start getting real users.
+
+![Alt text](./assets/image2.jpg)
 
 ## The Challenge
 

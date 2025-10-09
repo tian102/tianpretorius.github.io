@@ -4,11 +4,13 @@ description: A comprehensive SaaS platform with user management, billing, and an
 tags: [saas, react, node, typescript, stripe]
 demo: https://demo.example.com
 github: https://github.com/tianpretorius/saas-platform
-image: https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800
+coverImage: https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800
 date: 2024-03-15
 ---
 
 # SaaS Platform
+
+![Cover Image](https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800)
 
 A full-stack SaaS application designed to handle multi-tenant architecture with robust user management and subscription billing.
 

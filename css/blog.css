@@ -276,7 +276,23 @@
     margin: var(--spacing-lg) 0;
     color: var(--text-secondary);
     font-style: italic;
-}/* ==========================================
+}
+
+.blog-post-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: var(--spacing-xl) auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.blog-post-content img[alt] {
+    /* Add subtle border if image has alt text */
+    border: 1px solid var(--border-color);
+}
+
+/* ==========================================
    Utility Classes
    ========================================== */
 .hidden {

@@ -3,11 +3,13 @@ title: Building Scalable Systems: Lessons from 6+ Years
 date: 2024-09-28
 tags: architecture, engineering, best-practices, scalability
 author: Tian Pretorius
-image: https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=500&fit=crop
 tldr: Five essential lessons for building scalable systems: start simple, monitor everything, design databases carefully, automate early, and manage technical debt intentionally.
+coverImage: https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=500&fit=crop
 ---
 
 # Building Scalable Systems: Lessons from 6+ Years
+
+![Cover Image](https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=500&fit=crop)
 
 Key insights and lessons learned from building and scaling systems over 6+ years as a software engineer and CTO.
 

@@ -41,41 +41,65 @@ console.log('Building blog posts...');
 const blogPostsDir = path.join(__dirname, '../blog/posts');
 const blogPosts = [];
 
-const blogFiles = fs.readdirSync(blogPostsDir);
-console.log(`Found ${blogFiles.length} files in blog/posts`);
+const blogDirs = fs.readdirSync(blogPostsDir, { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => dirent.name);
+console.log(`Found ${blogDirs.length} blog post directories in blog/posts`);
 
-blogFiles.forEach(file => {
-    if (file.endsWith('.md')) {
-        console.log(`  Processing blog post: ${file}`);
-        const content = fs.readFileSync(path.join(blogPostsDir, file), 'utf8');
-        const { metadata, content: markdown } = parseFrontmatter(content);
-        const slug = file.replace('.md', '');
-        
-        // Extract excerpt from content (skip title, get first paragraph)
-        const lines = markdown.trim().split('\n');
-        let excerpt = '';
-        for (let i = 0; i < lines.length; i++) {
-            const line = lines[i].trim();
-            if (line && !line.startsWith('#')) {
-                excerpt = line.substring(0, 200);
-                if (excerpt.length === 200) excerpt += '...';
-                break;
-            }
-        }
-        
-        blogPosts.push({
-            slug,
-            filename: file,
-            title: metadata.title || 'Untitled',
-            date: metadata.date || new Date().toISOString().split('T')[0],
-            tags: metadata.tags || [],
-            author: metadata.author || 'Tian Pretorius',
-            image: metadata.image || '',
-            tldr: metadata.tldr || '',
-            content: markdown,
-            excerpt: excerpt || markdown.substring(0, 200) + '...'
-        });
+blogDirs.forEach(slug => {
+    const postIndexPath = path.join(blogPostsDir, slug, 'index.md');
+    
+    // Skip if index.md doesn't exist
+    if (!fs.existsSync(postIndexPath)) {
+        console.log(`  ⚠️  Warning: ${slug}/index.md not found, skipping...`);
+        return;
     }
+    
+    console.log(`  Processing blog post: ${slug}`);
+    const content = fs.readFileSync(postIndexPath, 'utf8');
+    const { metadata, content: markdown } = parseFrontmatter(content);
+    
+    // Extract excerpt from content (skip title, get first paragraph)
+    const lines = markdown.trim().split('\n');
+    let excerpt = '';
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (line && !line.startsWith('#')) {
+            excerpt = line.substring(0, 200);
+            if (excerpt.length === 200) excerpt += '...';
+            break;
+        }
+    }
+    
+    // Check for assets directory
+    const assetsDir = path.join(blogPostsDir, slug, 'assets');
+    const hasAssets = fs.existsSync(assetsDir);
+    
+    // Helper function to handle image paths
+    const getImagePath = (imagePath) => {
+        if (!imagePath) return '';
+        // If it's an external URL (starts with http:// or https://), return as-is
+        if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+            return imagePath;
+        }
+        // Otherwise, prepend the blog post path
+        return `blog/posts/${slug}/${imagePath}`;
+    };
+    
+    blogPosts.push({
+        slug,
+        title: metadata.title || 'Untitled',
+        date: metadata.date || new Date().toISOString().split('T')[0],
+        tags: metadata.tags || [],
+        author: metadata.author || 'Tian Pretorius',
+        image: getImagePath(metadata.image || metadata.coverImage),
+        coverImage: getImagePath(metadata.coverImage),
+        tldr: metadata.tldr || '',
+        content: markdown,
+        excerpt: excerpt || markdown.substring(0, 200) + '...',
+        assetsPath: hasAssets ? `blog/posts/${slug}/assets/` : '',
+        postPath: `blog/posts/${slug}/`
+    });
 });
 
 // Sort blog posts by date (newest first)
@@ -98,29 +122,53 @@ console.log('\nBuilding projects...');
 const projectsDir = path.join(__dirname, '../projects/posts');
 const projects = [];
 
-const projectFiles = fs.readdirSync(projectsDir);
-console.log(`Found ${projectFiles.length} files in projects/posts`);
+const projectDirs = fs.readdirSync(projectsDir, { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => dirent.name);
+console.log(`Found ${projectDirs.length} project directories in projects/posts`);
 
-projectFiles.forEach(file => {
-    if (file.endsWith('.md')) {
-        console.log(`  Processing project: ${file}`);
-        const content = fs.readFileSync(path.join(projectsDir, file), 'utf8');
-        const { metadata, content: markdown } = parseFrontmatter(content);
-        const slug = file.replace('.md', '');
-        
-        projects.push({
-            slug,
-            filename: file,
-            title: metadata.title || 'Untitled',
-            description: metadata.description || '',
-            tags: metadata.tags || [],
-            demo: metadata.demo || '',
-            github: metadata.github || '',
-            image: metadata.image || '',
-            date: metadata.date || '',
-            content: markdown
-        });
+projectDirs.forEach(slug => {
+    const projectIndexPath = path.join(projectsDir, slug, 'index.md');
+    
+    // Skip if index.md doesn't exist
+    if (!fs.existsSync(projectIndexPath)) {
+        console.log(`  ⚠️  Warning: ${slug}/index.md not found, skipping...`);
+        return;
     }
+    
+    console.log(`  Processing project: ${slug}`);
+    const content = fs.readFileSync(projectIndexPath, 'utf8');
+    const { metadata, content: markdown } = parseFrontmatter(content);
+    
+    // Check for assets directory
+    const assetsDir = path.join(projectsDir, slug, 'assets');
+    const hasAssets = fs.existsSync(assetsDir);
+    
+    // Helper function to handle image paths
+    const getImagePath = (imagePath) => {
+        if (!imagePath) return '';
+        // If it's an external URL (starts with http:// or https://), return as-is
+        if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+            return imagePath;
+        }
+        // Otherwise, prepend the project path
+        return `projects/posts/${slug}/${imagePath}`;
+    };
+    
+    projects.push({
+        slug,
+        title: metadata.title || 'Untitled',
+        description: metadata.description || '',
+        tags: metadata.tags || [],
+        demo: metadata.demo || '',
+        github: metadata.github || '',
+        image: getImagePath(metadata.image || metadata.coverImage),
+        coverImage: getImagePath(metadata.coverImage),
+        date: metadata.date || '',
+        content: markdown,
+        assetsPath: hasAssets ? `projects/posts/${slug}/assets/` : '',
+        projectPath: `projects/posts/${slug}/`
+    });
 });
 
 // Sort projects by date (newest first)

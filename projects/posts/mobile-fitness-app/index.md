@@ -4,11 +4,13 @@ description: Cross-platform mobile app for workout tracking, meal planning, and 
 tags: [react-native, mobile, firebase, typescript]
 demo: https://apps.apple.com/app/fitness-tracker
 github: 
-image: https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800
+coverImage: https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800
 date: 2023-11-10
 ---
 
 # Mobile Fitness Tracker
+
+![Cover Image](https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800)
 
 A comprehensive fitness tracking application built with React Native, featuring workout logging, nutrition tracking, and detailed progress analytics.
 

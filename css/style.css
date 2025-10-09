@@ -903,6 +903,8 @@ body.home .contact-preview > .container {
     height: 100%;
     object-fit: cover;
     transition: transform var(--transition-slow);
+    position: relative;
+    z-index: 1;
 }
 
 .project-card:hover .project-image img {
@@ -920,11 +922,14 @@ body.home .contact-preview > .container {
     align-items: center;
     justify-content: center;
     opacity: 0;
+    pointer-events: none;
     transition: opacity var(--transition-base);
+    z-index: 2;
 }
 
 .project-card:hover .project-overlay {
     opacity: 1;
+    pointer-events: auto;
 }
 
 .project-links {
@@ -1280,6 +1285,20 @@ body.home .contact-preview > .container {
 .project-detail-content pre code {
     background: none;
     padding: 0;
+}
+
+.project-detail-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: var(--spacing-md) auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.project-detail-content img[alt] {
+    /* Add subtle border if image has alt text */
+    border: 1px solid var(--border-color);
 }
 
 /* ==========================================

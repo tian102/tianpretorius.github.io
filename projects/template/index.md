@@ -4,13 +4,23 @@ description: A concise one-sentence description of what this project does and th
 tags: [technology1, technology2, technology3, technology4]
 demo: https://your-live-demo-url.com
 github: https://github.com/yourusername/your-repo
-image: https://via.placeholder.com/400x250/1a1a1a/00ff88?text=Your+Project
+coverImage: cover.jpg
+image: cover.jpg
 date: 2024-01-01
 ---
 
 # Your Project Name
 
+![Project Cover](./cover.jpg)
+
 A brief introduction that expands on your project description. Explain what motivated you to build this project and what makes it unique or interesting.
+
+## Using Images in Your Project
+
+With the new modular structure:
+- Store your main project image as `cover.jpg` in the project directory
+- Add screenshots and diagrams to the `assets/` folder
+- Reference them with relative paths: `![Screenshot](./assets/screenshot.jpg)`
 
 ## 🎯 Project Overview
 
@@ -177,6 +187,38 @@ State the license (e.g., MIT, Apache 2.0, etc.)
 - **GitHub Repository**: [github.com/yourusername/repo](https://github.com/yourusername/repo)
 - **Documentation**: [Link to docs if available]
 - **Blog Post**: [Link to related blog post if you wrote one]
+
+---
+
+## 📁 Directory Structure for This Project
+
+```
+projects/posts/your-project-slug/
+├── index.md          # This file (your project description)
+├── cover.jpg         # Main project image/screenshot
+└── assets/           # Additional images and files
+    ├── screenshot1.jpg    # Feature screenshots
+    ├── screenshot2.jpg
+    ├── architecture.svg   # Diagrams
+    ├── demo.gif          # Demo animations
+    └── logo.png          # Project logo
+```
+
+**Best Practices for Project Files:**
+- Use a high-quality cover image that represents your project well
+- Include screenshots showing key features
+- Add architecture diagrams if relevant
+- Consider adding a demo GIF showing the project in action
+- Optimize all images for web (compress and resize)
+- Use descriptive filenames
+- Reference images with relative paths in your markdown
+
+**Example Image Usage:**
+```markdown
+![Feature Demo](./assets/feature-demo.gif)
+![Architecture Diagram](./assets/architecture.svg)
+![Dashboard Screenshot](./assets/dashboard.jpg)
+```
 
 ---
 
