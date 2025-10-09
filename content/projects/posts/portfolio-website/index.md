@@ -1,19 +1,22 @@
 ---
-title: Portfolio Website with Markdown Content System
+title: 1. Portfolio Website with Markdown Content System
 description: A vanilla JavaScript portfolio with custom markdown-based content management, built the hard way because I refused to learn Jekyll.
 tags: [css, js, html, markdown, github, node]
 demo: https://tianpretorius.github.io
 github: https://github.com/tian102/tianpretorius.github.io
 coverImage: https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?w=1200&h=630&fit=crop
-image: https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?w=1200&h=630&fit=crop
 date: 2024-10-09
 ---
 
 # Portfolio Website with Markdown Content System
 
-A custom-built portfolio website that takes markdown files and turns them into a dynamic, navigable site—all without frameworks, without a backend, and definitely without using the perfectly good tools that already existed.
+## Reinventing the Wheel
 
-## 🎯 Project Overview
+I built this portfolio the hard way—no frameworks, no backend, no Jekyll—just Node.js, vanilla JavaScript, and a stubborn streak. Every markdown file, asset, and route is handled by a custom system I wrote myself. Sure, it took a bunch of hours to do what a few commands in Jekyll could’ve done, but along the way I learned everything about build automation, client-side routing, and modular site design—and now I have a portfolio that’s annoyingly mine.
+
+![Cover Image](https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?w=1200&h=630&fit=crop)
+
+## Project Overview
 
 This portfolio was born from necessity (needing a place to showcase my work) and fueled by stubbornness (refusing to do things the easy way).
 
@@ -27,7 +30,7 @@ Classic developer move, right?
 
 But in the process, I learned a lot, built something that's truly mine, and ended up with a portfolio system that works exactly the way I want it to.
 
-## ✨ Key Features
+## Key Features
 
 - **Markdown-Based Content Management**: Write blog posts and project descriptions in markdown, complete with frontmatter for metadata
 - **Automated Build System**: Node.js script that parses markdown files and generates JSON data at build time
@@ -36,7 +39,7 @@ But in the process, I learned a lot, built something that's truly mine, and ende
 - **Zero Backend Dependencies**: Everything is statically generated and served, keeping hosting costs at exactly $0
 - **Responsive Design**: Mobile-first approach with smooth animations and transitions
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 ### Frontend
 - **Vanilla JavaScript**: No frameworks—just pure JS for maximum control and minimal bundle size
@@ -60,7 +63,7 @@ But in the process, I learned a lot, built something that's truly mine, and ende
 - **GitHub Pages**: Free static hosting with custom domain support
 - **Git-Based Workflow**: Push to main branch triggers automatic deployment
 
-## 🏗️ Architecture & Design Decisions
+## Architecture & Design Decisions
 
 ### Why Vanilla JavaScript Over Frameworks?
 
@@ -123,7 +126,7 @@ Instead of fetching markdown files and parsing them in the browser, the build sc
 
 The trade-off? I have to run `npm run build` every time I add or update content. But with GitHub Actions, that's automated anyway.
 
-## 📊 Results & Outcomes
+## Results & Outcomes
 
 ### Performance
 - **JavaScript Bundle**: ~50KB unminified (could be smaller with minification)
@@ -144,7 +147,7 @@ The trade-off? I have to run `npm run build` every time I add or update content.
 - **History API**: Client-side routing without frameworks
 - **The Value of Existing Tools**: Sometimes the wheel doesn't need reinventing (but it's fun anyway)
 
-## 🤔 Challenges & Lessons Learned
+## Challenges & Lessons Learned
 
 ### The Jekyll Realization
 
@@ -177,7 +180,7 @@ But here's the thing: I don't regret it. Those 10 hours taught me things I would
 - **Performance Optimization**: Minify and bundle JavaScript
 - **Progressive Web App**: Add service worker for offline support
 
-## 💡 Key Takeaways
+## Key Takeaways
 
 1. **Constraints Drive Creativity**: Having no budget forced me to find free solutions and build creatively
 2. **Stubbornness Has Its Place**: Sometimes doing things the hard way teaches you more than the easy way

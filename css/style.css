@@ -1238,6 +1238,7 @@ body.home .contact-preview > .container {
 
 .project-detail-content {
     padding: var(--spacing-2xl) 0;
+    padding-top: var(--spacing-xs) 0;
     max-width: 800px;
 }
 

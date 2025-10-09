@@ -41,7 +41,8 @@ A JavaScript utility that provides:
 - `ContentLoader.populate(elementId, contentPath)` - Populate single element
 - `ContentLoader.populateMultiple(mappings)` - Populate multiple elements at once
 - `ContentLoader.renderAboutSections(containerId)` - Render about page sections
-- `ContentLoader.renderSkills(containerId)` - Render skills tags
+- `ContentLoader.renderHomeSkills(containerId)` - Render collapsible skills categories (homepage)
+- `ContentLoader.renderSkills(containerId)` - Render skills tags (about page sidebar)
 - `ContentLoader.renderExperience(containerId)` - Render experience items
 - `ContentLoader.renderContactMethods(containerId)` - Render contact methods
 - `ContentLoader.renderFooter(containerId)` - Render footer content
@@ -50,8 +51,10 @@ A JavaScript utility that provides:
 ### 3. Page Integration
 Each HTML page includes:
 1. IDs on content elements (e.g., `id="hero-description"`)
-2. Content loader script: `<script src="js/content-loader.js"></script>`
+2. Content loader script: `<script src="js/content-loader.js?v=VERSION"></script>`
 3. Initialization code to load and populate content
+
+**Note**: Cache versioning (e.g., `?v=20251009-59`) is used to ensure browsers load the latest version of CSS/JS files after updates.
 
 ## Editing Content
 
@@ -84,23 +87,33 @@ Each HTML page includes:
 }
 ```
 
-### Example: Adding a New Skill
+### Example: Adding a New Skill Category (Homepage)
 
-In the `about.sidebar.skills.tags` array:
+In the `homepage.skills.categories` array:
 ```json
 {
-  "about": {
-    "sidebar": {
-      "skills": {
-        "title": "Skills & Technologies",
-        "tags": [
-          "JavaScript",
-          "TypeScript",
-          "Your New Skill Here"  // ← Add here
-        ]
-      }
+  "homepage": {
+    "skills": {
+      "categories": [
+        {
+          "name": "Frontend",
+          "tags": ["React", "Vue.js", "TypeScript"]
+        },
+        {
+          "name": "Your New Category",  // ← Add new category
+          "tags": ["Tool 1", "Tool 2", "Tool 3"]
+        }
+      ]
     }
   }
+}
+```
+
+Or add to existing category's tags array:
+```json
+{
+  "name": "Frontend",
+  "tags": ["React", "Vue.js", "TypeScript", "Your New Skill"]  // ← Add here
 }
 ```
 
@@ -126,7 +139,8 @@ In the `about.sidebar.skills.tags` array:
 ### index.html
 - Hero section (greeting, name, description, CTAs)
 - Hero typed text animation
-- Blog section subtitle
+- About section with collapsible skill categories
+- Featured projects and blog posts
 - Contact preview
 - Footer
 
@@ -146,10 +160,14 @@ In the `about.sidebar.skills.tags` array:
 
 ### blog.html
 - Page title and tagline
+- Blog post listings with filtering and search
+- Individual post pages with TOC sidebar
 - Footer
 
 ### projects.html
 - Page title and tagline
+- Project listings with filtering
+- Individual project pages with TOC sidebar
 - Footer
 
 ## Benefits
@@ -173,6 +191,12 @@ In the `about.sidebar.skills.tags` array:
 - Quick content updates
 - No need to understand HTML structure
 - Version control friendly
+
+### ✅ Enhanced User Experience
+- Collapsible skill categories keep content organized
+- TOC sidebar for easy navigation on long posts
+- Smooth animations and transitions
+- Responsive design across all devices
 
 ## Build & Deploy Process
 
@@ -242,7 +266,26 @@ In the `about.sidebar.skills.tags` array:
 }
 ```
 
-### Sidebar Content
+### Homepage Skills (Collapsible Categories)
+```json
+"homepage": {
+  "skills": {
+    "title": "Skills & Technologies",
+    "categories": [
+      {
+        "name": "Frontend",
+        "tags": ["React", "Vue.js", "TypeScript"]
+      },
+      {
+        "name": "Backend",
+        "tags": ["Node.js", "Python", "PostgreSQL"]
+      }
+    ]
+  }
+}
+```
+
+### Sidebar Content (About Page)
 ```json
 "sidebar": {
   "skills": {
@@ -261,7 +304,8 @@ In the `about.sidebar.skills.tags` array:
   },
   "currentFocus": {
     "title": "Current Focus",
-    "text": "What you're working on"
+    "intro": "Brief intro text",
+    "list": ["Focus Area 1", "Focus Area 2"]
   }
 }
 ```
@@ -319,6 +363,12 @@ In the `about.sidebar.skills.tags` array:
 - Check element has class `typed-text`
 - Verify `ContentLoader.initHeroTypedText()` is called
 
+### Collapsible Elements Not Working
+- Check that details/summary structure is correct in HTML
+- Verify CSS includes transitions and chevron rotation
+- Clear browser cache (Ctrl+Shift+R or Cmd+Shift+R)
+- Check browser console for JavaScript errors
+
 ## Technical Details
 
 ### Content Loading Flow
@@ -352,6 +402,27 @@ Content is loaded once and cached. Subsequent calls to `ContentLoader.get()` use
 - Don't edit generated JSON files (`blog-posts.json`, `projects.json`)
 - Don't remove element IDs from HTML pages
 
+## UI Features
+
+### Table of Contents (TOC)
+Blog and project detail pages automatically generate a navigable table of contents:
+
+- **Auto-generation**: Parses H2 and H3 headings from markdown content
+- **Nested Structure**: H3 headings grouped under parent H2s
+- **Collapsible**: TOC and H2 sections can be expanded/collapsed
+- **Sticky Positioning**: Follows scroll, stays below navbar
+- **Active Highlighting**: Current section highlighted during scroll
+- **Smooth Navigation**: Clicking TOC links scrolls smoothly to sections
+
+### Collapsible Skills Categories (Homepage)
+The About section on the homepage displays skills in collapsible categories:
+
+- **Card Design**: Each category is a styled card with border and hover effects
+- **Collapsed by Default**: Categories start collapsed for clean appearance
+- **Chevron Icons**: Visual indicator of expand/collapse state (rotates 180°)
+- **Smooth Animations**: CSS transitions for opening/closing
+- **Category Organization**: Skills grouped logically (Frontend, Backend, etc.)
+
 ## Future Enhancements
 
 Potential improvements to the content management system:
@@ -364,6 +435,8 @@ Potential improvements to the content management system:
 6. **Media Management**: Images and assets in JSON
 7. **Content Search**: Find content across all sections
 8. **Import/Export**: Backup and restore content
+9. **TOC Enhancements**: Search functionality, bookmark support
+10. **Dark Mode Improvements**: Enhanced theme consistency
 
 ## Summary
 

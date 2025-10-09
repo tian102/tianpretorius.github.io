@@ -7,8 +7,10 @@ Personal portfolio website showcasing my work, skills, and blog posts. Built wit
 ## 🚀 Features
 
 - **Responsive Design** - Works seamlessly across all devices
-- **Blog System** - Markdown-based blog with tags, filtering, and search
-- **Projects Showcase** - Filterable project portfolio with detailed pages
+- **Blog System** - Markdown-based blog with tags, filtering, search, and navigable table of contents
+- **Projects Showcase** - Filterable project portfolio with detailed pages and table of contents navigation
+- **Centralized Content Management** - All site text managed from a single JSON file
+- **Collapsible UI Components** - Interactive collapsible sections for better UX (TOC, skills categories)
 - **No Framework Bloat** - Pure vanilla JavaScript for optimal performance
 - **GitHub Pages Compatible** - Pre-built JSON for static hosting
 
@@ -23,16 +25,18 @@ Personal portfolio website showcasing my work, skills, and blog posts. Built wit
 ├── projects/
 │   └── posts/          # Project details in markdown
 ├── css/                # Stylesheets
-│   ├── style.css
-│   └── blog.css
+│   ├── style.css       # Main styles + collapsible skills
+│   └── blog.css        # Blog/project styles + TOC sidebar
 ├── js/                 # JavaScript functionality
 │   ├── main.js         # Navigation and common features
-│   ├── blog.js         # Blog functionality
-│   ├── projects.js     # Projects page
+│   ├── content-loader.js # Content management system
+│   ├── blog.js         # Blog functionality + TOC generation
+│   ├── projects.js     # Projects page + TOC generation
 │   └── index.js        # Homepage featured content
-├── data/               # Generated JSON (auto-built)
-│   ├── blog-posts.json
-│   └── projects.json
+├── data/               # Generated JSON (auto-built) + site content
+│   ├── site-content.json  # Centralized content management
+│   ├── blog-posts.json    # Generated from markdown
+│   └── projects.json      # Generated from markdown
 ├── scripts/
 │   └── build-content.js # Build script for JSON generation
 ├── .github/workflows/  # GitHub Actions
@@ -129,9 +133,19 @@ To manually trigger the build:
 
 ## 🔧 Development Workflow
 
+### Editing Site Content
+1. Edit text in `data/site-content.json` (hero, about, contact, footer, etc.)
+2. Refresh browser - changes appear immediately!
+3. No build step needed for content updates
+
+### Editing Blog/Project Posts
+1. Edit markdown files in `blog/posts/` or `projects/posts/`
+2. Run `npm run build` to generate JSON
+3. Commit and push (or let GitHub Actions auto-build)
+
 ### Before Deploying to GitHub Pages
 ```bash
-# Always build before pushing
+# Build JSON from markdown (if you edited blog/project posts)
 npm run build
 
 # Check what files changed
@@ -150,6 +164,16 @@ GitHub Pages doesn't allow fetching `.md` files directly via JavaScript due to C
 - ✅ Improve load performance (no markdown parsing in browser)
 - ✅ Keep markdown files as source of truth
 - ✅ Enable automatic builds via GitHub Actions
+
+### Content Management System
+
+All static site text (hero section, about page, contact info, footer, etc.) is centralized in `data/site-content.json`. This allows you to:
+- ✅ Edit all site text from a single file
+- ✅ No HTML knowledge required for content updates
+- ✅ Instant updates (just refresh browser)
+- ✅ Maintain consistency across all pages
+
+See [CONTENT_MANAGEMENT.md](CONTENT_MANAGEMENT.md) for detailed documentation.
 
 ## 📝 Content Guidelines
 
@@ -185,6 +209,34 @@ GitHub Pages doesn't allow fetching `.md` files directly via JavaScript due to C
 - Verify workflow has necessary permissions in repo settings
 - Check Actions tab for error logs
 
+## ✨ Recent Features
+
+### Table of Contents (TOC) Navigation
+- Automatically generated TOC sidebar on blog and project posts
+- Collapsible by default with expand/collapse functionality
+- Nested structure (H2 headings with collapsible H3 subheadings)
+- Sticky positioning that follows scroll
+- Active section highlighting during scroll
+- Smooth navigation to heading sections
+
+### Collapsible UI Components
+- Skills section on homepage: collapsible categories with card design
+- TOC sections: nested collapsible structure for better organization
+- Smooth CSS transitions and chevron icon animations
+- Consistent details/summary pattern across the site
+
+### Modular Content Structure
+- Each blog post/project in its own directory
+- Assets organized alongside content
+- Easy to manage and version control
+- See [MODULAR-STRUCTURE.md](MODULAR-STRUCTURE.md) for details
+
+## 📚 Documentation
+
+- **[CONTENT_MANAGEMENT.md](CONTENT_MANAGEMENT.md)** - Complete guide to editing site content via JSON
+- **[MODULAR-STRUCTURE.md](MODULAR-STRUCTURE.md)** - Understanding the blog/project directory structure
+- **[IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)** - Technical implementation overview
+
 ## 📄 License
 
 MIT License - Feel free to use this template for your own portfolio!
@@ -192,7 +244,7 @@ MIT License - Feel free to use this template for your own portfolio!
 ## 🤝 Contact
 
 - **Email**: tianpretorius@gmail.com
-- **GitHub**: [@tianpretorius](https://github.com/tianpretorius)
+- **GitHub**: [@tian102](https://github.com/tian102)
 - **LinkedIn**: [Tian Pretorius](https://www.linkedin.com/in/tian-pretorius-817a2189/)
 
 ---

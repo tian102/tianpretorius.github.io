@@ -173,11 +173,20 @@ The build script (`scripts/build-content.js`) automatically:
 - Parses frontmatter and extracts metadata
 - Generates `data/blog-posts.json` and `data/projects.json`
 - Includes asset paths in the generated JSON
+- Preserves markdown content for rendering on detail pages
 
 **Run the build**:
 ```bash
+npm run build
+# or
 node scripts/build-content.js
 ```
+
+**What happens after build**:
+1. JSON files created in `data/` directory
+2. Blog and project pages read from JSON
+3. Individual post/project pages render markdown as HTML
+4. Table of contents automatically generated from H2/H3 headings
 
 ## Migration
 
@@ -197,6 +206,49 @@ Backups are created automatically in:
 - `blog/posts-backup/`
 - `projects/posts-backup/`
 
+## Enhanced Features
+
+### Table of Contents (TOC)
+When you view individual blog posts or projects, a table of contents is automatically generated:
+
+- **Auto-generated**: Parses H2 and H3 headings from your markdown
+- **Collapsible**: Main TOC and H2 sections can be expanded/collapsed
+- **Nested Structure**: H3 headings appear under their parent H2s
+- **Sticky Navigation**: TOC follows you as you scroll
+- **Active Highlighting**: Current section is highlighted
+- **Click to Navigate**: Click any heading to jump to that section
+
+**How it works**:
+1. Write markdown with H2 (`##`) and H3 (`###`) headings
+2. Build script converts markdown to HTML
+3. JavaScript extracts headings and generates TOC
+4. TOC appears on the page automatically
+
+**Example markdown structure**:
+```markdown
+## Main Section 1
+Content here...
+
+### Subsection 1.1
+More content...
+
+### Subsection 1.2
+Even more content...
+
+## Main Section 2
+Different content...
+
+### Subsection 2.1
+Final content...
+```
+
+This creates a TOC like:
+- Main Section 1 (collapsible)
+  - Subsection 1.1
+  - Subsection 1.2
+- Main Section 2 (collapsible)
+  - Subsection 2.1
+
 ## Benefits of Modular Structure
 
 ✅ **Self-contained**: Each post/project has all its assets in one place  
@@ -205,14 +257,15 @@ Backups are created automatically in:
 ✅ **Portable**: Easy to move posts between projects  
 ✅ **Scalable**: Clean structure even with hundreds of posts  
 ✅ **Version control**: See all changes to a post in one place  
+✅ **TOC-friendly**: H2/H3 structure automatically creates navigation  
 
 ## Troubleshooting
 
 ### Images not loading?
 - Check that paths use `./` prefix: `![Image](./assets/image.jpg)`
 - Verify image files exist in the correct location
-- Run the build script: `node scripts/build-content.js`
-- Clear browser cache (Ctrl+Shift+R)
+- Run the build script: `npm run build`
+- Clear browser cache (Ctrl+Shift+R or Cmd+Shift+R)
 
 ### Post not appearing?
 - Ensure `index.md` exists in the post directory
@@ -225,6 +278,51 @@ Backups are created automatically in:
 - Verify frontmatter has closing `---`
 - Ensure no special characters in directory names (use lowercase with hyphens)
 
+### TOC not showing?
+- Ensure your markdown has H2 (`##`) or H3 (`###`) headings
+- H1 (`#`) headings are ignored (reserved for post title)
+- Build script must be run after markdown changes
+- Check browser console for JavaScript errors
+
+### TOC sections not collapsible?
+- H2 headings only show expand arrow if they have H3 children
+- Main TOC is always collapsible
+- Clear cache and hard refresh browser
+
+### Content not updating?
+- Run `npm run build` after editing markdown
+- Check that JSON files were regenerated in `data/`
+- Clear browser cache (Ctrl+Shift+R)
+
+## Writing Tips for Better TOC
+
+### Use Proper Heading Hierarchy
+```markdown
+# Post Title (H1 - used for page title, not in TOC)
+
+## Introduction (H2 - appears in TOC as main section)
+Content here...
+
+## Main Topic (H2 - collapsible if it has H3 children)
+
+### Subtopic 1 (H3 - nested under Main Topic)
+Content...
+
+### Subtopic 2 (H3 - nested under Main Topic)
+Content...
+
+## Conclusion (H2 - appears in TOC as main section)
+Final thoughts...
+```
+
+### Best Practices
+- ✅ Use descriptive heading text (becomes TOC labels)
+- ✅ Keep headings concise (TOC has limited width)
+- ✅ Use H2 for main sections, H3 for subsections
+- ✅ Don't skip levels (H2 → H4 is bad structure)
+- ❌ Avoid special characters in headings (affects ID generation)
+- ❌ Don't use H1 in content (reserved for post title)
+
 ## Quick Reference
 
 ```bash
@@ -236,17 +334,36 @@ cp content/blog/template/index.md content/blog/posts/my-new-post/index.md
 mkdir content/projects/posts/my-new-project && mkdir content/projects/posts/my-new-project/assets
 cp content/projects/template/index.md content/projects/posts/my-new-project/index.md
 
-# Build content
-node scripts/build-content.js
+# Build content (generates JSON from markdown)
+npm run build
 
-# View structure
-tree blog/posts       # On Windows (PowerShell: tree /F)
-tree projects/posts
+# Test locally
+npx serve .
+# or
+python -m http.server 8080
+
+# View structure (PowerShell on Windows)
+tree blog\posts /F
+tree projects\posts /F
 ```
+
+## Summary
+
+The modular structure combined with automatic TOC generation provides:
+
+1. **Organization**: Each post/project is self-contained with all assets
+2. **Navigation**: Automatic table of contents for easy navigation
+3. **Flexibility**: Easy to add, edit, or remove content
+4. **Performance**: Pre-built JSON for fast loading
+5. **Developer Experience**: Clear structure, easy to understand
+6. **User Experience**: Enhanced navigation with collapsible sections
+
+Simply create a folder, add `index.md` with proper H2/H3 headings, run `npm run build`, and you have a fully navigable post with automatic table of contents!
 
 ## Questions?
 
-If you encounter any issues or have questions about the new structure, refer to:
-- Template files: `content/blog/template/index.md` and `content/projects/template/index.md`
-- Migration scripts: `scripts/migrate-blog-to-modular.js` and `scripts/migrate-projects-to-modular.js`
-- Build script: `scripts/build-content.js`
+If you encounter any issues or have questions about the structure, refer to:
+- **Template files**: `content/blog/template/index.md` and `content/projects/template/index.md`
+- **Build script**: `scripts/build-content.js`
+- **Content management**: See `CONTENT_MANAGEMENT.md` for editing site text
+- **Implementation details**: See `IMPLEMENTATION_SUMMARY.md` for technical details

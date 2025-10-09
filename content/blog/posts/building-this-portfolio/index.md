@@ -17,7 +17,7 @@ But here's what I've learned: when you're a builder at heart, you don't stop bui
 
 ## Why I Built This
 
-At first, it was purely practical. I needed a portfolio. A place to showcase my work, share my thoughts, and hopefully catch the attention of someone who might want to hire me. The standard LinkedIn profile and resume just weren't cutting it—I needed something more, something that showed not just what I'd done, but who I am as an engineer.
+At first, it was purely practical. I needed a portfolio. A place to showcase my work, share my thoughts, and hopefully catch the attention of someone who might want to hire me. The standard [LinkedIn](https://www.linkedin.com/in/tian-pretorius-817a2189/ "LinkedIn - Tian Pretorius") profile and [Resume](/assets/Tian-Pretorius-CV.pdf "CV - Tian Pretorius") just weren't cutting it—I needed something more, something that showed not just what I'd done, but who I am as an engineer.
 
 But as I started working on it, something shifted. The act of building this site became more than just a job-hunting tool. It became a lifeline.
 
@@ -29,9 +29,9 @@ When you're unemployed, it's easy to lose your sense of purpose. Days blend toge
 
 Here's the thing about being unemployed: you don't have money for fancy hosting services. No AWS credits, no Vercel Pro, no fancy CDN. Every dollar counts.
 
-So I went looking for free hosting options, and that's when I found GitHub Pages.
+So I went looking for free hosting options, and that's when I found [GitHub Pages](https://docs.github.com/en/pages "GitHub Pages documentation").
 
-It was perfect—free, reliable, and git-based (which I already knew). But it came with its own quirks. GitHub Pages is designed for static sites, and while that's great for performance, it meant I had to think differently about how I structured everything.
+It was perfect—free, reliable, and git-based (which I already knew). But it came with its own quirks. [GitHub Pages](https://docs.github.com/en/pages "GitHub Pages documentation") is designed for static sites, and while that's great for performance, it meant I had to think differently about how I structured everything.
 
 No backend. No database. Just HTML, CSS, JavaScript, and some markdown files.
 
@@ -43,11 +43,11 @@ Instead of reaching for a framework or a CMS, I had to think about what I actual
 
 Was it smooth sailing? Not exactly.
 
-GitHub Pages has its quirks—deployment can be finicky, there are some limitations on how you can structure things, and the documentation assumes you know more than you might. I hit walls. I got frustrated. There were definitely moments where I wanted to just pay for hosting somewhere else and be done with it.
+[GitHub Pages](https://docs.github.com/en/pages "GitHub Pages documentation") has its quirks—deployment can be finicky, there are some limitations on how you can structure things, and the documentation assumes you know more than you might. I hit walls. I got frustrated. There were definitely moments where I wanted to just pay for hosting somewhere else and be done with it.
 
 But I'm stubborn. Maybe too stubborn.
 
-There's a longer story about my stubbornness and some questionable decisions (like reinventing wheels that didn't need reinventing), but I'll save that for the project breakdown. Let's just say I learned a lot about what *not* to do, even if I did it anyway.
+There's a longer story about my stubbornness and some questionable decisions (like reinventing wheels that didn't need reinventing), but I'll save that for the [project](projects.html?project=portfolio-website "Portfolio Website with Markdown Content System") breakdown. Let's just say I learned a lot about what *not* to do, even if I did it anyway.
 
 ## What I Hope This Brings
 
@@ -83,4 +83,4 @@ Because the act of creating, of making something from nothing, is its own reward
 
 ---
 
-*If you want to know more about the technical side of this portfolio and the (questionable) decisions I made along the way, check out the project breakdown. Spoiler: I was way more stubborn than I should have been.*
+*If you want to know more about the technical side of this portfolio and the (questionable) decisions I made along the way, check out the [project](projects.html?project=portfolio-website "Portfolio Website with Markdown Content System") breakdown.*
