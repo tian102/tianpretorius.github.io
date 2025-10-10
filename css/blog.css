@@ -46,9 +46,9 @@
    Blog Post Individual View
    ========================================== */
 #blog-post {
-    max-width: 800px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: var(--spacing-3xl) var(--spacing-xl);
+    padding: 0;
 }
 
 .blog-post {
@@ -607,11 +607,33 @@
         flex-direction: column;
         gap: var(--spacing-sm);
     }
+    
+    /* Fix mobile padding - remove outer container padding to prevent double padding */
+    #blog-post {
+        padding: 0;
+        max-width: 100%;
+    }
+    
+    #project-detail {
+        padding: 0;
+        max-width: 100%;
+    }
+    
+    /* Match .container mobile padding for consistency */
+    .blog-post-detail-wrapper,
+    .project-detail-wrapper {
+        padding: var(--spacing-2xl) var(--spacing-md);
+    }
 }
 
 @media (max-width: 568px) {
+    /* Remove outer container padding completely on small mobile */
     #blog-post {
-        padding: var(--spacing-xl) var(--spacing-md);
+        padding: 0;
+    }
+    
+    #project-detail {
+        padding: 0;
     }
     
     .blog-content {
@@ -629,6 +651,12 @@
     .blog-post-header {
         margin-bottom: var(--spacing-2xl);
         padding-bottom: var(--spacing-md);
+    }
+    
+    /* Reduce horizontal padding on mobile for better content width */
+    .blog-post-detail-wrapper,
+    .project-detail-wrapper {
+        padding: var(--spacing-2xl) var(--spacing-md);
     }
 }
 
@@ -755,7 +783,7 @@
     gap: var(--spacing-2xl);
     max-width: 1400px;
     margin: 0 auto;
-    padding: var(--spacing-3xl) var(--spacing-xl);
+    padding: var(--spacing-3xl) var(--spacing-lg);
     position: relative;
     align-items: flex-start;
 }
