@@ -8,8 +8,7 @@
       "github": "https://github.com/tian102",
       "linkedin": "https://www.linkedin.com/in/tian-pretorius-817a2189/",
       "email": "mailto:tianpretorius@gmail.com"
-    },
-    "resume": "assets/Tian-Pretorius-CV.pdf"
+    }
   },
   
   "hero": {
@@ -232,8 +231,18 @@
       { "text": "Blog", "url": "blog.html" },
       { "text": "Contact", "url": "contact.html" }
     ],
-    "resumeLink": "assets/Tian-Pretorius-CV.pdf",
-    "resumeText": "Résumé"
+    "documents": [
+      {
+        "name": "Résumé",
+        "file": "assets/docs/Tian-Pretorius-CV.pdf",
+        "type": "pdf"
+      },
+      {
+        "name": "Cover Letter",
+        "file": "assets/docs/Tian-Pretorius-Cover-Letter.pdf",
+        "type": "pdf"
+      }
+    ]
   },
   
   "homepage": {

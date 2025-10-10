@@ -553,9 +553,15 @@
                 return `<li><a href="${link.url}" class="nav-link${isActive ? ' active' : ''}">${link.text}</a></li>`;
             }).join('');
             
-            const resumeHtml = `<li><a href="${nav.resumeLink}" class="nav-link resume-link" download>${nav.resumeText}</a></li>`;
+            // Remove resume link - will be replaced by dropdown
+            // const resumeHtml = `<li><a href="${nav.resumeLink}" class="nav-link resume-link" download>${nav.resumeText}</a></li>`;
             
-            navMenu.innerHTML = linksHtml + resumeHtml;
+            navMenu.innerHTML = linksHtml; // + resumeHtml;
+            
+            // Render documents dropdown after navigation is set up
+            if (typeof renderDocumentsDropdown === 'function') {
+                renderDocumentsDropdown();
+            }
         }
     }
 

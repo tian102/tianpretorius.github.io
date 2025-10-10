@@ -158,3 +158,81 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+// Function to render documents dropdown in navbar
+function renderDocumentsDropdown() {
+    console.log('renderDocumentsDropdown called');
+    
+    // Check if dropdown already exists
+    if (document.querySelector('.nav-dropdown')) {
+        console.log('Dropdown already exists');
+        return;
+    }
+    
+    // Load site content
+    fetch('data/site-content.json')
+        .then(response => response.json())
+        .then(siteContent => {
+            console.log('siteContent loaded:', siteContent);
+            const documents = siteContent.navigation?.documents || [];
+            console.log('documents:', documents);
+            
+            if (documents.length === 0) {
+                console.log('No documents found');
+                return;
+            }
+            
+            // Find the nav-menu ul element
+            const navMenu = document.querySelector('.nav-menu');
+            console.log('navMenu found:', navMenu);
+            if (!navMenu) {
+                console.log('navMenu not found!');
+                return;
+            }
+            
+            // Create dropdown HTML
+            const dropdownHTML = `
+                <li class="nav-dropdown">
+                    <button class="nav-dropdown-toggle">Docs</button>
+                    <ul class="nav-dropdown-menu">
+                        ${documents.map(doc => `
+                            <li class="nav-dropdown-item">
+                                <a href="${doc.file}" target="_blank" rel="noopener noreferrer">${doc.name}</a>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </li>
+            `;
+            
+            // Insert before the closing </ul> tag
+            console.log('Inserting dropdown HTML');
+            navMenu.insertAdjacentHTML('beforeend', dropdownHTML);
+            console.log('HTML inserted, checking if elements exist...');
+            
+            // Verify the elements were added
+            const dropdownToggle = navMenu.querySelector('.nav-dropdown-toggle');
+            const dropdownMenu = navMenu.querySelector('.nav-dropdown-menu');
+            console.log('dropdownToggle after insertion:', dropdownToggle);
+            console.log('dropdownMenu after insertion:', dropdownMenu);
+            
+            if (dropdownToggle && dropdownMenu) {
+                dropdownToggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    dropdownMenu.classList.toggle('active');
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!dropdownToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                        dropdownMenu.classList.remove('active');
+                    }
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error loading site content for navbar:', error);
+        });
+}
+
+// Make function globally available
+window.renderDocumentsDropdown = renderDocumentsDropdown;

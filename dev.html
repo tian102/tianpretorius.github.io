@@ -19,12 +19,7 @@
                 </a>
             </div>
             <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
-                <li><a href="projects.html" class="nav-link">Projects</a></li>
-                <li><a href="blog.html" class="nav-link">Blog</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
-                <li><a href="assets/Tian-Pretorius-CV.pdf" class="nav-link resume-link" download>Resume</a></li>
+                <!-- Navigation links will be loaded dynamically -->
             </ul>
             <div class="nav-toggle">
                 <span></span>
@@ -89,6 +84,9 @@
         // Load and populate dev page content
         document.addEventListener('DOMContentLoaded', async function() {
             await ContentLoader.load();
+
+            // Render navigation
+            ContentLoader.renderNavigation();
 
             // Populate page header
             ContentLoader.populate('dev-page-title', 'dev.pageTitle');
