@@ -154,6 +154,9 @@ async function loadFeaturedProjects() {
             });
         });
         
+        // Initialize projects carousel after content is loaded
+        setupCarousel('projects-grid', 'projects-nav-left', 'projects-nav-right');
+        
     } catch (error) {
         console.error('Error loading featured projects:', error);
         projectsGrid.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">Error loading projects.</p>';
@@ -209,6 +212,9 @@ async function loadLatestBlogPosts() {
                 </div>
             </article>
         `).join('');
+        
+        // Initialize blog carousel after content is loaded
+        setupCarousel('blog-preview-grid', 'blog-nav-left', 'blog-nav-right');
         
     } catch (error) {
         console.error('Error loading blog posts:', error);
@@ -273,23 +279,3 @@ function setupCarousel(gridId, leftBtnId, rightBtnId) {
     // Update on window resize
     window.addEventListener('resize', updateButtonStates);
 }
-
-// Special handling for hero description (can be string or array)
-const heroDescElement = document.getElementById('hero-description');
-if (heroDescElement && content.hero?.description) {
-    if (Array.isArray(content.hero.description)) {
-        // If array, create paragraph for each item
-        heroDescElement.innerHTML = content.hero.description
-            .map(paragraph => `<p>${paragraph}</p>`)
-            .join('');
-    } else {
-        // If string, set as single paragraph
-        heroDescElement.textContent = content.hero.description;
-    }
-}
-
-// Initialize carousels after content loads
-setTimeout(() => {
-    setupCarousel('projects-grid', 'projects-nav-left', 'projects-nav-right');
-    setupCarousel('blog-preview-grid', 'blog-nav-left', 'blog-nav-right');
-}, 500);
