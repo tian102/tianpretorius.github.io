@@ -2536,19 +2536,29 @@ body.home .contact-preview > .container {
    Section Navigation Arrows
    ========================================== */
 .section-nav {
+    z-index: 100;
+}
+
+.section-nav-up {
     position: fixed;
+    top: calc(70px + var(--spacing-xl));
     right: var(--spacing-xl);
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
     z-index: 100;
     opacity: 0;
     transition: opacity var(--transition-base);
 }
 
-.section-nav.visible {
+.section-nav-down {
+    position: fixed;
+    bottom: var(--spacing-xl);
+    right: var(--spacing-xl);
+    z-index: 100;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.section-nav.visible .section-nav-up,
+.section-nav.visible .section-nav-down {
     opacity: 1;
 }
 
@@ -2586,7 +2596,8 @@ body.home .contact-preview > .container {
 }
 
 @media (max-width: 968px) {
-    .section-nav {
+    .section-nav-up,
+    .section-nav-down {
         right: var(--spacing-md);
     }
     

@@ -2,7 +2,7 @@
 
 Personal portfolio website showcasing my work, skills, and blog posts. Built with vanilla HTML, CSS, and JavaScript, featuring a markdown-based content management system.
 
-🌐 **Live Site**: [tianpretorius.github.io](https://tianpretorius.github.io)
+🌐 **Live Site**: [tianpretorius.github.io](https://tian102.github.io/tianpretorius.github.io/)
 
 ## 🚀 Features
 
