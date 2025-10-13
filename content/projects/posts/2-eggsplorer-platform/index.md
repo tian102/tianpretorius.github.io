@@ -1,11 +1,11 @@
 ---
-title: Eggsplorer - Interactive Hunt Platform
+title: 2. Eggsplorer - Interactive Hunt Platform
 description: A web-based platform for creating and running digital scavenger hunts, Easter egg hunts, and trivia challenges with real-time tracking and leaderboards.
 tags: [php, mysql, javascript, bootstrap, ajax, web-development]
 demo: 
 github: https://github.com/tian102/Eggsplorer
 coverImage: ./assets/Eggsplorer.png
-date: 2025-10-10
+date: 2025-10-8
 ---
 
 # Eggsplorer - Interactive Hunt Platform

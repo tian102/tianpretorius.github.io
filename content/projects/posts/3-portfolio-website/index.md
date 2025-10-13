@@ -1,11 +1,11 @@
 ---
-title: 1. Portfolio Website with Markdown Content System
+title: 3. Portfolio Website with Markdown Content System
 description: A vanilla JavaScript portfolio with custom markdown-based content management, built the hard way because I refused to learn Jekyll.
 tags: [css, js, html, markdown, github, node]
 demo: https://tianpretorius.github.io
 github: https://github.com/tian102/tianpretorius.github.io
 coverImage: https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?w=1200&h=630&fit=crop
-date: 2024-10-09
+date: 2025-10-10
 ---
 
 # Portfolio Website with Markdown Content System
