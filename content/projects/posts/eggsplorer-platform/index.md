@@ -16,7 +16,7 @@ A full-stack web application that transforms traditional scavenger hunts into in
 
 ## The Story Behind It
 
-This started as a "wouldn't it be fun if..." idea three weeks before Easter last year. I was hosting and wanted to make the traditional egg hunt more engaging. The first version was rough—buggy, barely functional, held together with duct tape and hope—but people loved it.
+This started as a "wouldn't it be fun if..." idea three days before Easter last year. I was hosting and wanted to make the traditional egg hunt more engaging. The first version was rough—buggy, barely functional, held together with duct tape and hope—but people loved it.
 
 This year, I rebuilt it properly. Fixed the bugs, overhauled the UI, added all the features I wished existed last time, and turned it into a real platform that could handle any type of hunt event.
 
@@ -85,7 +85,7 @@ Points update in real-time (well, every 30 seconds) so everyone can see the comp
 
 ### The Stack
 
-Built with technologies I already knew—no time to learn frameworks when Easter's three weeks away:
+Built with technologies I already knew—no time to learn frameworks when Easter's three days away:
 
 - **PHP 8**: Server-side logic and session management
 - **MySQL**: Database with proper relational structure
@@ -161,7 +161,7 @@ Good enough for a family Easter party and then some.
 
 ### Version 1 (Last Year)
 
-Built in about two weeks. Features:
+Built in about 3 days. Features:
 - Basic login/registration
 - Task display and answer submission
 - Egg hunt timer (that worked... mostly)
@@ -180,7 +180,7 @@ Result: Everyone had fun anyway. Got great feedback on what to improve.
 
 ### Version 2 (This Year)
 
-Complete rebuild over a few months. Added:
+Complete rebuild over a few weeks. Added:
 - Server-authoritative timers (no more cheating)
 - Full-featured admin panel
 - Proper AJAX architecture
@@ -313,7 +313,7 @@ Built with Chart.js, looks professional, actually useful for tuning event diffic
 
 **Challenge**: Complex layouts breaking on small screens, buttons too small, timers not visible.
 
-**Solution**: Bootstrap's grid system and mobile-first approach. Tested extensively on actual phones (borrowed from family members). Adjusted button sizes and spacing based on feedback.
+**Solution**: Bootstrap's grid system and mobile-first approach (tested extensively on my own phone). Adjusted button sizes and spacing based on look and feel.
 
 ## What I'd Do Differently
 
@@ -350,7 +350,7 @@ But honestly? It does what it needs to do now. Might add these if there's demand
 
 ## Final Thoughts
 
-Eggsplorer is what happens when you combine a love for building things with an excuse to over-engineer something fun. It's not going to change the world, but it made my family's Easter better, taught me a bunch, and gave me something to work on during downtime.
+Eggsplorer is what happens when you combine a love for building things with an excuse to over-engineer something fun. It's not going to change the world, but it made Easter a tad more interesting, taught me a bunch, and gave me something to work on during downtime.
 
 Sometimes the best projects are the ones that make people smile. This one definitely does that.
 
