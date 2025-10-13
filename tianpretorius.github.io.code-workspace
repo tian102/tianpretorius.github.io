@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../../xampp/htdocs/web-apps/Eggsplorer"
+		}
+	],
+	"settings": {
+		"sqltools.connections": [
+			{
+				"ssh": "Disabled",
+				"previewLimit": 50,
+				"server": "localhost",
+				"driver": "PostgreSQL",
+				"connectString": "postgresql://zenith_user:zenith_password@localhost:5432/zenith_db",
+				"name": "ZenithDB"
+			}
+		]
+	}
+}
