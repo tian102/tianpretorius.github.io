@@ -624,7 +624,7 @@ body.home .contact-preview > .container {
     max-width: 320px;
     height: auto;
     opacity: 0;
-    transition: opacity 0.3s ease-in-out, transform var(--transition-slow);
+    transition: opacity 0.5s ease-in-out, transform var(--transition-slow);
     pointer-events: none;
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-xl);

@@ -299,7 +299,7 @@ function initHeroImageFlip() {
             // Start fade out
             frontImg.classList.remove('active');
             
-            // Load gif after fade transition (300ms)
+            // Load gif after fade transition (500ms)
             setTimeout(() => {
                 // Reload the gif to play from beginning
                 // Remove src first to force reload
@@ -309,7 +309,7 @@ function initHeroImageFlip() {
                     backImg.src = originalGifSrc;
                     backImg.classList.add('active');
                 }, 10);
-            }, 300);
+            }, 500);
             
             isFlipped = true;
         }
