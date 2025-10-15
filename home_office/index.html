@@ -87,7 +87,7 @@
     <script src="GLTFLoader.js"></script>
     <script src="OrbitControls.js"></script>
     <script src="dat.gui.min.js"></script>
-    <div id="loading" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 24px; color: #333;">Loading 3D Scene...</div>
+    <div id="loading" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 24px; color: #333;">Loading Tian...</div>
     <!-- Sub-POI Tooltip with modern styling -->
     <div id="description" style="
         position: absolute; 
@@ -458,7 +458,55 @@
                     resetAction();
                 };
 
+                // Back button (left side)
+                const backButton = document.createElement('button');
+                backButton.className = 'nav-button-mobile';
+                backButton.innerHTML = '← Back';
+                backButton.style.cssText = `
+                    background: rgba(255, 255, 255, 0.1);
+                    border: 2px solid rgba(255, 255, 255, 0.3);
+                    color: white;
+                    padding: 8px 16px;
+                    border-radius: 20px;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-weight: bold;
+                    transition: all 0.2s;
+                    touch-action: manipulation;
+                    -webkit-tap-highlight-color: transparent;
+                    white-space: nowrap;
+                `;
+                backButton.onmouseover = () => {
+                    backButton.style.background = 'rgba(255, 255, 255, 0.2)';
+                    backButton.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+                };
+                backButton.onmouseout = () => {
+                    backButton.style.background = 'rgba(255, 255, 255, 0.1)';
+                    backButton.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                };
+                const backAction = () => {
+                    window.location.href = 'https://tian102.github.io/tianpretorius.github.io/';
+                };
+                backButton.onclick = backAction;
+                backButton.ontouchend = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    backAction();
+                };
+
+                // Separator for back button
+                const backSeparator = document.createElement('div');
+                backSeparator.className = 'nav-separator-mobile';
+                backSeparator.style.cssText = `
+                    width: 2px;
+                    height: 30px;
+                    background: rgba(255, 255, 255, 0.2);
+                    margin: 0 5px;
+                `;
+
                 // Assemble navigation bar
+                navBar.appendChild(backButton);
+                navBar.appendChild(backSeparator);
                 navBar.appendChild(prevButton);
                 navBar.appendChild(poiLabel);
                 navBar.appendChild(nextButton);
