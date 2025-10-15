@@ -296,20 +296,16 @@ function initHeroImageFlip() {
         if (!isFlipped) {
             container.classList.add('flipped');
             
-            // Start fade out
-            frontImg.classList.remove('active');
-            
-            // Load gif after fade transition (500ms)
+            // Reload the gif to play from beginning
+            // Remove src first to force reload
+            backImg.src = '';
+            // Use a small delay to ensure browser registers the change
             setTimeout(() => {
-                // Reload the gif to play from beginning
-                // Remove src first to force reload
-                backImg.src = '';
-                // Use a small delay to ensure browser registers the change
-                setTimeout(() => {
-                    backImg.src = originalGifSrc;
-                    backImg.classList.add('active');
-                }, 10);
-            }, 500);
+                backImg.src = originalGifSrc;
+                // Start crossfade: fade out front, fade in back simultaneously
+                frontImg.classList.remove('active');
+                backImg.classList.add('active');
+            }, 10);
             
             isFlipped = true;
         }
