@@ -608,22 +608,43 @@ body.home .contact-preview > .container {
     animation: fadeInScale 1s ease-out 0.3s both;
 }
 
+/* Hero Image Flip Animation */
 .image-wrapper {
     position: relative;
     z-index: 1;
+    cursor: pointer;
+    display: inline-block;
 }
 
-.image-wrapper img {
+.hero-img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     max-width: 320px;
     height: auto;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform var(--transition-slow);
+    pointer-events: none;
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-xl);
-    transition: transform var(--transition-slow);
 }
 
-.image-wrapper:hover img {
+.hero-img.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.hero-img:first-child {
+    position: relative;
+}
+
+.image-wrapper:hover .hero-img.active {
     transform: scale(1.02);
+}
+
+.image-wrapper.flipped:hover .hero-img {
+    transform: none;
 }
 
 .scroll-indicator {

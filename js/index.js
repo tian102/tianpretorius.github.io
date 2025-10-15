@@ -279,3 +279,100 @@ function setupCarousel(gridId, leftBtnId, rightBtnId) {
     // Update on window resize
     window.addEventListener('resize', updateButtonStates);
 }
+
+// Hero Image Flip Animation
+function initHeroImageFlip() {
+    const container = document.getElementById('hero-image-container');
+    const frontImg = document.getElementById('hero-img-front');
+    const backImg = document.getElementById('hero-img-back');
+    
+    if (!container || !frontImg || !backImg) return;
+    
+    let isFlipped = false;
+    const originalGifSrc = 'assets/door.gif';
+    
+    // Function to flip to door.gif
+    function flipToDoor() {
+        if (!isFlipped) {
+            container.classList.add('flipped');
+            
+            // Start fade out
+            frontImg.classList.remove('active');
+            
+            // Load gif after fade transition (300ms)
+            setTimeout(() => {
+                // Reload the gif to play from beginning
+                // Remove src first to force reload
+                backImg.src = '';
+                // Use a small delay to ensure browser registers the change
+                setTimeout(() => {
+                    backImg.src = originalGifSrc;
+                    backImg.classList.add('active');
+                }, 10);
+            }, 300);
+            
+            isFlipped = true;
+        }
+    }
+    
+    // Function to flip back to profile
+    function flipToProfile() {
+        if (isFlipped) {
+            backImg.classList.remove('active');
+            frontImg.classList.add('active');
+            container.classList.remove('flipped');
+            isFlipped = false;
+        }
+    }
+    
+    // Click on front image to flip
+    frontImg.addEventListener('click', (e) => {
+        e.stopPropagation();
+        flipToDoor();
+    });
+    
+    // Click on back image to navigate
+    backImg.addEventListener('click', (e) => {
+        e.stopPropagation();
+        window.location.href = 'home_office/index.html';
+    });
+    
+    // Flip back when mouse leaves the container
+    container.addEventListener('mouseleave', () => {
+        flipToProfile();
+    });
+    
+    // Flip back on scroll
+    window.addEventListener('scroll', () => {
+        flipToProfile();
+    });
+    
+    // Flip back on click outside
+    document.addEventListener('click', (e) => {
+        if (!container.contains(e.target)) {
+            flipToProfile();
+        }
+    });
+    
+    // For mobile: flip back on touch move outside or scroll
+    let touchStartedInside = false;
+    
+    container.addEventListener('touchstart', () => {
+        touchStartedInside = true;
+    });
+    
+    document.addEventListener('touchmove', (e) => {
+        if (!touchStartedInside || !container.contains(e.target)) {
+            flipToProfile();
+        }
+    });
+    
+    document.addEventListener('touchend', () => {
+        touchStartedInside = false;
+    });
+}
+
+// Initialize hero image flip when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    initHeroImageFlip();
+});
