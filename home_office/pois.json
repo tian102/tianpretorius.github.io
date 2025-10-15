@@ -1,0 +1,155 @@
+{
+    "pois": [
+        {
+        "name": "Desk",
+        "position": [0, -0.5, -1.2],
+        "cameraPos": [0, 0.18, -0.48],
+        "target": [0, 0.1, -0.75],
+        "description": "Where ideas turn into real world stuff.",
+        "subPois": [
+            {
+            "name": "Primary workspace:",
+            "position": [-0.6, -0.1, -1.67],
+            "description": "• Programming<br>• Design<br>• Data analysis"
+            },
+            {
+            "name": "Secondary workspace:",
+            "position": [0.6, -0.1, -1.67],
+            "description": "• Research<br>• Notes<br>• Music<br>• Communications"
+            },
+            {
+            "name": "Work Notes",
+            "position": [-0.8208228815016918, -0.5, -1.354302728151292],
+            "description": "• Sketches<br>• Equations<br>• Spontaneous ideas<br><br><i>Where structure meets creativity.</i>"
+            },
+            {
+            "name": "Keyboard",
+            "position": [-0.12389292471301785, -0.5, -1.294572627535512],
+            "description": "• Logitech MX Keys S<br><br><i>Quiet precision.</i>"
+            },
+            {
+            "name": "Mouse",
+            "position": [0.26490624543571717, -0.5, -1.2472905093986024],
+            "description": "• Logitech MX Master 3S<br><br><i>Comfort meets control.</i>"
+            },
+            {
+            "name": "Favorite Movies",
+            "position": [0.27370816438735646, 0.5688931854043493, -1.75],
+            "description": "• Interstellar — for the awe.<br>• 21 Jump Street — for the laughs."
+            },
+            {
+            "name": "Favorite Books",
+            "position": [-0.295965572667905, 0.5315190835031234, -1.75],
+            "description": "• A Brief History of Time (Hawking),<br>• Zero to One (Thiel),<br>• Eragon series (Paolini)<br>• Metro 2033 (Glukhovsky)."
+            },
+            {
+            "name": "Headphones",
+            "position": [0.8216470644790441, -0.5, -1.3124546094032499],
+            "description": "• Corsair HS70 Pro<br><br><i>Tuned for deep focus and good music.</i>"
+            },
+            {
+            "name": "Libby",
+            "position": [-0.62, 0.25, -1.8],
+            "description": "• 1 Part Corgi<br>• 2 Parts chaos"
+            }
+        ]
+        },
+        {
+        "name": "Bookshelf",
+        "position": [-1.5, -0.3204565221869373, -0.22801535208567617],
+        "cameraPos": [-0.69628503171031, -0.3204565221869373, -0.22801535208567617],
+        "target": [-0.9357996667268282, -0.36698584209897184, -0.21681492020876936],
+        "description": "A collection of projects, stories, and ideas.",
+        "subPois": [
+            {
+            "name": "Morning Rituals",
+            "position": [-1.7, -1.3272012340609796, 0.07992207736481727],
+            "description": "Wake up reluctantly.<br>Coffee first — existential questions later.<br>Window stare: 3–5 mins of deep thinking (or daydreaming)."
+            },
+            {
+            "name": "Kitchen Experiments",
+            "position": [-1.7, -1.3248218647555547, -0.2751076097345816],
+            "description": "Cooking like a scientist.<br>Sometimes edible, sometimes abstract art.<br><br>Favorite meals:<br>• Braai vleis<br>• Breakfast of Champions."
+            },
+            {
+            "name": "Quirks",
+            "position": [-1.7, -0.958965835173215, -0.4988244619682078],
+            "description": "I listen to 'Sleepy Science' videos to fall asleep."
+            },
+            {
+            "name": "Random joys",
+            "position": [-1.7, -0.6761311619767332, 0.06644849761066629],
+            "description": "• Finding a good meme: triumph.<br>• Perfectly trimmed hedge: small victory.<br>• Unexpected free time: legendary."
+            },
+            {
+            "name": "Fun Facts",
+            "position": [-1.7, -0.6944932663056392, -0.7786166838987948],
+            "description": "I can lose hours perfecting the smallest thing in code."
+            },
+            {
+            "name": "Stories",
+            "position": [-1.7, -0.25723357469359165, 0.0957614615411081],
+            "description": "Ask me about my trip to Malawi."
+            },
+            {
+            "name": "Media (Personal preference)",
+            "position": [-1.7, 0.06078727742091705, -0.204523738792943],
+            "description": "• Series > Movies<br>• Podcast > Music<br>• Reading > Audiobook<br>• Warm and cozy (inside) > Hot and sweaty (outside)"
+            },
+            {
+            "name": "Breakfast of Champions",
+            "position": [-1.7, 0.03634821504446939, -0.7041309402642079],
+            "description": "The perfect ratio:<br>• 1 Part Future Life (50g)<br>• 1 Part Whey Protein (50g)<br>• 3 Parts Milk (150ml)<br><br>Macros:<br>Protein: 53g<br>Carbs: 34g<br>Fats: 14g<br><br>Cals: 474cals<br>"
+            },
+            {
+            "name": "What I live by",
+            "position": [-1.9, -1.0894389418685655, 1.100842976332667],
+            "description": "• Keep learning. Keep building. Keep improving.<br>• Investigate. Optimize. Iterate.<br>• Live. Laugh. Learn"
+            }
+        ]
+        },
+        {
+        "name": "Interests",
+        "position": [1.5, 0.15, -1.5],
+        "cameraPos": [1.0405187873971848, 0.15919258401548275, -0.7947308570842502],
+        "target": [1.3772951569759937, 0.12367157989460724, -1.234380493621075],
+        "description": "What fuels my curiosity.",
+        "subPois": [
+            {
+            "name": "Gaming",
+            "position": [1.035034045127332, -0.01822013179955473, -1.9],
+            "description": "• Baldur's Gate 3<br>• Minecraft<br>• Stardew Valley<br>• Portal 2<br>• Counter Strike<br>• Dota2<br>• Dishonered 1 & 2<br><br><i>Many more...</i>"
+            },
+            {
+            "name": "Training & Health",
+            "position": [1.6214478416024616, 0.31765159683509125, -1.9],
+            "description": "• Strength and hypertrophy training<br>• Fitness and performance<br>• Nutrition and recovery<br>• Health, wellness, and longevity<br><br><i>The science behind it all.</i>"
+            },
+            {
+            "name": "Astronomy",
+            "position": [2.0, 0.07080406596653388, -1.2663565515798951],
+            "description": "Favorite Planet:<br><i>• Earth</i><br><br>Favorite Phenomenon:<br><i>• Black Hole</i><br><br>Favorite Body:<br><i>• Stephen's Quintet</i><br><br>Favorite Moon:<br><i>• Europa</i><br><br>Favorite Astronomer:<br><i>• Galileo Galilei</i>"
+            }
+        ]
+        },
+        {
+        "name": "Coffee Table",
+        "position": [-0.03368959352599659, -0.85124569768645748, 1.0],
+        "cameraPos": [-0.03368959352599659, -0.5124569768645748, 1.288138817556639],
+        "target": [-0.005021629232461189, -1.5069972127944968, -0.6927906482121273],
+        "description": "A small space for reflection and planning.",
+        "subPois": [
+            {
+            "name": "Coffee",
+            "position": [0.38105658954521404, -0.9, 0.8671175048124469],
+            "description": "Medium roast flat white — my daily ritual."
+            },
+            {
+            "name": "Ideas",
+            "position": [-0.09287145080697165, -1.0, 0.7592058538630169],
+            "description": "Always have my half-built ideas scattered everywhere."
+            }
+        ]
+        }
+    ]
+    }

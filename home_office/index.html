@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Office 3D Viewer</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+        }
+        /* Responsive navigation bar for mobile */
+        @media (max-width: 768px) {
+            .nav-bar-mobile {
+                padding: 10px 15px !important;
+                gap: 8px !important;
+            }
+            .nav-button-mobile {
+                width: 36px !important;
+                height: 36px !important;
+                font-size: 14px !important;
+            }
+            .nav-label-mobile {
+                font-size: 14px !important;
+                min-width: 150px !important;
+            }
+            .nav-reset-mobile {
+                padding: 8px 15px !important;
+                font-size: 13px !important;
+            }
+        }
+        /* Extra compact for portrait mobile */
+        @media (max-width: 480px) and (orientation: portrait) {
+            .nav-bar-mobile {
+                padding: 8px 12px !important;
+                gap: 6px !important;
+                border-radius: 30px !important;
+            }
+            .nav-button-mobile {
+                width: 32px !important;
+                height: 32px !important;
+                font-size: 12px !important;
+            }
+            .nav-label-mobile {
+                font-size: 12px !important;
+                min-width: 120px !important;
+            }
+            .nav-reset-mobile {
+                padding: 6px 12px !important;
+                font-size: 12px !important;
+            }
+            .nav-separator-mobile {
+                height: 24px !important;
+            }
+        }
+        /* Tooltip animation */
+        @keyframes tooltipFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Tooltip title styling */
+        #description strong {
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #ffffff;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        /* Tooltip description text */
+        #description {
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <script src="three.min.js"></script>
+    <script src="GLTFLoader.js"></script>
+    <script src="OrbitControls.js"></script>
+    <script src="dat.gui.min.js"></script>
+    <div id="loading" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 24px; color: #333;">Loading 3D Scene...</div>
+    <!-- Sub-POI Tooltip with modern styling -->
+    <div id="description" style="
+        position: absolute; 
+        top: 10px; 
+        left: 10px; 
+        background: linear-gradient(135deg, rgba(30, 60, 114, 0.95), rgba(42, 82, 152, 0.95));
+        color: white; 
+        padding: 15px 20px; 
+        display: none; 
+        max-width: 280px;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        font-family: 'Segoe UI', Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        pointer-events: none;
+        z-index: 2000;
+        animation: tooltipFadeIn 0.2s ease-out;
+    "></div>
+    <div id="coordinates" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; padding: 10px; font-family: monospace; font-size: 12px; display: none;"></div>
+    <script>
+        // Scene setup
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xf0f0f0);
+
+        // Camera
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        // Adjust default camera position for mobile screens
+        let defaultCameraPos = new THREE.Vector3(1.87, 1.05, 1.94);
+        if (window.innerWidth < window.innerHeight) {
+            defaultCameraPos.multiplyScalar(0.8);
+            defaultCameraPos.y *= 0.9;
+        }
+        camera.position.copy(defaultCameraPos);
+
+        // Renderer
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        // document.body.appendChild(renderer.domElement); // Append after loading
+
+        // Controls
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        // Adjust default target for mobile screens
+        let defaultTarget = new THREE.Vector3(0.30, -0.27, -0.06);
+        if (window.innerWidth < window.innerHeight) {
+            defaultTarget.y *= 0.9;
+        }
+        controls.target.copy(defaultTarget);
+
+        // Enhanced Lighting
+        const ambientLight = new THREE.AmbientLight(0x404040, 1.3);
+        scene.add(ambientLight);
+
+        const hemisphereLight = new THREE.HemisphereLight(0x87CEEB, 0x8B4513, 0.96);
+        scene.add(hemisphereLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.1);
+        directionalLight.position.set(1, 1, 1);
+        scene.add(directionalLight);
+
+                const pointLight = new THREE.PointLight(0xffffff, 0);
+        pointLight.position.set(-2, 2, 2);
+        scene.add(pointLight);
+
+        const spotLight = new THREE.SpotLight(0xffffff, 0);
+        spotLight.position.set(0, 5, 0);
+        spotLight.target.position.set(0, 0, 0);
+        scene.add(spotLight);
+        scene.add(spotLight.target);
+
+        // Scene-specific lights
+        const lampLight = new THREE.PointLight(0xffaa44, 1); // Warm standing lamp
+        lampLight.position.set(-1.48, 0.08, 1.56);
+        scene.add(lampLight);
+
+        const screenLight = new THREE.PointLight(0xaaccff, 1.09); // Cool monitor glow
+        screenLight.position.set(-0.04, -0.25, -1.8); // Between the two monitors
+        scene.add(screenLight);
+
+        const roofLight = new THREE.SpotLight(0xffffff, 0.43, 10, Math.PI / 6); // Pendant ceiling light
+        roofLight.position.set(-0.03, 0.99, 0.04);
+        roofLight.target.position.set(0, 0, 0);
+        scene.add(roofLight);
+        scene.add(roofLight.target);
+
+        // Points of Interest - Load from JSON
+        fetch('pois.json')
+            .then(response => response.json())
+            .then(data => {
+                const pois = data.pois.map(poi => ({
+                    name: poi.name,
+                    position: new THREE.Vector3(...poi.position),
+                    cameraPos: new THREE.Vector3(...poi.cameraPos),
+                    target: new THREE.Vector3(...poi.target),
+                    description: poi.description,
+                    subPois: poi.subPois
+                }));
+
+                const poiMeshes = [];
+                const subPoiMeshes = [];
+                pois.forEach((poi, index) => {
+                    // Create canvas for POI marker
+                    const canvas = document.createElement('canvas');
+                    canvas.width = 128;
+                    canvas.height = 128;
+                    const ctx = canvas.getContext('2d');
+
+                    // Clear
+                    ctx.clearRect(0, 0, 128, 128);
+
+                    // Draw white border circle
+                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+                    ctx.lineWidth = 8;
+                    ctx.beginPath();
+                    ctx.arc(64, 64, 50, 0, Math.PI * 2);
+                    ctx.stroke();
+
+                    // Draw black fill
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+                    ctx.beginPath();
+                    ctx.arc(64, 64, 42, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Draw white number
+                    ctx.fillStyle = 'white';
+                    ctx.font = 'bold 40px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText((index + 1).toString(), 64, 64);
+
+                    const texture = new THREE.CanvasTexture(canvas);
+                    const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
+                    const geometry = new THREE.PlaneGeometry(0.16, 0.16);
+                    const sphere = new THREE.Mesh(geometry, material);
+                    sphere.position.copy(poi.position);
+                    sphere.userData = poi;
+                    sphere.visible = false; // Hide initially
+                    scene.add(sphere);
+                    poiMeshes.push(sphere);
+
+                    // Create sub-POI meshes
+                    if (poi.subPois && poi.subPois.length > 0) {
+                        poi.subPois.forEach((subPoi, subIndex) => {
+                            // Create smaller canvas for sub-POI (info icon)
+                            const subCanvas = document.createElement('canvas');
+                            subCanvas.width = 64;
+                            subCanvas.height = 64;
+                            const subCtx = subCanvas.getContext('2d');
+
+                            // Clear
+                            subCtx.clearRect(0, 0, 64, 64);
+
+                            // Draw blue border circle (smaller)
+                            subCtx.strokeStyle = 'rgba(0, 123, 255, 0.8)';
+                            subCtx.lineWidth = 4;
+                            subCtx.beginPath();
+                            subCtx.arc(32, 32, 25, 0, Math.PI * 2);
+                            subCtx.stroke();
+
+                            // Draw white fill
+                            subCtx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                            subCtx.beginPath();
+                            subCtx.arc(32, 32, 21, 0, Math.PI * 2);
+                            subCtx.fill();
+
+                            // Draw info icon (i)
+                            subCtx.fillStyle = 'blue';
+                            subCtx.font = 'bold 24px Arial';
+                            subCtx.textAlign = 'center';
+                            subCtx.textBaseline = 'middle';
+                            subCtx.fillText('i', 32, 32);
+
+                            const subTexture = new THREE.CanvasTexture(subCanvas);
+                            const subMaterial = new THREE.SpriteMaterial({ map: subTexture, transparent: true });
+                            const subMesh = new THREE.Sprite(subMaterial);
+                            subMesh.position.copy(new THREE.Vector3(...subPoi.position));
+                            subMesh.scale.set(0.08, 0.08, 1); // Size of the sprite
+                            subMesh.userData = { ...subPoi, parentPoi: poi };
+                            subMesh.visible = false; // Hide initially
+                            scene.add(subMesh);
+                            subPoiMeshes.push(subMesh);
+                        });
+                    }
+                });
+
+                // Bottom Navigation Bar
+                let currentPOIIndex = -1; // -1 means default view
+                
+                // Create navigation container
+                const navBar = document.createElement('div');
+                navBar.className = 'nav-bar-mobile'; // Add responsive class
+                navBar.style.position = 'fixed';
+                navBar.style.bottom = '20px';
+                navBar.style.left = '50%';
+                navBar.style.transform = 'translateX(-50%)';
+                navBar.style.display = 'flex';
+                navBar.style.alignItems = 'center';
+                navBar.style.gap = '10px';
+                navBar.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+                navBar.style.padding = '15px 20px';
+                navBar.style.borderRadius = '50px';
+                navBar.style.zIndex = '1000';
+                navBar.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
+                navBar.style.touchAction = 'manipulation'; // MOBILE: Enable touch on nav bar
+                
+                // MOBILE: Prevent OrbitControls from capturing touches on nav bar
+                navBar.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: false });
+                navBar.addEventListener('touchmove', (e) => e.stopPropagation(), { passive: false });
+                navBar.addEventListener('touchend', (e) => e.stopPropagation(), { passive: false });
+
+                // Previous button
+                const prevButton = document.createElement('button');
+                prevButton.className = 'nav-button-mobile'; // Add responsive class
+                prevButton.innerHTML = '◀';
+                prevButton.style.cssText = `
+                    background: rgba(255, 255, 255, 0.1);
+                    border: 2px solid rgba(255, 255, 255, 0.3);
+                    color: white;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    font-size: 16px;
+                    transition: all 0.2s;
+                    touch-action: manipulation;
+                    -webkit-tap-highlight-color: transparent;
+                `;
+                prevButton.onmouseover = () => {
+                    prevButton.style.background = 'rgba(255, 255, 255, 0.2)';
+                    prevButton.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+                };
+                prevButton.onmouseout = () => {
+                    prevButton.style.background = 'rgba(255, 255, 255, 0.1)';
+                    prevButton.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                };
+                const prevAction = () => {
+                    currentPOIIndex--;
+                    if (currentPOIIndex < -1) currentPOIIndex = pois.length - 1;
+                    
+                    if (currentPOIIndex === -1) {
+                        resetView();
+                    } else {
+                        startPOITransition(pois[currentPOIIndex]);
+                    }
+                    updatePOILabel();
+                };
+                prevButton.onclick = prevAction;
+                prevButton.ontouchend = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    prevAction();
+                };
+
+                // POI Label
+                const poiLabel = document.createElement('div');
+                poiLabel.className = 'nav-label-mobile'; // Add responsive class
+                poiLabel.style.cssText = `
+                    color: white;
+                    font-family: Arial, sans-serif;
+                    font-size: 16px;
+                    font-weight: bold;
+                    min-width: 200px;
+                    text-align: center;
+                    user-select: none;
+                `;
+                
+                function updatePOILabel() {
+                    if (currentPOIIndex === -1) {
+                        poiLabel.textContent = 'Default View';
+                    } else {
+                        poiLabel.textContent = `${currentPOIIndex + 1}/${pois.length}: ${pois[currentPOIIndex].name}`;
+                    }
+                }
+                updatePOILabel();
+
+                // Next button
+                const nextButton = document.createElement('button');
+                nextButton.className = 'nav-button-mobile'; // Add responsive class
+                nextButton.innerHTML = '▶';
+                nextButton.style.cssText = `
+                    background: rgba(255, 255, 255, 0.1);
+                    border: 2px solid rgba(255, 255, 255, 0.3);
+                    color: white;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    font-size: 16px;
+                    transition: all 0.2s;
+                    touch-action: manipulation;
+                    -webkit-tap-highlight-color: transparent;
+                `;
+                nextButton.onmouseover = () => {
+                    nextButton.style.background = 'rgba(255, 255, 255, 0.2)';
+                    nextButton.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+                };
+                nextButton.onmouseout = () => {
+                    nextButton.style.background = 'rgba(255, 255, 255, 0.1)';
+                    nextButton.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                };
+                const nextAction = () => {
+                    currentPOIIndex++;
+                    if (currentPOIIndex >= pois.length) currentPOIIndex = -1;
+                    
+                    if (currentPOIIndex === -1) {
+                        resetView();
+                    } else {
+                        startPOITransition(pois[currentPOIIndex]);
+                    }
+                    updatePOILabel();
+                };
+                nextButton.onclick = nextAction;
+                nextButton.ontouchend = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    nextAction();
+                };
+
+                // Separator
+                const separator = document.createElement('div');
+                separator.className = 'nav-separator-mobile'; // Add responsive class
+                separator.style.cssText = `
+                    width: 2px;
+                    height: 30px;
+                    background: rgba(255, 255, 255, 0.2);
+                    margin: 0 5px;
+                `;
+
+                // Reset button
+                const resetButton = document.createElement('button');
+                resetButton.className = 'nav-reset-mobile'; // Add responsive class
+                resetButton.innerHTML = '⟲ Reset';
+                resetButton.style.cssText = `
+                    background: rgba(255, 255, 255, 0.1);
+                    border: 2px solid rgba(255, 255, 255, 0.3);
+                    color: white;
+                    padding: 10px 20px;
+                    border-radius: 20px;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-weight: bold;
+                    transition: all 0.2s;
+                    touch-action: manipulation;
+                    -webkit-tap-highlight-color: transparent;
+                `;
+                resetButton.onmouseover = () => {
+                    resetButton.style.background = 'rgba(255, 255, 255, 0.2)';
+                    resetButton.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+                };
+                resetButton.onmouseout = () => {
+                    resetButton.style.background = 'rgba(255, 255, 255, 0.1)';
+                    resetButton.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                };
+                const resetAction = () => {
+                    currentPOIIndex = -1;
+                    resetView();
+                    updatePOILabel();
+                };
+                resetButton.onclick = resetAction;
+                resetButton.ontouchend = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    resetAction();
+                };
+
+                // Assemble navigation bar
+                navBar.appendChild(prevButton);
+                navBar.appendChild(poiLabel);
+                navBar.appendChild(nextButton);
+                navBar.appendChild(separator);
+                navBar.appendChild(resetButton);
+                document.body.appendChild(navBar);
+
+                // Reset view function
+                function resetView() {
+                    // CRITICAL: Clear ALL POI state FIRST to prevent visibility detection from interfering
+                    currentActivePoi = null;
+                    currentDescription = '';
+                    lastKnownTarget = defaultTarget.clone(); // Set to default BEFORE transition starts
+                    lastKnownCameraDistance = null;
+                    
+                    // Hide description
+                    const descDiv = document.getElementById('description');
+                    descDiv.style.display = 'none';
+                    
+                    // Show all main POIs immediately
+                    poiMeshes.forEach(sphere => {
+                        sphere.visible = true;
+                    });
+                    
+                    // Hide all sub-POIs immediately
+                    subPoiMeshes.forEach(mesh => {
+                        mesh.visible = false;
+                    });
+                    
+                    // Check if already at default position (within threshold)
+                    const cameraDistance = camera.position.distanceTo(defaultCameraPos);
+                    const targetDistance = controls.target.distanceTo(defaultTarget);
+                    
+                    if (cameraDistance < 0.1 && targetDistance < 0.1) {
+                        // Already close to default, snap directly
+                        camera.position.copy(defaultCameraPos);
+                        controls.target.copy(defaultTarget);
+                        targetCameraPos = null;
+                        targetTargetPos = null;
+                        controls.update();
+                    } else {
+                        // Set target positions for smooth transition
+                        targetCameraPos = defaultCameraPos.clone();
+                        targetTargetPos = defaultTarget.clone();
+                    }
+                }
+
+                // Raycaster for clicks
+                const raycaster = new THREE.Raycaster();
+                const mouse = new THREE.Vector2();
+
+                let mousePosition = new THREE.Vector3();
+
+                function startPOITransition(poi) {
+                    let adjustedCameraPos = poi.cameraPos.clone();
+                    let adjustedTarget = poi.target.clone();
+
+                    // Adjust POI positions for mobile screens (portrait orientation)
+                    if (window.innerWidth < window.innerHeight) {
+                        // On mobile, bring camera closer and adjust height for better framing
+                        adjustedCameraPos.multiplyScalar(0.8);
+                        adjustedCameraPos.y *= 0.9;
+                        adjustedTarget.y *= 0.9;
+                    }
+
+                    // Update navigation bar to match clicked POI
+                    currentPOIIndex = pois.findIndex(p => p === poi);
+                    updatePOILabel();
+
+                    targetCameraPos = adjustedCameraPos;
+                    targetTargetPos = adjustedTarget;
+                    currentDescription = poi.description;
+                    const descDiv = document.getElementById('description');
+                    descDiv.innerHTML = currentDescription;
+                    descDiv.style.display = 'block';
+                    setTimeout(() => descDiv.style.display = 'none', 5000);
+
+                    // PERFORMANCE: Console logging removed
+                    
+                    // If transitioning to a different POI, show previous POI's marker
+                    if (currentActivePoi && currentActivePoi !== poi) {
+                        poiMeshes.forEach(sphere => {
+                            if (sphere.userData === currentActivePoi) {
+                                sphere.visible = true;
+                            }
+                        });
+                    }
+
+                    // Hide all sub-POIs immediately when changing target
+                    subPoiMeshes.forEach(mesh => {
+                        mesh.visible = false;
+                    });
+
+                    // Hide the clicked POI marker
+                    poiMeshes.forEach(sphere => {
+                        if (sphere.userData === poi) {
+                            sphere.visible = false;
+                        }
+                    });
+
+                    // Set this POI as active and show its sub-POIs
+                    currentActivePoi = poi;
+                    if (poi.subPois && poi.subPois.length > 0) {
+                        subPoiMeshes.forEach(mesh => {
+                            if (mesh.userData.parentPoi === poi) {
+                                mesh.visible = true;
+                            }
+                        });
+                    }
+                    
+                    // Update last known target (distance will be set after transition completes)
+                    lastKnownTarget = adjustedTarget.clone();
+                    lastKnownCameraDistance = null; // Will be set after transition
+                }
+
+                // Capture state management
+                let currentMainPoi = null;
+                let isCapturingSubPois = false;
+                let reviewOverlay = null;
+                let captureMainButton = null;
+
+                // Function to update the overlay content
+                function updateReviewOverlay() {
+                    if (!reviewOverlay) return;
+                    
+                    if (!currentMainPoi) {
+                        reviewOverlay.innerHTML = `
+                            <h3 style="margin-top: 0; color: white; text-align: center; font-size: 14px;">Capture Panel</h3>
+                            <p style="color: #aaa; text-align: center; font-style: italic; font-size: 12px;">No POI captured yet</p>
+                        `;
+                        return;
+                    }
+
+                    reviewOverlay.innerHTML = `
+                        <h3 style="margin-top: 0; color: white; font-size: 14px; border-bottom: 1px solid #555; padding-bottom: 8px;">Captured POI</h3>
+                        
+                        <div style="background: rgba(76, 175, 80, 0.2); padding: 10px; border-radius: 3px; margin-bottom: 12px; border-left: 3px solid #4CAF50;">
+                            <h4 style="margin: 0 0 6px 0; color: #4CAF50; font-size: 13px;">${currentMainPoi.name || 'Main POI'}</h4>
+                            <p style="margin: 3px 0; font-size: 10px; color: #aaa; font-style: italic;">${currentMainPoi.description || 'No description'}</p>
+                            <p style="margin: 3px 0; font-size: 11px; font-family: monospace; color: #ddd;"><strong>Pos:</strong> (${currentMainPoi.position[0].toFixed(2)}, ${currentMainPoi.position[1].toFixed(2)}, ${currentMainPoi.position[2].toFixed(2)})</p>
+                        </div>
+
+                        <div style="background: rgba(255, 152, 0, 0.2); padding: 10px; border-radius: 3px; margin-bottom: 12px; border-left: 3px solid #FF9800;">
+                            <h4 style="margin: 0 0 6px 0; color: #FF9800; font-size: 13px;">Sub-POIs (${currentMainPoi.subPois.length})</h4>
+                            ${currentMainPoi.subPois.length === 0 ? 
+                                '<p style="color: #aaa; font-style: italic; font-size: 11px;">Click on model to capture</p>' :
+                                currentMainPoi.subPois.map((subPoi, index) => `
+                                    <div style="background: rgba(255, 255, 255, 0.1); padding: 8px; margin-bottom: 6px; border-radius: 3px; font-size: 11px; color: #ddd;">
+                                        <strong style="color: #FF9800;">${subPoi.name || '#' + (index + 1)}</strong><br>
+                                        <span style="font-size: 10px; color: #aaa; font-style: italic;">${subPoi.description || 'No description'}</span><br>
+                                        <span style="font-family: monospace; font-size: 10px;">Pos: (${subPoi.position[0].toFixed(2)}, ${subPoi.position[1].toFixed(2)}, ${subPoi.position[2].toFixed(2)})</span>
+                                    </div>
+                                `).join('')
+                            }
+                        </div>
+
+                        <button id="exportNow" style="width: 100%; padding: 10px; background: #4CAF50; color: white; border: none; border-radius: 3px; cursor: pointer; font-size: 13px; font-weight: bold;">Export & Save</button>
+                    `;
+
+                    // Attach export button handler
+                    const exportBtn = document.getElementById('exportNow');
+                    if (exportBtn) {
+                        exportBtn.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            exportCapture();
+                        });
+                    }
+                }
+
+                // Function to export the capture
+                function exportCapture() {
+                    if (!currentMainPoi) return;
+
+                    // Get existing captures from localStorage
+                    let allCaptures = JSON.parse(localStorage.getItem('capturedPois') || '[]');
+                    allCaptures.push(currentMainPoi);
+                    localStorage.setItem('capturedPois', JSON.stringify(allCaptures));
+
+                    // PERFORMANCE: Console logging removed
+
+                    // Download as JSON
+                    const updatedData = { pois: allCaptures };
+                    const jsonString = JSON.stringify(updatedData, null, 2);
+                    const blob = new Blob([jsonString], { type: 'application/json' });
+                    const url = URL.createObjectURL(blob);
+
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'captured_POI_coordinates.json';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+
+                    // Show success message
+                    const feedbackDiv = document.getElementById('description');
+                    feedbackDiv.innerHTML = `<strong>Exported!</strong><br>Main POI with ${currentMainPoi.subPois.length} Sub-POIs<br>Total: ${allCaptures.length} POIs`;
+                    feedbackDiv.style.display = 'block';
+                    feedbackDiv.style.fontSize = '14px';
+                    feedbackDiv.style.padding = '12px';
+                    feedbackDiv.style.backgroundColor = 'rgba(76, 175, 80, 0.95)';
+                    setTimeout(() => {
+                        feedbackDiv.style.display = 'none';
+                        feedbackDiv.style.backgroundColor = 'rgba(0,0,0,0.7)';
+                    }, 3000);
+
+                    // Reset for next capture
+                    currentMainPoi = null;
+                    isCapturingSubPois = false;
+                    if (captureMainButton) {
+                        captureMainButton.disabled = false;
+                        captureMainButton.style.backgroundColor = '#4CAF50';
+                        captureMainButton.innerHTML = 'Capture Main POI';
+                        captureMainButton.style.opacity = '1';
+                    }
+
+                    // Update overlay to show empty state
+                    updateReviewOverlay();
+                }
+
+                // Mouse click event
+                window.addEventListener('click', onMouseClick, false);
+                function onMouseClick(event) {
+                    // Check if click is on a button or inside the overlay (don't capture if clicking UI)
+                    if (event.target.tagName === 'BUTTON') {
+                        return;
+                    }
+                    
+                    // Check if click is inside the review overlay
+                    if (reviewOverlay && reviewOverlay.contains(event.target)) {
+                        return;
+                    }
+
+                    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+                    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+                    // PERFORMANCE: Console logging removed
+
+                    raycaster.setFromCamera(mouse, camera);
+                    
+                    // If in sub-POI capture mode, raycast against the model
+                    if (isCapturingSubPois && model && currentMainPoi) {
+                        const modelIntersects = raycaster.intersectObjects(model.children, true);
+                        
+                        if (modelIntersects.length > 0) {
+                            const clickPoint = modelIntersects[0].point;
+                            
+                            // Prompt for Sub-POI details
+                            const subPoiName = prompt('Enter Sub-POI name:', '');
+                            if (subPoiName === null) return; // User cancelled
+                            
+                            const subPoiDescription = prompt('Enter Sub-POI description:', '');
+                            if (subPoiDescription === null) return; // User cancelled
+                            
+                            const subPoi = {
+                                name: subPoiName,
+                                position: [clickPoint.x, clickPoint.y, clickPoint.z],
+                                description: subPoiDescription
+                            };
+                            currentMainPoi.subPois.push(subPoi);
+                            
+                            // Update the overlay panel
+                            updateReviewOverlay();
+                            
+                            // Visual feedback - non-blocking
+                            const feedbackDiv = document.getElementById('description');
+                            feedbackDiv.innerHTML = `<strong>Sub-POI "${subPoiName}" Captured!</strong>`;
+                            feedbackDiv.style.display = 'block';
+                            feedbackDiv.style.fontSize = '14px';
+                            feedbackDiv.style.padding = '10px';
+                            setTimeout(() => feedbackDiv.style.display = 'none', 2000);
+                            return;
+                        }
+                        // PERFORMANCE: Removed "click missed" console log
+                    }
+                    // PERFORMANCE: Removed diagnostic console logs
+
+                    // Raycast against POI markers for navigation
+                    const intersects = raycaster.intersectObjects([...poiMeshes, ...subPoiMeshes]);
+                    if (intersects.length > 0) {
+                        const clickedObject = intersects[0].object;
+                        const poi = clickedObject.userData;
+
+                        // Check if it's a sub-POI
+                        if (clickedObject.userData.parentPoi) {
+                            // Handle sub-POI click - show detailed information
+                            const subPoi = poi;
+                            const descDiv = document.getElementById('description');
+                            descDiv.innerHTML = `<strong>📍 ${subPoi.name}</strong>${subPoi.description}`;
+
+                            // Position description near the sub-POI
+                            const screenPosition = clickedObject.position.clone();
+                            screenPosition.project(camera);
+
+                            const x = (screenPosition.x * 0.5 + 0.5) * window.innerWidth;
+                            const y = (-screenPosition.y * 0.5 + 0.5) * window.innerHeight;
+
+                            // Position above and to the right of the sub-POI
+                            descDiv.style.left = `${Math.min(x + 20, window.innerWidth - 320)}px`;
+                            descDiv.style.top = `${Math.max(y - 60, 10)}px`;
+                            descDiv.style.display = 'block';
+                            setTimeout(() => descDiv.style.display = 'none', 8000); // Show longer for sub-POIs
+                        } else {
+                            // Handle main POI click
+                            startPOITransition(poi);
+                        }
+                    }
+                }
+
+                // Touch event for mobile
+                window.addEventListener('touchend', onTouchEnd, false);
+                function onTouchEnd(event) {
+                    event.preventDefault(); // Prevent default touch behavior like scrolling
+                    const touch = event.changedTouches[0];
+                    mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
+                    mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
+
+                    // PERFORMANCE: Console logging removed
+
+                    raycaster.setFromCamera(mouse, camera);
+                    const intersects = raycaster.intersectObjects([...poiMeshes, ...subPoiMeshes]);
+
+                    if (intersects.length > 0) {
+                        const clickedObject = intersects[0].object;
+                        const poi = clickedObject.userData;
+
+                        // Check if it's a sub-POI
+                        if (clickedObject.userData.parentPoi) {
+                            // Handle sub-POI click - show detailed information
+                            const subPoi = poi;
+                            const descDiv = document.getElementById('description');
+                            descDiv.innerHTML = `<strong>📍 ${subPoi.name}</strong>${subPoi.description}`;
+
+                            // Position description near the sub-POI
+                            const screenPosition = clickedObject.position.clone();
+                            screenPosition.project(camera);
+
+                            const x = (screenPosition.x * 0.5 + 0.5) * window.innerWidth;
+                            const y = (-screenPosition.y * 0.5 + 0.5) * window.innerHeight;
+
+                            // Position above and to the right of the sub-POI
+                            descDiv.style.left = `${Math.min(x + 20, window.innerWidth - 320)}px`;
+                            descDiv.style.top = `${Math.max(y - 60, 10)}px`;
+                            descDiv.style.display = 'block';
+                            setTimeout(() => descDiv.style.display = 'none', 8000); // Show longer for sub-POIs
+                        } else {
+                            // Handle main POI click
+                            startPOITransition(poi);
+                        }
+                    }
+                }
+
+                // Mouse move for mouse position
+                // PERFORMANCE: Throttle mouse move to reduce raycasting
+                let lastMouseMoveTime = 0;
+                const mouseMoveThrottle = 50; // ms between raycasts
+                
+                window.addEventListener('mousemove', onMouseMove, false);
+                function onMouseMove(event) {
+                    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+                    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+                    // PERFORMANCE: Throttle expensive raycasting operations
+                    const now = Date.now();
+                    if (now - lastMouseMoveTime < mouseMoveThrottle) {
+                        return; // Skip this frame
+                    }
+                    lastMouseMoveTime = now;
+
+                    // Only raycast if we need the mouse position for capture mode
+                    if (model && isCapturingSubPois) {
+                        raycaster.setFromCamera(mouse, camera);
+                        const intersects = raycaster.intersectObject(model, true);
+
+                        if (intersects.length > 0) {
+                            mousePosition.copy(intersects[0].point);
+                        }
+                    }
+
+                    // Check for sub-POI hover (re-enabled for tooltips)
+                    raycaster.setFromCamera(mouse, camera);
+                    const subPoiIntersects = raycaster.intersectObjects(subPoiMeshes);
+
+                    if (subPoiIntersects.length > 0) {
+                        const subPoi = subPoiIntersects[0].object.userData;
+                        const descDiv = document.getElementById('description');
+                        descDiv.innerHTML = `<strong>${subPoi.name}</strong>${subPoi.description}`;
+
+                        // Position description near the sub-POI
+                        const subPoiMesh = subPoiIntersects[0].object;
+                        const screenPosition = subPoiMesh.position.clone();
+                        screenPosition.project(camera);
+
+                        const x = (screenPosition.x * 0.5 + 0.5) * window.innerWidth;
+                        const y = (-screenPosition.y * 0.5 + 0.5) * window.innerHeight;
+
+                        // Position above and to the right of the sub-POI
+                        descDiv.style.left = `${Math.min(x + 20, window.innerWidth - 320)}px`;
+                        descDiv.style.top = `${Math.max(y - 60, 10)}px`;
+                        descDiv.style.display = 'block';
+                    } else {
+                        // Hide description if not hovering over sub-POI and no transition is active
+                        if (!targetCameraPos) {
+                            const descDiv = document.getElementById('description');
+                            descDiv.style.display = 'none';
+                        }
+                    }
+                }
+
+                // GLTF Loader
+                let model;
+                const loader = new THREE.GLTFLoader();
+                loader.load(
+                    'home_office_model/scene.gltf',
+                    function (gltf) {
+                        model = gltf.scene;
+                        scene.add(model);
+                        // Center the model
+                        const box = new THREE.Box3().setFromObject(model);
+                        const center = box.getCenter(new THREE.Vector3());
+                        model.position.sub(center);
+
+                        // Set initial texture quality
+                        const maxAnisotropy = renderer.capabilities.getMaxAnisotropy();
+                        model.traverse((child) => {
+                            if (child.isMesh) {
+                                // Remove neon sign meshes
+                                const neonMeshes = ['Object_103', 'Object_104', 'Object_106', 'Object_108', 'Object_105', 'Object_107', 'Object_109'];
+                                if (neonMeshes.includes(child.name)) {
+                                    child.visible = false;
+                                }
+                            }
+                            if (child.isMesh && child.material) {
+                                if (child.material.map) child.material.map.anisotropy = maxAnisotropy;
+                                if (child.material.normalMap) child.material.normalMap.anisotropy = maxAnisotropy;
+                                if (child.material.roughnessMap) child.material.roughnessMap.anisotropy = maxAnisotropy;
+                                if (child.material.metalnessMap) child.material.metalnessMap.anisotropy = maxAnisotropy;
+                            }
+                        });
+
+                        // Show scene and hide loading
+                        document.body.appendChild(renderer.domElement);
+                        document.getElementById('loading').style.display = 'none';
+
+                        // Show POI indicators
+                        poiMeshes.forEach(sphere => {
+                            sphere.visible = true;
+                        });
+
+                        // Add capture Main POI button
+                        captureMainButton = document.createElement('button');
+                        captureMainButton.innerHTML = 'Capture Main POI';
+                        captureMainButton.style.position = 'absolute';
+                        captureMainButton.style.bottom = '20px';
+                        captureMainButton.style.right = '20px';
+                        captureMainButton.style.padding = '10px 15px';
+                        captureMainButton.style.backgroundColor = '#4CAF50';
+                        captureMainButton.style.color = 'white';
+                        captureMainButton.style.border = 'none';
+                        captureMainButton.style.borderRadius = '5px';
+                        captureMainButton.style.cursor = 'pointer';
+                        captureMainButton.style.fontSize = '14px';
+                        captureMainButton.style.zIndex = '1000';
+                        captureMainButton.style.display = 'none'; // PRODUCTION MODE: Hidden
+                        captureMainButton.addEventListener('click', function(event) {
+                            event.stopPropagation(); // Prevent click from reaching window listener
+                            
+                            // Prompt for Main POI details
+                            const poiName = prompt('Enter Main POI name:', '');
+                            if (poiName === null) return; // User cancelled
+                            
+                            const poiDescription = prompt('Enter Main POI description:', '');
+                            if (poiDescription === null) return; // User cancelled
+                            
+                            currentMainPoi = {
+                                name: poiName,
+                                position: [mousePosition.x, mousePosition.y, mousePosition.z],
+                                cameraPos: [camera.position.x, camera.position.y, camera.position.z],
+                                target: [controls.target.x, controls.target.y, controls.target.z],
+                                description: poiDescription,
+                                subPois: []
+                            };
+
+                            // Enable sub-POI capture mode
+                            isCapturingSubPois = true;
+
+                            // Update button appearance
+                            captureMainButton.style.backgroundColor = '#999';
+                            captureMainButton.innerHTML = 'Capturing Sub-POIs...';
+                            captureMainButton.disabled = true;
+                            captureMainButton.style.opacity = '0.5';
+
+                            // PERFORMANCE: Console logging removed
+                            
+                            // Update the overlay panel
+                            updateReviewOverlay();
+                            
+                            // Use non-blocking notification
+                            const feedbackDiv = document.getElementById('description');
+                            feedbackDiv.innerHTML = `<strong>Main POI "${poiName}" Captured!</strong><br>Click on model to capture Sub-POIs`;
+                            feedbackDiv.style.display = 'block';
+                            feedbackDiv.style.fontSize = '14px';
+                            feedbackDiv.style.padding = '12px';
+                            setTimeout(() => feedbackDiv.style.display = 'none', 3000);
+                        });
+                        document.body.appendChild(captureMainButton);
+
+                        // Add Clear All button
+                        const clearAllButton = document.createElement('button');
+                        clearAllButton.innerHTML = 'Clear All Captures';
+                        clearAllButton.style.position = 'absolute';
+                        clearAllButton.style.bottom = '20px';
+                        clearAllButton.style.right = '180px';
+                        clearAllButton.style.padding = '10px 15px';
+                        clearAllButton.style.backgroundColor = '#f44336';
+                        clearAllButton.style.color = 'white';
+                        clearAllButton.style.border = 'none';
+                        clearAllButton.style.borderRadius = '5px';
+                        clearAllButton.style.cursor = 'pointer';
+                        clearAllButton.style.fontSize = '14px';
+                        clearAllButton.style.zIndex = '1000';
+                        clearAllButton.style.display = 'none'; // PRODUCTION MODE: Hidden
+                        clearAllButton.addEventListener('click', function(event) {
+                            event.stopPropagation();
+                            
+                            if (confirm('Clear all captured POIs from storage? This will remove all previous captures.')) {
+                                localStorage.removeItem('capturedPois');
+                                // PERFORMANCE: Console logging removed
+                                alert('All captures cleared! The next export will start fresh.');
+                            }
+                        });
+                        document.body.appendChild(clearAllButton);
+
+                        // Create review overlay - persistent panel on right side with dark theme
+                        reviewOverlay = document.createElement('div');
+                        reviewOverlay.id = 'reviewOverlay';
+                        reviewOverlay.style.display = 'none'; // PRODUCTION MODE: Hidden
+                        reviewOverlay.style.position = 'fixed';
+                        reviewOverlay.style.top = '50%';
+                        reviewOverlay.style.right = '20px';
+                        reviewOverlay.style.transform = 'translateY(-50%)';
+                        reviewOverlay.style.width = '320px';
+                        reviewOverlay.style.maxHeight = '70vh';
+                        reviewOverlay.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
+                        reviewOverlay.style.color = 'white';
+                        reviewOverlay.style.zIndex = '500';
+                        reviewOverlay.style.overflow = 'auto';
+                        reviewOverlay.style.padding = '15px';
+                        reviewOverlay.style.fontFamily = 'monospace';
+                        reviewOverlay.style.fontSize = '12px';
+
+                        // Prevent clicks on the overlay from propagating to the model
+                        reviewOverlay.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                        });
+
+                        document.body.appendChild(reviewOverlay);
+                        
+                        // Initialize overlay content
+                        updateReviewOverlay();
+
+
+                    },
+                    function (xhr) {
+                        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+                    },
+                    function (error) {
+                        console.error('An error happened', error);
+                    }
+                );
+
+                // Animation loop
+                let frameCount = 0;
+                function animate() {
+                    requestAnimationFrame(animate);
+                    frameCount++;
+                    controls.update();
+
+                    // Smooth camera transition
+                    if (targetCameraPos) {
+                        camera.position.lerp(targetCameraPos, 0.05);
+                        controls.target.lerp(targetTargetPos, 0.05);
+                        if (camera.position.distanceTo(targetCameraPos) < 0.01 && controls.target.distanceTo(targetTargetPos) < 0.01) {
+                            camera.position.copy(targetCameraPos);
+                            controls.target.copy(targetTargetPos);
+                            
+                            // Set the baseline camera distance NOW (after transition completes)
+                            if (currentActivePoi) {
+                                lastKnownCameraDistance = camera.position.distanceTo(controls.target);
+                            }
+                            
+                            targetCameraPos = null;
+                            targetTargetPos = null;
+                        }
+                    }
+
+                    // Check if camera target has changed (user panned) OR zoomed out at all
+                    if (!targetCameraPos && currentActivePoi && lastKnownCameraDistance !== null) {
+                        const targetDistance = controls.target.distanceTo(lastKnownTarget);
+                        const currentCameraDistance = camera.position.distanceTo(controls.target);
+                        const zoomChange = currentCameraDistance - lastKnownCameraDistance;
+                        
+                        // PERFORMANCE: Removed excessive console logging
+                        
+                        // Trigger if target changed OR zoomed out at all (any increase in distance)
+                        const targetChanged = targetDistance > 0.3;
+                        const zoomedOut = zoomChange > 0.01; // Any zoom out (increased distance)
+                        
+                        if (targetChanged || zoomedOut) {
+                            // Show the currently active POI's marker
+                            poiMeshes.forEach(sphere => {
+                                if (sphere.userData === currentActivePoi) {
+                                    sphere.visible = true;
+                                }
+                            });
+                            
+                            // Hide all sub-POIs
+                            subPoiMeshes.forEach(mesh => {
+                                mesh.visible = false;
+                            });
+                            
+                            currentActivePoi = null;
+                            lastKnownTarget = controls.target.clone();
+                            lastKnownCameraDistance = null;
+                        }
+                    }
+
+                    // Make POI planes face the camera (only visible ones)
+                    poiMeshes.forEach(sphere => {
+                        if (sphere.visible) {
+                            sphere.lookAt(camera.position);
+                        }
+                    });
+
+                    // PERFORMANCE: Skip DOM updates for hidden overlays
+                    // const coordDiv = document.getElementById('coordinates');
+                    // coordDiv.innerHTML = `
+                    // Camera: (${camera.position.x.toFixed(2)}, ${camera.position.y.toFixed(2)}, ${camera.position.z.toFixed(2)})<br>
+                    // Target: (${controls.target.x.toFixed(2)}, ${controls.target.y.toFixed(2)}, ${controls.target.z.toFixed(2)})<br>
+                    // Mouse: (${mousePosition.x.toFixed(2)}, ${mousePosition.y.toFixed(2)}, ${mousePosition.z.toFixed(2)})
+                    // `;
+
+                    renderer.render(scene, camera);
+                }
+                animate();
+
+                // Handle window resize
+                window.addEventListener('resize', function() {
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                });
+            })
+            .catch(error => console.error('Error loading POIs:', error));
+
+        // Smooth transition variables
+        let targetCameraPos = null;
+        let targetTargetPos = null;
+        let currentDescription = '';
+        let currentActivePoi = null; // Track which POI is currently being viewed
+        let lastKnownTarget = defaultTarget.clone(); // Track target changes
+        let lastKnownCameraDistance = null; // Track zoom distance
+
+    </script>
+</body>
+</html>
